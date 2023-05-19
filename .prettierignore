@@ -1,0 +1,22 @@
+# Ignore artifacts:
+build
+coverage
+.cicd
+
+# Ignore all HTML files:
+*.html
+
+**/.git
+**/.svn
+**/.hg
+**/node_modules
+**/dist
+**/coverage
+**/.cicd
+
+**/.git
+**/.svn
+**/.hg
+
+.yaml
+
