@@ -65,7 +65,6 @@ const submit = () => {
   flex-direction: column;
   height: 100%;
   padding: 30px;
-  background: rgba(118, 118, 241, 0.3);
 
   .main {
     flex: 1 0 auto;
