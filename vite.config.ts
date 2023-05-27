@@ -13,7 +13,6 @@ export default defineConfig({
 
   build: {
     outDir: path.join(__dirname, "dist"),
-
     rollupOptions: {
       input: resolve(__dirname, "index.html"),
     },
