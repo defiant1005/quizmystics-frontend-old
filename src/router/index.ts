@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { useUserStore } from "@/stores/user";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -10,6 +11,11 @@ const router = createRouter({
       children: [
         {
           path: "",
+          name: "MainRegistration",
+          component: () => import("../views/login/MainRegistration.vue"),
+        },
+        {
+          path: "/home",
           name: "HomePage",
           component: () => import("../views/login/HomePage.vue"),
         },
@@ -26,6 +32,14 @@ const router = createRouter({
       ],
     },
   ],
+});
+
+router.beforeEach((to) => {
+  const userStore = useUserStore();
+
+  if (userStore.name.trim().length === 0 && to.name !== "MainRegistration") {
+    return { name: "MainRegistration" };
+  }
 });
 
 export default router;
