@@ -40,6 +40,10 @@ router.beforeEach((to) => {
   if (userStore.name.trim().length === 0 && to.name !== "MainRegistration") {
     return { name: "MainRegistration" };
   }
+
+  if (userStore.id === null && to.name === "MainRoom") {
+    return { name: "HomePage" };
+  }
 });
 
 export default router;

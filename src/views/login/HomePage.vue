@@ -41,9 +41,6 @@ export default {
           }
         }
       );
-      // socket.emit("connection", (err, response) => {
-      //   console.log(response);
-      // });
     },
 
     enterRoom() {

@@ -23,6 +23,10 @@ export default {
       connected() {
         return state.connected;
       },
+
+      messages() {
+        return state.messages;
+      },
     }),
 
     currentRoom() {
@@ -39,6 +43,12 @@ export default {
 <template>
   <div class="main-room">
     <p>Комната номер {{ currentRoom }}</p>
+
+    <div class="">
+      <template v-for="(message, index) in messages" :key="index">
+        <p>{{ message.text }}</p>
+      </template>
+    </div>
   </div>
 </template>
 
