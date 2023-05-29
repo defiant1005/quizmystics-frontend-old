@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { socket_old } from "@/socket_old";
+import { socket } from "@/socket";
 
 export default {
   name: "MyForm",
@@ -23,7 +23,7 @@ export default {
     onSubmit() {
       this.isLoading = true;
 
-      socket_old.timeout(200).emit("create-something", this.value, () => {
+      socket.timeout(200).emit("create-something", this.value, () => {
         this.isLoading = false;
       });
     },

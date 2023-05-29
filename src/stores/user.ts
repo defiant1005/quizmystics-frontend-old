@@ -5,12 +5,17 @@ const cookies = useCookies();
 export const useUserStore = defineStore("user-store", {
   state: () => ({
     name: cookies.cookies.get("name") ?? "",
+    id: null as null | string,
   }),
 
   actions: {
     renameName(name: string) {
       cookies.cookies.set("name", name);
       this.name = name;
+    },
+
+    saveId(id: string) {
+      this.id = id;
     },
   },
 });

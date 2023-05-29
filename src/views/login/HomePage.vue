@@ -1,19 +1,49 @@
 <script>
 import stringGeneration from "@/package/helpers/string-generation";
+import { socket } from "@/socket";
+import { mapState } from "pinia";
+import { useUserStore } from "@/stores/user";
 
 export default {
   name: "HomePage",
 
   data() {
+    const userStore = useUserStore();
+
     return {
+      userStore,
       stringGeneration,
     };
+  },
+
+  computed: {
+    ...mapState(useUserStore, {
+      saveNameValue: "name",
+    }),
   },
 
   methods: {
     createRoom() {
       const room = this.stringGeneration(4).toUpperCase();
-      this.$router.push(room);
+      socket.connect();
+      socket.emit(
+        "userJoined",
+        {
+          name: this.saveNameValue,
+          room: room,
+        },
+        (data) => {
+          if (typeof data === "string") {
+            console.error(data);
+          } else {
+            this.userStore.saveId(data.userId);
+            this.$router.push(room);
+          }
+        }
+      );
+      // socket.emit("connection", (err, response) => {
+      //   console.log(response);
+      // });
     },
 
     enterRoom() {

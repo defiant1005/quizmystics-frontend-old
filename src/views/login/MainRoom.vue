@@ -1,6 +1,7 @@
 <script>
 import { useUserStore } from "@/stores/user";
 import { mapState } from "pinia";
+import { socket, state } from "@/socket";
 
 export default {
   name: "MainRoom",
@@ -18,11 +19,19 @@ export default {
   computed: {
     ...mapState(useUserStore, {
       saveNameValue: "name",
+
+      connected() {
+        return state.connected;
+      },
     }),
 
     currentRoom() {
       return this.$route.params.id;
     },
+  },
+
+  unmounted() {
+    socket.disconnect();
   },
 };
 </script>

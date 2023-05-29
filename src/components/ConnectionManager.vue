@@ -4,17 +4,17 @@
 </template>
 
 <script>
-import { socket_old } from "@/socket_old";
+import { socket } from "@/socket";
 
 export default {
   name: "ConnectionManager",
 
   methods: {
     connect() {
-      socket_old.connect();
+      socket.connect();
     },
     disconnect() {
-      socket_old.disconnect();
+      socket.disconnect();
     },
   },
 };

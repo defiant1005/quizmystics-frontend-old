@@ -13,23 +13,27 @@ const URL =
     ? undefined
     : "http://192.168.0.101:3000/";
 
-export const socket_old = io(URL, {
+export const socket = io(URL, {
   autoConnect: false,
   withCredentials: true,
 });
 
-socket_old.on("connect", () => {
+socket.on("connect", () => {
   state.connected = true;
 });
 
-socket_old.on("disconnect", () => {
+socket.on("disconnect", () => {
   state.connected = false;
 });
 
-socket_old.on("foo", (...args) => {
+socket.on("foo", (...args) => {
   state.fooEvents.push(args);
 });
 
-socket_old.on("bar", (...args) => {
+socket.on("bar", (...args) => {
   state.barEvents.push(args);
+});
+
+socket.on("hello", (arg) => {
+  console.log(arg); // world
 });
