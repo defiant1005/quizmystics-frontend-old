@@ -6,6 +6,7 @@ import UserAvatar from "@/components/UserAvatar.vue";
 
 export default {
   name: "MainRoom",
+
   components: { UserAvatar },
 
   data() {
@@ -21,6 +22,8 @@ export default {
   computed: {
     ...mapState(useUserStore, {
       saveNameValue: "name",
+      userRoom: "room",
+      id: "id",
 
       connected() {
         return state.connected;
@@ -33,10 +36,23 @@ export default {
       usersList() {
         return state.usersList;
       },
+
+      isRoomAdmin() {
+        return !!this.usersList.find((user) => user.userId === this.id)
+          ?.isRoomAdmin;
+      },
     }),
 
     currentRoom() {
       return this.$route.params.id;
+    },
+  },
+
+  methods: {
+    startGame() {
+      socket.emit("startGame", { room: this.userRoom }, (data) => {
+        console.log(data);
+      });
     },
   },
 
@@ -54,15 +70,17 @@ export default {
       <UserAvatar
         v-for="(user, index) in usersList"
         :key="index"
-        :name="user"
+        :user="user"
       />
     </div>
 
-    <div class="">
-      <template v-for="(message, index) in messages" :key="index">
-        <p>{{ message.data.message }}</p>
-      </template>
-    </div>
+    <button
+      v-if="isRoomAdmin"
+      class="main-button main-button_green"
+      @click="startGame"
+    >
+      Начать
+    </button>
   </div>
 </template>
 

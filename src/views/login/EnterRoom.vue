@@ -30,7 +30,7 @@ export default {
 
       socket.connect();
 
-      socket.emit("join", userData, (data) => {
+      socket.emit("connectingExistingRoom", userData, (data) => {
         if (typeof data === "string") {
           console.error(data);
         } else {

@@ -5,8 +5,8 @@ export default defineComponent({
   name: "UserAvatar",
 
   props: {
-    name: {
-      type: String,
+    user: {
+      type: Object,
       required: true,
     },
   },
@@ -15,7 +15,8 @@ export default defineComponent({
 
 <template>
   <div class="user-avatar">
-    {{ name }}
+    <div v-if="user.isRoomAdmin" class="user-avatar__crown crown" />
+    <span>{{ user.name }}</span>
   </div>
 </template>
 
@@ -28,5 +29,15 @@ export default defineComponent({
   align-items: center;
   justify-content: center;
   border-radius: 50%;
+  position: relative;
+
+  .crown {
+    position: absolute;
+    width: 50px;
+    height: 10px;
+    background: #da9e18;
+    top: 0;
+    border-radius: 10px;
+  }
 }
 </style>

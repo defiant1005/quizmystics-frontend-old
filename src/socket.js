@@ -33,6 +33,10 @@ socket.on("hello", (arg) => {
   console.log(arg);
 });
 
-socket.on("joinRoom", ({ data }) => {
-  state.usersList = data.users.map((i) => i.name);
+socket.on("updateUserList", ({ data }) => {
+  state.usersList = data.users;
+});
+
+socket.on("startGame", () => {
+  console.log("начало игры...");
 });

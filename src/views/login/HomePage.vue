@@ -34,7 +34,7 @@ export default {
 
       socket.connect();
 
-      socket.emit("join", userData, (data) => {
+      socket.emit("createRoom", userData, (data) => {
         if (typeof data === "string") {
           console.error(data);
         } else {
