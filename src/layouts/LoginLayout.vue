@@ -1,12 +1,22 @@
 <script>
+import { mapState } from "pinia";
+import { useUserStore } from "@/stores/user";
+
 export default {
   name: "LoginLayout",
+
+  computed: {
+    ...mapState(useUserStore, {
+      saveNameValue: "name",
+    }),
+  },
 };
 </script>
 
 <template>
   <div class="login-layout">
-    <h1>Добро пожаловать в игру!</h1>
+    <h1 v-if="saveNameValue">Добро пожаловать в игру, {{ saveNameValue }}!</h1>
+    <h1 v-else>Добро пожаловать в игру!</h1>
     <router-view />
   </div>
 </template>

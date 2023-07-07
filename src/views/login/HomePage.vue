@@ -25,22 +25,23 @@ export default {
   methods: {
     createRoom() {
       const room = this.stringGeneration(4).toUpperCase();
+      this.userStore.setRoom(room);
+
+      const userData = {
+        name: this.saveNameValue,
+        room: room,
+      };
+
       socket.connect();
-      socket.emit(
-        "userJoined",
-        {
-          name: this.saveNameValue,
-          room: room,
-        },
-        (data) => {
-          if (typeof data === "string") {
-            console.error(data);
-          } else {
-            this.userStore.saveId(data.userId);
-            this.$router.push(room);
-          }
+
+      socket.emit("join", userData, (data) => {
+        if (typeof data === "string") {
+          console.error(data);
+        } else {
+          this.userStore.saveId(data.userId);
+          this.$router.push(room);
         }
-      );
+      });
     },
 
     enterRoom() {

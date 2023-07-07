@@ -6,6 +6,7 @@ export const useUserStore = defineStore("user-store", {
   state: () => ({
     name: cookies.cookies.get("name") ?? "",
     id: null as null | string,
+    room: "",
   }),
 
   actions: {
@@ -16,6 +17,10 @@ export const useUserStore = defineStore("user-store", {
 
     saveId(id: string) {
       this.id = id;
+    },
+
+    setRoom(room: string) {
+      this.room = room;
     },
   },
 });

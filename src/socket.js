@@ -4,9 +4,9 @@ import { io } from "socket.io-client";
 export const state = reactive({
   connected: false,
   messages: [],
+  usersList: [],
 });
 
-// "undefined" means the URL will be computed from the `window.location` object
 const URL =
   process.env.NODE_ENV === "production"
     ? undefined
@@ -25,18 +25,14 @@ socket.on("disconnect", () => {
   state.connected = false;
 });
 
-socket.on("newMessage", (message) => {
+socket.on("message", (message) => {
   state.messages.push(message);
 });
 
-// socket.on("foo", (...args) => {
-//   state.fooEvents.push(args);
-// });
-//
-// socket.on("bar", (...args) => {
-//   state.barEvents.push(args);
-// });
-
 socket.on("hello", (arg) => {
-  console.log(arg); // world
+  console.log(arg);
+});
+
+socket.on("joinRoom", ({ data }) => {
+  state.usersList = data.users.map((i) => i.name);
 });

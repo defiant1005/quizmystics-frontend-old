@@ -1,16 +1,43 @@
 <script>
+import { socket } from "@/socket";
+import { mapState } from "pinia";
+import { useUserStore } from "@/stores/user";
+
 export default {
   name: "EnterRoom",
 
   data() {
+    const userStore = useUserStore();
+
     return {
+      userStore,
       room: "",
     };
   },
 
+  computed: {
+    ...mapState(useUserStore, {
+      saveNameValue: "name",
+    }),
+  },
+
   methods: {
     goRoom() {
-      this.$router.push(this.room);
+      const userData = {
+        name: this.saveNameValue,
+        room: this.room,
+      };
+
+      socket.connect();
+
+      socket.emit("join", userData, (data) => {
+        if (typeof data === "string") {
+          console.error(data);
+        } else {
+          this.userStore.saveId(data.userId);
+          this.$router.push(this.room);
+        }
+      });
     },
 
     checkUpperCase() {
