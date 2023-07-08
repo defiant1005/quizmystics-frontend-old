@@ -1,10 +1,12 @@
 import { reactive } from "vue";
 import { io } from "socket.io-client";
+import router from "@/router/index.ts";
 
 export const state = reactive({
   connected: false,
   messages: [],
   usersList: [],
+  startGame: false,
 });
 
 const URL =
@@ -23,6 +25,7 @@ socket.on("connect", () => {
 
 socket.on("disconnect", () => {
   state.connected = false;
+  state.startGame = false;
 });
 
 socket.on("message", (message) => {
@@ -37,6 +40,12 @@ socket.on("updateUserList", ({ data }) => {
   state.usersList = data.users;
 });
 
-socket.on("startGame", () => {
+socket.on("startGame", ({ data }) => {
+  state.startGame = true;
+
+  router.push({
+    path: `game/room/${data.room}`,
+  });
+
   console.log("начало игры...");
 });
