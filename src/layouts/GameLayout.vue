@@ -14,5 +14,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .game-layout {
+  height: 100%;
 }
 </style>
