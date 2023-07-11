@@ -43,15 +43,33 @@ const router = createRouter({
         },
       ],
     },
+    {
+      path: "/admin",
+      name: "AdminLayout",
+      component: () => import("../layouts/AdminLayout.vue"),
+      children: [
+        {
+          path: "",
+          name: "AdminPage",
+          component: () => import("../views/admin/AdminPage.vue"),
+        },
+        {
+          path: "registration",
+          name: "AdminRegister",
+          component: () => import("../views/admin/AdminRegister.vue"),
+        },
+        {
+          path: "login",
+          name: "AdminLogin",
+          component: () => import("../views/admin/AdminLogin.vue"),
+        },
+      ],
+    },
   ],
 });
 
 router.beforeEach((to) => {
   const userStore = useUserStore();
-
-  if (userStore.name.trim().length === 0 && to.name !== "MainRegistration") {
-    return { name: "MainRegistration" };
-  }
 
   if (userStore.id === null && to.name === "MainRoom") {
     return { name: "HomePage" };
