@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { useUserStore } from "@/stores/user";
+import { useCookies } from "vue3-cookies";
+import { useAuthStore } from "@/stores/auth";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -49,9 +51,9 @@ const router = createRouter({
       component: () => import("../layouts/AdminLayout.vue"),
       children: [
         {
-          path: "",
-          name: "AdminPage",
-          component: () => import("../views/admin/AdminPage.vue"),
+          path: "login",
+          name: "AdminLogin",
+          component: () => import("../views/admin/AdminLogin.vue"),
         },
         {
           path: "registration",
@@ -59,9 +61,9 @@ const router = createRouter({
           component: () => import("../views/admin/AdminRegister.vue"),
         },
         {
-          path: "login",
-          name: "AdminLogin",
-          component: () => import("../views/admin/AdminLogin.vue"),
+          path: "",
+          name: "AdminPage",
+          component: () => import("../views/admin/AdminPage.vue"),
         },
       ],
     },
@@ -70,8 +72,11 @@ const router = createRouter({
 
 router.beforeEach((to) => {
   const userStore = useUserStore();
+  const authStore = useAuthStore();
 
   if (userStore.id === null && to.name === "MainRoom") {
+    return { name: "HomePage" };
+  } else if (!authStore.token && to.name === "AdminPage") {
     return { name: "HomePage" };
   }
 });

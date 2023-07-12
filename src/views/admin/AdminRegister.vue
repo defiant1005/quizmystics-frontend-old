@@ -12,5 +12,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .admin-register {
+  color: white;
 }
 </style>
