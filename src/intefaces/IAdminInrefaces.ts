@@ -15,6 +15,7 @@ export interface IUser {
 export interface ISetUsersData {
   email: string;
   password: string;
+  roleId: number;
 }
 
 export interface IRoles {

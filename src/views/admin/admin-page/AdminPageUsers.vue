@@ -3,7 +3,6 @@ import { defineComponent } from "vue";
 import { useUsersStore } from "@/stores/admin/users.store";
 import MainTable from "@/package/components/MainTable.vue";
 import { mapState } from "pinia";
-import AdminModalFormCategory from "@/components/admin/AdminModalFormCategory.vue";
 import MainModal from "@/package/components/MainModal.vue";
 import AdminModalFormUser from "@/components/admin/AdminModalFormUser.vue";
 
@@ -61,7 +60,7 @@ export default defineComponent({
       Создать пользователя
     </button>
 
-    <MainModal :title="'Создать категорию'">
+    <MainModal :title="'Создать пользователя'">
       <AdminModalFormUser />
     </MainModal>
   </div>

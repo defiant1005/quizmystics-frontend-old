@@ -5,8 +5,12 @@ export const apiGetAllUsers = () => {
   return API.get<Array<IUser>>("api/user/users");
 };
 
-export const apiSetUsers = ({ email, password }: ISetUsersData) => {
-  return API.post<ICategories>("api/user/registration", { email, password });
+export const apiSetUsers = ({ email, password, roleId }: ISetUsersData) => {
+  return API.post<ICategories>("api/user/registration", {
+    email,
+    password,
+    roleId,
+  });
 };
 
 export const apiDeleteUser = (id: string) => {

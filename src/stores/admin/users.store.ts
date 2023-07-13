@@ -6,7 +6,7 @@ export const useUsersStore = defineStore("users-store", {
   state: () => ({
     users: [] as Array<IUser>,
 
-    tableHeader: ["id", "email", "role"],
+    tableHeader: ["id", "email", "roleId"],
   }),
 
   actions: {
@@ -24,10 +24,10 @@ export const useUsersStore = defineStore("users-store", {
       });
     },
 
-    setUser({ email, password }: ISetUsersData) {
+    setUser({ email, password, roleId }: ISetUsersData) {
       return new Promise((resolve, reject) => {
         usersApi
-          .apiSetUsers({ email, password })
+          .apiSetUsers({ email, password, roleId })
           .then((response) => {
             resolve(response);
           })
