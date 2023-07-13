@@ -1,8 +1,20 @@
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useRolesStore } from "@/stores/admin/roles.store";
 
 export default defineComponent({
   name: "AdminLayout",
+
+  data() {
+    const rolesStore = useRolesStore();
+    return {
+      rolesStore,
+    };
+  },
+
+  mounted() {
+    this.rolesStore.getAllRoles();
+  },
 });
 </script>
 

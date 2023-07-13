@@ -28,7 +28,7 @@ export default defineComponent({
           })
           .then(() => {
             this.$router.replace({
-              name: "AdminPage",
+              name: "AdminPageUsers",
             });
           })
           .finally(() => {

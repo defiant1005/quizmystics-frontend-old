@@ -48,6 +48,7 @@ const router = createRouter({
       path: "/admin",
       name: "AdminLayout",
       component: () => import("../layouts/AdminLayout.vue"),
+
       children: [
         {
           path: "login",
@@ -63,6 +64,29 @@ const router = createRouter({
           path: "",
           name: "AdminPage",
           component: () => import("../views/admin/AdminPage.vue"),
+          meta: {
+            secret: true,
+          },
+          children: [
+            {
+              path: "",
+              name: "AdminPageUsers",
+              component: () =>
+                import("../views/admin/admin-page/AdminPageUsers.vue"),
+            },
+            {
+              path: "categories",
+              name: "AdminPageCategories",
+              component: () =>
+                import("../views/admin/admin-page/AdminPageCategories.vue"),
+            },
+            {
+              path: "questions",
+              name: "AdminPageQuestions",
+              component: () =>
+                import("../views/admin/admin-page/AdminPageQuestions.vue"),
+            },
+          ],
         },
       ],
     },
@@ -73,16 +97,16 @@ router.beforeEach((to) => {
   const userStore = useUserStore();
   const authStore = useAuthStore();
 
+  console.log("!authStore.token", !authStore.token);
+  console.log("!to.meta.secret", to);
+  console.log("!authStore.isAdmin", !authStore.isAdmin);
+
   if (userStore.id === null && to.name === "MainRoom") {
     return { name: "HomePage" };
-  } else if (
-    !authStore.token &&
-    to.name === "AdminPage" &&
-    !authStore.isAdmin
-  ) {
+  } else if (!authStore.token && to.meta.secret && !authStore.isAdmin) {
     return { name: "AdminLogin" };
   } else if (authStore.token && to.name === "AdminLogin") {
-    return { name: "AdminPage" };
+    return { name: "AdminLayout" };
   }
 });
 

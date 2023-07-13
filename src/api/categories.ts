@@ -1,5 +1,5 @@
 import API from "@/package/services/axios-settings";
-import { ICategories, ISetCategoryData } from "@/intefaces/ICategories";
+import { ICategories, ISetCategoryData } from "@/intefaces/IAdminInrefaces";
 
 export const apiGetCategories = () => {
   return API.get<Array<ICategories>>("api/category/");

@@ -1,11 +1,11 @@
 <script lang="ts">
 import { defineComponent } from "vue";
-import { useCategoriesStore } from "@/stores/category";
+import { useCategoriesStore } from "@/stores/admin/categories.store";
 
 export default defineComponent({
   name: "AdminModalFormCategory",
 
-  emits: ["setCategory"],
+  emits: ["closeModal"],
 
   props: {},
 
@@ -27,6 +27,8 @@ export default defineComponent({
         })
         .then(() => {
           this.categoriesStore.getCategories();
+          this.category = "";
+          this.$emit("closeModal");
         })
         .finally(() => {
           this.isLoading = false;
@@ -53,6 +55,7 @@ export default defineComponent({
     <button
       type="submit"
       class="btn btn-primary"
+      data-bs-dismiss="modal"
       :disabled="isLoading || category.trim().length < 5"
     >
       Сохранить
