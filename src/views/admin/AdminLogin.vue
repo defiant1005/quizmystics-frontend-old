@@ -27,8 +27,8 @@ export default defineComponent({
             password: this.password,
           })
           .then(() => {
-            this.$router.push({
-              name: "",
+            this.$router.replace({
+              name: "AdminPage",
             });
           })
           .finally(() => {
@@ -47,30 +47,28 @@ export default defineComponent({
 
       <h2 class="login__title">Вход Душнила</h2>
 
-      <form
-        class="login__form form"
-        autocomplete="off"
-        @submit.prevent="submitForm"
-      >
-        <input
-          v-model="email"
-          type="email"
-          class="form__input"
-          placeholder="Email"
-          name="email_address"
-          autocomplete="email"
-        />
+      <form @submit.prevent="submitForm">
+        <div class="mb-3">
+          <label for="adminLoginEmail" class="form-label">Email address</label>
+          <input
+            id="adminLoginEmail"
+            v-model="email"
+            type="email"
+            class="form-control"
+            aria-describedby="emailHelp"
+          />
+        </div>
 
-        <input
-          v-model="password"
-          type="password"
-          class="form__input"
-          placeholder="Пароль"
-          name="xyz123"
-          autocomplete="xyz123"
-        />
-
-        <button type="submit" :disabled="isLoading" class="form__btn">
+        <div class="mb-3">
+          <label for="adminLoginPassword" class="form-label">Password</label>
+          <input
+            id="adminLoginPassword"
+            v-model="password"
+            type="password"
+            class="form-control"
+          />
+        </div>
+        <button type="submit" :disabled="isLoading" class="btn btn-primary">
           Войти
         </button>
       </form>
@@ -107,45 +105,45 @@ export default defineComponent({
     &__title {
     }
 
-    .form {
-      width: 272px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-
-      &__input {
-        width: 272px;
-        height: 36px;
-        padding: 8px 12px;
-        line-height: 20px;
-        font-size: 14px;
-        border: 1px solid rgba(255, 255, 255, 0.16);
-        background-color: #333333;
-        border-radius: 8px;
-        color: white;
-      }
-
-      &__btn {
-        background: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 8px;
-        width: 100%;
-        font-size: 14px;
-        padding: 0 16px;
-        height: 36px;
-        color: #222222;
-
-        &:hover {
-          background: #f3f3f3;
-        }
-
-        &:active {
-          background: #e3e3e3;
-        }
-      }
-    }
+    //.form {
+    //  width: 272px;
+    //  display: flex;
+    //  flex-direction: column;
+    //  gap: 12px;
+    //
+    //  &__input {
+    //    width: 272px;
+    //    height: 36px;
+    //    padding: 8px 12px;
+    //    line-height: 20px;
+    //    font-size: 14px;
+    //    border: 1px solid rgba(255, 255, 255, 0.16);
+    //    background-color: #333333;
+    //    border-radius: 8px;
+    //    color: white;
+    //  }
+    //
+    //  &__btn {
+    //    background: white;
+    //    display: flex;
+    //    align-items: center;
+    //    justify-content: center;
+    //    border-radius: 8px;
+    //    width: 100%;
+    //    font-size: 14px;
+    //    padding: 0 16px;
+    //    height: 36px;
+    //    color: #222222;
+    //
+    //    &:hover {
+    //      background: #f3f3f3;
+    //    }
+    //
+    //    &:active {
+    //      background: #e3e3e3;
+    //    }
+    //  }
+    //}
   }
 }
 </style>

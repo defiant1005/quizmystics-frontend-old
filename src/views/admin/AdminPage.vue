@@ -2,6 +2,7 @@
 import { defineComponent } from "vue";
 import MainModal from "@/package/components/MainModal.vue";
 import AdminModalFormCategory from "@/components/admin/AdminModalFormCategory.vue";
+import { useAuthStore } from "@/stores/auth";
 
 export default defineComponent({
   name: "AdminPage",
@@ -9,15 +10,29 @@ export default defineComponent({
   components: { AdminModalFormCategory, MainModal },
 
   data() {
-    return {};
+    const authStore = useAuthStore();
+
+    return {
+      authStore,
+    };
   },
 
-  methods: {},
+  methods: {
+    exit() {
+      this.authStore.logOut();
+      this.$router.replace({
+        name: "AdminLogin",
+      });
+    },
+  },
 });
 </script>
 
 <template>
   <div class="admin-page">
+    <button type="button" class="btn btn-danger admin-page__exit" @click="exit">
+      Выйти
+    </button>
     <button
       type="button"
       class="btn btn-primary"
@@ -42,5 +57,12 @@ export default defineComponent({
   height: 100%;
   flex-direction: column;
   gap: 20px;
+  position: relative;
+
+  &__exit {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+  }
 }
 </style>

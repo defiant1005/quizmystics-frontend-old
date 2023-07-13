@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { useUserStore } from "@/stores/user";
-import { useCookies } from "vue3-cookies";
 import { useAuthStore } from "@/stores/auth";
 
 const router = createRouter({
@@ -76,8 +75,14 @@ router.beforeEach((to) => {
 
   if (userStore.id === null && to.name === "MainRoom") {
     return { name: "HomePage" };
-  } else if (!authStore.token && to.name === "AdminPage") {
-    return { name: "HomePage" };
+  } else if (
+    !authStore.token &&
+    to.name === "AdminPage" &&
+    !authStore.isAdmin
+  ) {
+    return { name: "AdminLogin" };
+  } else if (authStore.token && to.name === "AdminLogin") {
+    return { name: "AdminPage" };
   }
 });
 
