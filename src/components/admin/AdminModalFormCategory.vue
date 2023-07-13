@@ -21,12 +21,17 @@ export default defineComponent({
   methods: {
     setCategory() {
       this.isLoading = true;
-      console.log(123);
+      this.categoriesStore
+        .setCategory({
+          title: this.category,
+        })
+        .then(() => {
+          this.categoriesStore.getCategories();
+        })
+        .finally(() => {
+          this.isLoading = false;
+        });
     },
-  },
-
-  mounted() {
-    this.categoriesStore.getCategories();
   },
 });
 </script>

@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useMainStore } from "@/stores/main";
+import { useCookies } from "vue3-cookies";
 export const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+const { cookies } = useCookies();
 
 const API = axios.create({
   baseURL: BASE_URL,
@@ -9,6 +11,10 @@ const API = axios.create({
 
 API.interceptors.request.use(
   function (config) {
+    const token = cookies.get("token");
+    if (token) {
+      config.headers["Authorization"] = `Bearer ${token}`;
+    }
     return config;
   },
   function (error) {
@@ -52,7 +58,7 @@ API.interceptors.response.use(
     } else {
       mainStore.createNotification({
         type: "danger",
-        description: error.response.data.error,
+        description: error.response.data.message,
       });
     }
     return Promise.reject(error);

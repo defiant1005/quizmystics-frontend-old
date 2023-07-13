@@ -121,13 +121,11 @@ export default defineComponent({
 <style lang="scss" scoped>
 .main-notice {
   position: fixed;
-  bottom: 20px;
-  right: -200px;
-  animation: notice-animate 6s ease-out;
-  //transition: right 1s ease-out;
 
   &_open {
-    right: 20px;
+    animation: notice-animate 6s ease-out;
+    bottom: 20px;
+    right: -100%;
   }
 
   svg {
@@ -138,7 +136,7 @@ export default defineComponent({
 
 @keyframes notice-animate {
   0% {
-    right: -200px;
+    right: -100%;
   }
 
   10% {
@@ -150,11 +148,11 @@ export default defineComponent({
   }
 
   70% {
-    right: -200px;
+    right: -100%;
   }
 
   100% {
-    right: -200px;
+    right: -100%;
   }
 }
 </style>
