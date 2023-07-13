@@ -9,7 +9,7 @@ export default defineComponent({
 
   props: {
     noticeData: {
-      type: Object as PropType<INoticeData>,
+      type: Object as PropType<INoticeData | null>,
       required: true,
     },
 
@@ -30,7 +30,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div v-if="noticeData" class="main-notice">
+  <div class="main-notice" :class="{ 'main-notice_open': noticeData !== null }">
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
       <symbol id="check-circle-fill" viewBox="0 0 16 16">
         <path
@@ -49,60 +49,112 @@ export default defineComponent({
       </symbol>
     </svg>
 
-    <div
-      v-if="noticeData.type === 'primary'"
-      class="alert alert-primary d-flex align-items-center"
-      role="alert"
-    >
-      <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Info:">
-        <use xlink:href="#info-fill" />
-      </svg>
-      <div>{{ noticeData.description }}</div>
-      <button type="button" class="btn-close" aria-label="Close"></button>
-    </div>
-    <div
-      v-if="noticeData.type === 'success'"
-      class="alert alert-success d-flex align-items-center"
-      role="alert"
-    >
-      <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:">
-        <use xlink:href="#check-circle-fill" />
-      </svg>
-      <div>{{ noticeData.description }}</div>
-      <button type="button" class="btn-close" aria-label="Close"></button>
-    </div>
-    <div
-      v-if="noticeData.type === 'warning'"
-      class="alert alert-warning d-flex align-items-center"
-      role="alert"
-    >
-      <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Warning:">
-        <use xlink:href="#exclamation-triangle-fill" />
-      </svg>
-      <div>{{ noticeData.description }}</div>
-    </div>
-    <div
-      v-if="noticeData.type === 'danger'"
-      class="alert alert-danger d-flex align-items-center"
-      role="alert"
-    >
-      <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:">
-        <use xlink:href="#exclamation-triangle-fill" />
-      </svg>
-      <div>{{ noticeData.description }}</div>
-    </div>
+    <template v-if="noticeData">
+      <div
+        v-if="noticeData.type === 'primary'"
+        class="alert alert-primary d-flex align-items-center"
+        role="alert"
+      >
+        <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Info:">
+          <use xlink:href="#info-fill" />
+        </svg>
+        <div>{{ noticeData.description }}</div>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          @click="$emit('close')"
+        ></button>
+      </div>
+      <div
+        v-if="noticeData.type === 'success'"
+        class="alert alert-success d-flex align-items-center"
+        role="alert"
+      >
+        <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:">
+          <use xlink:href="#check-circle-fill" />
+        </svg>
+        <div>{{ noticeData.description }}</div>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          @click="$emit('close')"
+        ></button>
+      </div>
+      <div
+        v-if="noticeData.type === 'warning'"
+        class="alert alert-warning d-flex align-items-center"
+        role="alert"
+      >
+        <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Warning:">
+          <use xlink:href="#exclamation-triangle-fill" />
+        </svg>
+        <div>{{ noticeData.description }}</div>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          @click="$emit('close')"
+        ></button>
+      </div>
+      <div
+        v-if="noticeData.type === 'danger'"
+        class="alert alert-danger d-flex align-items-center"
+        role="alert"
+      >
+        <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:">
+          <use xlink:href="#exclamation-triangle-fill" />
+        </svg>
+        <div>{{ noticeData.description }}</div>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          @click="$emit('close')"
+        ></button>
+      </div>
+    </template>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .main-notice {
   position: fixed;
-  right: 20px;
   bottom: 20px;
+  right: -200px;
+  animation: notice-animate 6s ease-out;
+  //transition: right 1s ease-out;
+
+  &_open {
+    right: 20px;
+  }
 
   svg {
     width: 16px;
     height: 16px;
+  }
+}
+
+@keyframes notice-animate {
+  0% {
+    right: -200px;
+  }
+
+  10% {
+    right: 20px;
+  }
+
+  60% {
+    right: 20px;
+  }
+
+  70% {
+    right: -200px;
+  }
+
+  100% {
+    right: -200px;
   }
 }
 </style>

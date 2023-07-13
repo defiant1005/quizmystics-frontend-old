@@ -42,7 +42,6 @@ export default defineComponent({
   <router-view />
 
   <MainNotice
-    v-if="notification"
     :notice-data="notification"
     :auto-close="true"
     @close="clearNotification"
