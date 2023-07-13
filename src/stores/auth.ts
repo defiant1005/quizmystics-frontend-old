@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
-import { IAuthData } from "@/intefaces/auth/IAuth";
-import * as authAPI from "@/api/auth/auth";
+import { IAuthData } from "@/intefaces/IAuth";
+import * as authAPI from "@/api/auth";
 import { useCookies } from "vue3-cookies";
 const { cookies } = useCookies();
 

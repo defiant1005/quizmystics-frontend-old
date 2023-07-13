@@ -1,28 +1,32 @@
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useCategoriesStore } from "@/stores/category";
 
 export default defineComponent({
   name: "AdminModalFormCategory",
 
   emits: ["setCategory"],
 
-  props: {
-    isCategoryLoading: {
-      type: Boolean,
-      default: false,
-    },
-  },
+  props: {},
 
   data() {
+    const categoriesStore = useCategoriesStore();
     return {
+      categoriesStore,
       category: "",
+      isLoading: false,
     };
   },
 
   methods: {
     setCategory() {
-      this.$emit("setCategory");
+      this.isLoading = true;
+      console.log(123);
     },
+  },
+
+  mounted() {
+    this.categoriesStore.getCategories();
   },
 });
 </script>
@@ -37,14 +41,14 @@ export default defineComponent({
         type="text"
         class="form-control"
         aria-describedby="emailHelp"
-      />.
+      />
       <div id="emailHelp" class="form-text">Категория вопроса</div>
     </div>
 
     <button
       type="submit"
       class="btn btn-primary"
-      :disabled="isCategoryLoading || category.trim().length < 5"
+      :disabled="isLoading || category.trim().length < 5"
     >
       Сохранить
     </button>

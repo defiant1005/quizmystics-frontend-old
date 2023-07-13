@@ -9,7 +9,7 @@ export default defineComponent({
 
   props: {
     noticeData: {
-      type: Object as PropType<INoticeData | null>,
+      type: [Object, null] as PropType<INoticeData | null>,
       required: true,
     },
 

@@ -29,12 +29,12 @@ export default defineComponent({
     },
   },
 
-  mounted() {
-    this.mainStore.createNotification({
-      type: "success",
-      description: "Все хорошо",
-    });
-  },
+  // mounted() {
+  //   this.mainStore.createNotification({
+  //     type: "success",
+  //     description: "Все хорошо",
+  //   });
+  // },
 });
 </script>
 

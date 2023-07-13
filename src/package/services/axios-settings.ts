@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useMainStore } from "@/stores/main";
 export const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const API = axios.create({
@@ -15,18 +16,44 @@ API.interceptors.request.use(
   }
 );
 
+//Список POST запросов, на которые не нужно показывать нотификацию "Успешно"
+const postBackApiWithoutNotice = ["api/user/login"];
+
 API.interceptors.response.use(
   function (response) {
+    const mainStore = useMainStore();
+
+    if (
+      response.config.method !== "get" &&
+      !postBackApiWithoutNotice.includes(response.config.url ?? "")
+    ) {
+      mainStore.createNotification({
+        type: "success",
+        description: "Успешно",
+      });
+    }
+
     return response;
   },
 
   function (error) {
+    const mainStore = useMainStore();
+
     if (error.response.status === 500) {
-      console.log("Ошибка сервера");
+      mainStore.createNotification({
+        type: "danger",
+        description: "Ошибка сервера",
+      });
     } else if (error.response.status === 403 && error.config.method !== "get") {
-      console.log("Отказано в доступе");
+      mainStore.createNotification({
+        type: "danger",
+        description: "Отказано в доступе",
+      });
     } else {
-      console.log(error.response.data.error);
+      mainStore.createNotification({
+        type: "danger",
+        description: error.response.data.error,
+      });
     }
     return Promise.reject(error);
   }

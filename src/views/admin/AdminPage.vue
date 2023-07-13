@@ -9,21 +9,10 @@ export default defineComponent({
   components: { AdminModalFormCategory, MainModal },
 
   data() {
-    return {
-      isCategoryLoading: false,
-    };
+    return {};
   },
 
-  methods: {
-    setCategoryHandler(category) {
-      this.isCategoryLoading = true;
-      console.log(category);
-
-      setTimeout(() => {
-        this.isCategoryLoading = false;
-      }, 3000);
-    },
-  },
+  methods: {},
 });
 </script>
 
@@ -40,10 +29,7 @@ export default defineComponent({
     <button class="btn btn-primary">Создать вопрос</button>
 
     <MainModal :title="'Создать категорию'">
-      <AdminModalFormCategory
-        :is-category-loading="isCategoryLoading"
-        @setCategory="setCategoryHandler"
-      />
+      <AdminModalFormCategory />
     </MainModal>
   </div>
 </template>
