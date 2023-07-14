@@ -1,11 +1,18 @@
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 import { useUsersStore } from "@/stores/admin/users.store";
 import { useRolesStore } from "@/stores/admin/roles.store";
 import { mapState } from "pinia";
 
 export default defineComponent({
   name: "AdminModalFormEditUser",
+
+  props: {
+    editUserId: {
+      type: [null, Number] as PropType<null | number>,
+      required: true,
+    },
+  },
 
   data() {
     const usersStore = useUsersStore();
@@ -14,8 +21,8 @@ export default defineComponent({
       usersStore,
       isLoading: false,
       email: "",
-      password: "",
-      role: "",
+      role: null as null | number,
+      userId: null as number,
     };
   },
 
@@ -23,21 +30,44 @@ export default defineComponent({
     ...mapState(useRolesStore, {
       roles: "roles",
     }),
+
+    ...mapState(useUsersStore, {
+      users: "users",
+    }),
+
+    currentUser() {
+      return this.users.find((user) => user.id === this.editUserId);
+    },
+  },
+
+  watch: {
+    currentUser: {
+      handler(newValue) {
+        if (newValue) {
+          //@ts-ignore
+          this.email = newValue.email;
+          //@ts-ignore
+          this.role = newValue.roleId;
+          //@ts-ignore
+          this.userId = newValue.id;
+        }
+      },
+      deep: true,
+    },
   },
 
   methods: {
-    setUser() {
+    editUser() {
       this.isLoading = true;
       this.usersStore
-        .setUser({
+        .editUser(this.userId, {
           email: this.email,
-          password: this.password,
           roleId: +this.role,
         })
         .then(() => {
           this.email = "";
-          this.password = "";
-          this.role = "";
+          this.role = null;
+          this.userId = 0;
           this.usersStore.getAllUsers();
         })
         .finally(() => {
@@ -49,11 +79,11 @@ export default defineComponent({
 </script>
 
 <template>
-  <form @submit.prevent="setUser">
+  <form @submit.prevent="editUser">
     <div class="mb-3">
-      <label for="addModalFormEditUserEmail" class="form-label">Email</label>
+      <label for="AdminModalFormUserEmail" class="form-label">Email</label>
       <input
-        id="addModalFormEditUserEmail"
+        id="AdminModalFormUserEmail"
         v-model="email"
         type="email"
         class="form-control"
@@ -62,22 +92,9 @@ export default defineComponent({
     </div>
 
     <div class="mb-3">
-      <label for="addModalFormEditUserPassword" class="form-label"
-        >Пароль</label
-      >
-      <input
-        id="addModalFormEditUserPassword"
-        v-model="password"
-        type="password"
-        class="form-control"
-        aria-describedby="passwordHelp"
-      />
-    </div>
-
-    <div class="mb-3">
-      <label for="addModalFormEditUserRole" class="form-label">Роль</label>
+      <label for="AdminModalFormUserRole" class="form-label">Роль</label>
       <select
-        id="addModalFormEditUserRole"
+        id="AdminModalFormUserRole"
         v-model="role"
         class="form-select"
         aria-label="Default select example"
@@ -100,7 +117,7 @@ export default defineComponent({
         isLoading ||
         email.trim().length < 5 ||
         email.trim().length < 5 ||
-        role === ''
+        role === null
       "
     >
       Сохранить

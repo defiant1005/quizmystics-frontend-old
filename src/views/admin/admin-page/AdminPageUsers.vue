@@ -4,14 +4,16 @@ import { useUsersStore } from "@/stores/admin/users.store";
 import MainTable from "@/package/components/MainTable.vue";
 import { mapState } from "pinia";
 import MainModal from "@/package/components/MainModal.vue";
-import AdminModalFormUser from "@/components/admin/users/AdminModalFormUser.vue";
 import { Modal } from "bootstrap";
+import AdminModalFormCreateUser from "@/components/admin/users/AdminModalFormCreateUser.vue";
+import AdminModalFormEditUser from "@/components/admin/users/AdminModalFormEditUser.vue";
 
 export default defineComponent({
   name: "AdminPageUsers",
 
   components: {
-    AdminModalFormUser,
+    AdminModalFormEditUser,
+    AdminModalFormCreateUser,
     MainModal,
     MainTable,
   },
@@ -69,21 +71,12 @@ export default defineComponent({
       Создать пользователя
     </button>
 
-    <button
-      type="button"
-      class="btn btn-primary m-lg-2"
-      data-bs-toggle="modal"
-      data-bs-target="#editUser"
-    >
-      Редактировать пользователя
-    </button>
-
     <MainModal :id-value="'createUser'" :title="'Создать пользователя'">
-      <AdminModalFormUser />
+      <AdminModalFormCreateUser />
     </MainModal>
 
     <MainModal :title="'Редактировать пользователя'" :id-value="'editUser'">
-      <AdminModalFormUser :edit-user-id="editUserId" />
+      <AdminModalFormEditUser :edit-user-id="editUserId" />
     </MainModal>
   </div>
 </template>

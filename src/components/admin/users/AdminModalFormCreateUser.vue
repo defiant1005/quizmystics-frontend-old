@@ -1,18 +1,11 @@
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent } from "vue";
 import { useUsersStore } from "@/stores/admin/users.store";
 import { useRolesStore } from "@/stores/admin/roles.store";
 import { mapState } from "pinia";
 
 export default defineComponent({
-  name: "AdminModalFormUser",
-
-  props: {
-    editUserId: {
-      type: [null, Number] as PropType<null | number>,
-      required: true,
-    },
-  },
+  name: "AdminModalFormCreateUser",
 
   data() {
     const usersStore = useUsersStore();
@@ -21,8 +14,8 @@ export default defineComponent({
       usersStore,
       isLoading: false,
       email: "",
-      role: null as null | number,
-      userId: null as number,
+      password: "",
+      role: "",
     };
   },
 
@@ -30,44 +23,21 @@ export default defineComponent({
     ...mapState(useRolesStore, {
       roles: "roles",
     }),
-
-    ...mapState(useUsersStore, {
-      users: "users",
-    }),
-
-    currentUser() {
-      return this.users.find((user) => user.id === this.editUserId);
-    },
-  },
-
-  watch: {
-    currentUser: {
-      handler(newValue) {
-        if (newValue) {
-          //@ts-ignore
-          this.email = newValue.email;
-          //@ts-ignore
-          this.role = newValue.roleId;
-          //@ts-ignore
-          this.userId = newValue.id;
-        }
-      },
-      deep: true,
-    },
   },
 
   methods: {
-    editUser() {
+    setUser() {
       this.isLoading = true;
       this.usersStore
-        .editUser(this.userId, {
+        .setUser({
           email: this.email,
+          password: this.password,
           roleId: +this.role,
         })
         .then(() => {
           this.email = "";
-          this.role = null;
-          this.userId = 0;
+          this.password = "";
+          this.role = "";
           this.usersStore.getAllUsers();
         })
         .finally(() => {
@@ -79,11 +49,11 @@ export default defineComponent({
 </script>
 
 <template>
-  <form @submit.prevent="editUser">
+  <form @submit.prevent="setUser">
     <div class="mb-3">
-      <label for="AdminModalFormUserEmail" class="form-label">Email</label>
+      <label for="addModalFormEditUserEmail" class="form-label">Email</label>
       <input
-        id="AdminModalFormUserEmail"
+        id="addModalFormEditUserEmail"
         v-model="email"
         type="email"
         class="form-control"
@@ -92,9 +62,22 @@ export default defineComponent({
     </div>
 
     <div class="mb-3">
-      <label for="AdminModalFormUserRole" class="form-label">Роль</label>
+      <label for="addModalFormEditUserPassword" class="form-label">
+        Пароль
+      </label>
+      <input
+        id="addModalFormEditUserPassword"
+        v-model="password"
+        type="password"
+        class="form-control"
+        aria-describedby="passwordHelp"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="addModalFormEditUserRole" class="form-label">Роль</label>
       <select
-        id="AdminModalFormUserRole"
+        id="addModalFormEditUserRole"
         v-model="role"
         class="form-select"
         aria-label="Default select example"
@@ -117,7 +100,7 @@ export default defineComponent({
         isLoading ||
         email.trim().length < 5 ||
         email.trim().length < 5 ||
-        role === null
+        role === ''
       "
     >
       Сохранить
