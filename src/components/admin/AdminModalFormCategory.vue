@@ -41,9 +41,9 @@ export default defineComponent({
 <template>
   <form @submit.prevent="setCategory">
     <div class="mb-3">
-      <label for="exampleInputText1" class="form-label">Категория</label>
+      <label for="AdminModalFormCategory" class="form-label">Категория</label>
       <input
-        id="exampleInputText1"
+        id="AdminModalFormCategory"
         v-model="category"
         type="text"
         class="form-control"

@@ -1,6 +1,10 @@
 import { defineStore } from "pinia";
 import * as usersApi from "@/api/users";
-import { ISetUsersData, IUser } from "@/intefaces/IAdminInrefaces";
+import {
+  IEditUsersData,
+  ISetUsersData,
+  IUser,
+} from "@/intefaces/IAdminInrefaces";
 
 export const useUsersStore = defineStore("users-store", {
   state: () => ({
@@ -41,6 +45,19 @@ export const useUsersStore = defineStore("users-store", {
       return new Promise((resolve, reject) => {
         usersApi
           .apiDeleteUser(id)
+          .then((response) => {
+            resolve(response);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    },
+
+    editUser(id: number, { email, roleId }: IEditUsersData) {
+      return new Promise((resolve, reject) => {
+        usersApi
+          .apiEditUsers(id, { email, roleId })
           .then((response) => {
             resolve(response);
           })

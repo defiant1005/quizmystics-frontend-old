@@ -18,6 +18,11 @@ export interface ISetUsersData {
   roleId: number;
 }
 
+export interface IEditUsersData {
+  email: string;
+  roleId: number;
+}
+
 export interface IRoles {
   role: string;
   id: number;

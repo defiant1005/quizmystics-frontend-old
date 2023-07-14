@@ -5,13 +5,18 @@ export default {
       type: String,
       default: "",
     },
+
+    idValue: {
+      type: String,
+      required: true,
+    },
   },
 };
 </script>
 
 <template>
   <div
-    id="exampleModal"
+    :id="idValue"
     class="modal fade"
     tabindex="-1"
     aria-labelledby="exampleModalLabel"

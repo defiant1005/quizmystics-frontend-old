@@ -97,10 +97,6 @@ router.beforeEach((to) => {
   const userStore = useUserStore();
   const authStore = useAuthStore();
 
-  console.log("!authStore.token", !authStore.token);
-  console.log("!to.meta.secret", to);
-  console.log("!authStore.isAdmin", !authStore.isAdmin);
-
   if (userStore.id === null && to.name === "MainRoom") {
     return { name: "HomePage" };
   } else if (!authStore.token && to.meta.secret && !authStore.isAdmin) {

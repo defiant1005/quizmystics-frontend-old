@@ -4,7 +4,7 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "MainTable",
 
-  emits: ["deleteEntity"],
+  emits: ["deleteEntity", "editEntity"],
 
   props: {
     tableHeader: {
@@ -50,6 +50,14 @@ export default defineComponent({
           @click="currentId = row.id"
         >
           Удалить
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          @click="$emit('editEntity', row.id)"
+        >
+          Edit
         </button>
       </tr>
     </tbody>
