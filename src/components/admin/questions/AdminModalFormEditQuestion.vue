@@ -1,40 +1,40 @@
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
 import { mapState } from "pinia";
-import { useCategoriesStore } from "@/stores/admin/categories.store";
+import { useQuestionsStore } from "@/stores/admin/questions.store";
 
 export default defineComponent({
-  name: "AdminModalFormEditCategory",
+  name: "AdminModalFormEditQuestion",
 
   props: {
-    editCategoryId: {
+    editQuestionId: {
       type: [null, Number] as PropType<null | number>,
       required: true,
     },
   },
 
   data() {
-    const categoryStore = useCategoriesStore();
+    const questionStore = useQuestionsStore();
 
     return {
-      categoryStore,
+      questionStore,
       isLoading: false,
       title: "",
     };
   },
 
   computed: {
-    ...mapState(useCategoriesStore, {
-      categories: "categories",
+    ...mapState(useQuestionsStore, {
+      questions: "questions",
     }),
 
-    currentCategory() {
-      return this.categories.find((user) => user.id === this.editCategoryId);
+    currentQuestion() {
+      return this.questions.find((user) => user.id === this.editQuestionId);
     },
   },
 
   watch: {
-    currentCategory: {
+    currentQuestion: {
       handler(newValue) {
         if (newValue) {
           //@ts-ignore
@@ -46,15 +46,15 @@ export default defineComponent({
   },
 
   methods: {
-    editCategory() {
+    editQuestion() {
       this.isLoading = true;
-      this.categoryStore
-        .editCategory(this.editCategoryId, {
+      this.questionStore
+        .editQuestion(this.editQuestionId, {
           title: this.title,
         })
         .then(() => {
           this.title = "";
-          this.categoryStore.getCategories();
+          this.questionStore.getQuestions();
         })
         .finally(() => {
           this.isLoading = false;
@@ -65,13 +65,11 @@ export default defineComponent({
 </script>
 
 <template>
-  <form @submit.prevent="editCategory">
+  <form @submit.prevent="editQuestion">
     <div class="mb-3">
-      <label for="AdminModalFormCategoryTitle" class="form-label">
-        Категория
-      </label>
+      <label for="AdminModalFormQuestionTitle" class="form-label">ПОЛЕ 1</label>
       <input
-        id="AdminModalFormCategoryTitle"
+        id="AdminModalFormQuestionTitle"
         v-model="title"
         type="text"
         class="form-control"

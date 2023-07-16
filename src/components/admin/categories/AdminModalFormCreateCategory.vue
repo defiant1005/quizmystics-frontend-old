@@ -40,15 +40,14 @@ export default defineComponent({
 <template>
   <form @submit.prevent="setCategory">
     <div class="mb-3">
-      <label for="addModalFormEditUserEmail" class="form-label">
+      <label for="addModalFormEditCategoryTitle" class="form-label">
         Категория
       </label>
       <input
-        id="addModalFormEditUserEmail"
+        id="addModalFormEditCategoryTitle"
         v-model="title"
         type="text"
         class="form-control"
-        aria-describedby="emailHelp"
       />
     </div>
 

@@ -76,7 +76,7 @@ export default defineComponent({
       <AdminModalFormCreateCategory @closeModal="closeModalHandler" />
     </MainModal>
 
-    <MainModal :title="'Редактировать пользователя'" :id-value="'editCategory'">
+    <MainModal :title="'Редактировать категорию'" :id-value="'editCategory'">
       <AdminModalFormEditCategory :edit-category-id="editCategoryId" />
     </MainModal>
   </div>

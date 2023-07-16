@@ -62,11 +62,11 @@ export default defineComponent({
     </div>
 
     <div class="mb-3">
-      <label for="addModalFormEditUserPassword" class="form-label">
+      <label for="addModalFormCreateUserPassword" class="form-label">
         Пароль
       </label>
       <input
-        id="addModalFormEditUserPassword"
+        id="addModalFormCreateUserPassword"
         v-model="password"
         type="password"
         class="form-control"
@@ -75,9 +75,9 @@ export default defineComponent({
     </div>
 
     <div class="mb-3">
-      <label for="addModalFormEditUserRole" class="form-label">Роль</label>
+      <label for="addModalFormCreateUserRole" class="form-label">Роль</label>
       <select
-        id="addModalFormEditUserRole"
+        id="addModalFormCreateUserRole"
         v-model="role"
         class="form-select"
         aria-label="Default select example"
