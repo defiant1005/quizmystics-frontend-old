@@ -10,3 +10,11 @@ export const apiSetCategory = ({ title }: ISetCategoryData) => {
     title: title,
   });
 };
+
+export const apiEditCategory = (id: number, { title }: ISetCategoryData) => {
+  return API.put<ICategories>(`api/category/${id}`, { title });
+};
+
+export const apiDeleteCategory = (id: string) => {
+  return API.delete(`api/category/${id}`);
+};

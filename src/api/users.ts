@@ -11,7 +11,7 @@ export const apiGetAllUsers = () => {
 };
 
 export const apiSetUsers = ({ email, password, roleId }: ISetUsersData) => {
-  return API.post<ICategories>("api/user/registration", {
+  return API.post<IUser>("api/user/registration", {
     email,
     password,
     roleId,
@@ -19,7 +19,7 @@ export const apiSetUsers = ({ email, password, roleId }: ISetUsersData) => {
 };
 
 export const apiEditUsers = (id: number, { email, roleId }: IEditUsersData) => {
-  return API.put<ICategories>(`api/user/users/${id}`, {
+  return API.put<IUser>(`api/user/users/${id}`, {
     email,
     roleId,
   });

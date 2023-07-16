@@ -1,8 +1,8 @@
 <script lang="ts">
 import { defineComponent } from "vue";
-import { useAuthStore } from "@/stores/auth";
-import { useCategoriesStore } from "@/stores/admin/categories.store";
 import AdminNavigation from "@/components/admin/AdminNavigation.vue";
+import { useCategoriesStore } from "@/stores/admin/categories.store";
+import { useUsersStore } from "@/stores/admin/users.store";
 
 export default defineComponent({
   name: "AdminPage",
@@ -10,17 +10,19 @@ export default defineComponent({
   components: { AdminNavigation },
 
   data() {
-    const authStore = useAuthStore();
-    const categoriesStore = useCategoriesStore();
+    const categoryStore = useCategoriesStore();
+    const usersStore = useUsersStore();
+    // const questionsStore = useQues();
 
     return {
-      categoriesStore,
-      authStore,
+      categoryStore,
+      usersStore,
     };
   },
 
   mounted() {
-    this.categoriesStore.getCategories();
+    this.categoryStore.getCategories();
+    this.usersStore.getAllUsers();
   },
 });
 </script>

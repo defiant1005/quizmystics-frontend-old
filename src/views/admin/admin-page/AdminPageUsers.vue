@@ -46,10 +46,6 @@ export default defineComponent({
       myModal.show();
     },
   },
-
-  mounted() {
-    this.usersStore.getAllUsers();
-  },
 });
 </script>
 

@@ -41,10 +41,10 @@ export const useUsersStore = defineStore("users-store", {
       });
     },
 
-    deleteUser(id: string) {
+    editUser(id: number, { email, roleId }: IEditUsersData) {
       return new Promise((resolve, reject) => {
         usersApi
-          .apiDeleteUser(id)
+          .apiEditUsers(id, { email, roleId })
           .then((response) => {
             resolve(response);
           })
@@ -54,10 +54,10 @@ export const useUsersStore = defineStore("users-store", {
       });
     },
 
-    editUser(id: number, { email, roleId }: IEditUsersData) {
+    deleteUser(id: string) {
       return new Promise((resolve, reject) => {
         usersApi
-          .apiEditUsers(id, { email, roleId })
+          .apiDeleteUser(id)
           .then((response) => {
             resolve(response);
           })
