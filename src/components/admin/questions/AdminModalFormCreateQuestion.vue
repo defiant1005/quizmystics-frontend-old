@@ -29,6 +29,15 @@ export default defineComponent({
     ...mapState(useCategoriesStore, {
       categories: "categories",
     }),
+
+    checkCorrectAnswer() {
+      return (
+        this.correct_answer === this.answer1 ||
+        this.correct_answer === this.answer2 ||
+        this.correct_answer === this.answer3 ||
+        this.correct_answer === this.answer4
+      );
+    },
   },
 
   methods: {
@@ -36,10 +45,22 @@ export default defineComponent({
       this.isLoading = true;
       this.questionsStore
         .setQuestion({
+          categoryId: +this.categoryId,
           title: this.title,
+          answer1: this.answer1,
+          answer2: this.answer2,
+          answer3: this.answer3,
+          answer4: this.answer4,
+          correct_answer: this.correct_answer,
         })
         .then(() => {
+          this.categoryId = "";
           this.title = "";
+          this.answer1 = "";
+          this.answer2 = "";
+          this.answer3 = "";
+          this.answer4 = "";
+          this.correct_answer = "";
           this.questionsStore.getQuestions();
           this.$emit("closeModal");
         })
@@ -54,11 +75,11 @@ export default defineComponent({
 <template>
   <form @submit.prevent="setCategory">
     <div class="mb-3">
-      <label for="addModalFormEditCreateQuestionCategory" class="form-label">
+      <label for="addModalFormCreateQuestionCategory" class="form-label">
         Категория
       </label>
       <select
-        id="addModalFormEditCreateQuestionCategory"
+        id="addModalFormCreateQuestionCategory"
         v-model="categoryId"
         class="form-select"
         aria-label="Default select example"
@@ -74,11 +95,11 @@ export default defineComponent({
     </div>
 
     <div class="mb-3">
-      <label for="addModalFormEditQuestionTitle" class="form-label">
+      <label for="addModalFormCreateQuestionTitle" class="form-label">
         Вопрос
       </label>
       <input
-        id="addModalFormEditQuestionTitle"
+        id="addModalFormCreateQuestionTitle"
         v-model="title"
         type="text"
         :disabled="categoryId === ''"
@@ -87,11 +108,11 @@ export default defineComponent({
     </div>
 
     <div class="mb-3">
-      <label for="addModalFormEditQuestionAnswer1" class="form-label">
+      <label for="addModalFormCreateQuestionAnswer1" class="form-label">
         Вариант 1
       </label>
       <input
-        id="addModalFormEditQuestionAnswer1"
+        id="addModalFormCreateQuestionAnswer1"
         v-model="answer1"
         type="text"
         :disabled="categoryId === ''"
@@ -100,11 +121,11 @@ export default defineComponent({
     </div>
 
     <div class="mb-3">
-      <label for="addModalFormEditQuestionAnswer2" class="form-label">
+      <label for="addModalFormCreateQuestionAnswer2" class="form-label">
         Вариант 2
       </label>
       <input
-        id="addModalFormEditQuestionAnswer2"
+        id="addModalFormCreateQuestionAnswer2"
         v-model="answer2"
         type="text"
         :disabled="categoryId === ''"
@@ -113,11 +134,11 @@ export default defineComponent({
     </div>
 
     <div class="mb-3">
-      <label for="addModalFormEditQuestionAnswer3" class="form-label">
+      <label for="addModalFormCreateQuestionAnswer3" class="form-label">
         Вариант 3
       </label>
       <input
-        id="addModalFormEditQuestionAnswer3"
+        id="addModalFormCreateQuestionAnswer3"
         v-model="answer3"
         :disabled="categoryId === ''"
         type="text"
@@ -126,11 +147,11 @@ export default defineComponent({
     </div>
 
     <div class="mb-3">
-      <label for="addModalFormEditQuestionAnswer4" class="form-label">
+      <label for="addModalFormCreateQuestionAnswer4" class="form-label">
         Вариант 4
       </label>
       <input
-        id="addModalFormEditQuestionAnswer4"
+        id="addModalFormCreateQuestionAnswer4"
         v-model="answer4"
         :disabled="categoryId === ''"
         type="text"
@@ -139,11 +160,11 @@ export default defineComponent({
     </div>
 
     <div class="mb-3">
-      <label for="addModalFormEditCreateQuestionCategory" class="form-label">
+      <label for="addModalFormCreateQuestionCategory" class="form-label">
         Правильный ответ
       </label>
       <select
-        id="addModalFormEditCreateQuestionCategory"
+        id="addModalFormCreateQuestionCategory"
         v-model="correct_answer"
         class="form-select"
         :disabled="
@@ -164,7 +185,17 @@ export default defineComponent({
     <button
       type="submit"
       class="btn btn-primary"
-      :disabled="isLoading || title.trim() === ''"
+      data-bs-dismiss="modal"
+      :disabled="
+        isLoading ||
+        title.trim() === '' ||
+        answer1.trim() === '' ||
+        answer2.trim() === '' ||
+        answer3.trim() === '' ||
+        answer4.trim() === '' ||
+        correct_answer.trim() === '' ||
+        !checkCorrectAnswer
+      "
     >
       Сохранить
     </button>

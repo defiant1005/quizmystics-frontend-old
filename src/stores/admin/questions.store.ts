@@ -1,6 +1,10 @@
 import { defineStore } from "pinia";
 import * as questionsApi from "@/api/questions";
-import { ICategories, ISetCategoryData } from "@/intefaces/IAdminInrefaces";
+import {
+  ICategories,
+  ISetCategoryData,
+  ISetQuestion,
+} from "@/intefaces/IAdminInrefaces";
 
 export const useQuestionsStore = defineStore("questions-store", {
   state: () => ({
@@ -32,10 +36,26 @@ export const useQuestionsStore = defineStore("questions-store", {
       });
     },
 
-    setQuestion({ title }: ISetCategoryData) {
+    setQuestion({
+      categoryId,
+      title,
+      answer1,
+      answer2,
+      answer3,
+      answer4,
+      correct_answer,
+    }: ISetQuestion) {
       return new Promise((resolve, reject) => {
         questionsApi
-          .apiSetQuestion({ title })
+          .apiSetQuestion({
+            categoryId,
+            title,
+            answer1,
+            answer2,
+            answer3,
+            answer4,
+            correct_answer,
+          })
           .then((response) => {
             resolve(response);
           })
@@ -45,10 +65,29 @@ export const useQuestionsStore = defineStore("questions-store", {
       });
     },
 
-    editQuestion(id: number, { title }: ISetCategoryData) {
+    editQuestion(
+      id: number,
+      {
+        categoryId,
+        title,
+        answer1,
+        answer2,
+        answer3,
+        answer4,
+        correct_answer,
+      }: ISetQuestion
+    ) {
       return new Promise((resolve, reject) => {
         questionsApi
-          .apiEditQuestion(id, { title })
+          .apiEditQuestion(id, {
+            categoryId,
+            title,
+            answer1,
+            answer2,
+            answer3,
+            answer4,
+            correct_answer,
+          })
           .then((response) => {
             resolve(response);
           })

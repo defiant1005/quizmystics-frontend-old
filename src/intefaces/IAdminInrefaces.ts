@@ -31,3 +31,13 @@ export interface IRoles {
 export interface ISetRoles {
   role: string;
 }
+
+export interface ISetQuestion {
+  categoryId: number;
+  title: string;
+  answer1: string;
+  answer2: string;
+  answer3: string;
+  answer4: string;
+  correct_answer: string;
+}
