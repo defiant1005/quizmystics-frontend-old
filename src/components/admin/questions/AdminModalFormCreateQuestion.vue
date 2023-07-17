@@ -46,12 +46,12 @@ export default defineComponent({
       this.questionsStore
         .setQuestion({
           categoryId: +this.categoryId,
-          title: this.title,
-          answer1: this.answer1,
-          answer2: this.answer2,
-          answer3: this.answer3,
-          answer4: this.answer4,
-          correct_answer: this.correct_answer,
+          title: this.title.trim(),
+          answer1: this.answer1.trim(),
+          answer2: this.answer2.trim(),
+          answer3: this.answer3.trim(),
+          answer4: this.answer4.trim(),
+          correct_answer: this.correct_answer.trim(),
         })
         .then(() => {
           this.categoryId = "";

@@ -56,6 +56,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .admin-page {
+  overflow: auto;
   height: 100%;
 
   &__logo {

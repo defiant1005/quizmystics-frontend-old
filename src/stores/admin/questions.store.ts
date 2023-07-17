@@ -1,10 +1,6 @@
 import { defineStore } from "pinia";
 import * as questionsApi from "@/api/questions";
-import {
-  ICategories,
-  ISetCategoryData,
-  ISetQuestion,
-} from "@/intefaces/IAdminInrefaces";
+import { ICategories, ISetQuestion } from "@/intefaces/IAdminInrefaces";
 
 export const useQuestionsStore = defineStore("questions-store", {
   state: () => ({
@@ -18,6 +14,7 @@ export const useQuestionsStore = defineStore("questions-store", {
       "answer3",
       "answer4",
       "correct_answer",
+      "categoryId",
     ],
   }),
 

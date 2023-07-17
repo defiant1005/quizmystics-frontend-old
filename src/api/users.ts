@@ -1,6 +1,5 @@
 import API from "@/package/services/axios-settings";
 import {
-  ICategories,
   IEditUsersData,
   ISetUsersData,
   IUser,
