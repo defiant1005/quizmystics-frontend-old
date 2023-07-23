@@ -1,6 +1,7 @@
 import { reactive } from "vue";
 import { io } from "socket.io-client";
 import router from "@/router/index.ts";
+import { BASE_URL } from "@/package/services/axios-settings.ts";
 
 export const state = reactive({
   connected: false,
@@ -9,12 +10,7 @@ export const state = reactive({
   startGame: false,
 });
 
-const URL =
-  process.env.NODE_ENV === "production"
-    ? undefined
-    : "http://192.168.0.101:3000/";
-
-export const socket = io(URL, {
+export const socket = io(BASE_URL, {
   autoConnect: false,
   withCredentials: true,
 });
