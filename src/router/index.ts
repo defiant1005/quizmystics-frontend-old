@@ -98,7 +98,7 @@ router.beforeEach((to) => {
   const authStore = useAuthStore();
 
   if (userStore.id === null && to.name === "MainRoom") {
-    return { name: "HomePage" };
+    return { name: "MainRegistration" };
   } else if (!authStore.token && to.meta.secret && !authStore.isAdmin) {
     return { name: "AdminLogin" };
   } else if (authStore.token && to.name === "AdminLogin") {
