@@ -2,6 +2,7 @@ import { reactive } from "vue";
 import { io } from "socket.io-client";
 import router from "@/router/index.ts";
 import { BASE_URL } from "@/package/services/axios-settings.ts";
+import { useQuestionsStore } from "@/stores/questions.store.ts";
 
 export const state = reactive({
   connected: false,
@@ -28,20 +29,21 @@ socket.on("message", (message) => {
   state.messages.push(message);
 });
 
-socket.on("hello", (arg) => {
-  console.log(arg);
-});
-
 socket.on("updateUserList", ({ data }) => {
   state.usersList = data.users;
 });
 
-socket.on("startGame", ({ data }) => {
-  state.startGame = true;
+socket.on("startGame", async ({ room, questionId }) => {
+  const questionsStore = useQuestionsStore();
+  await questionsStore.getOneQuestion(questionId);
 
-  router.push({
-    path: `game/room/${data.room}`,
-  });
+  if (!state.startGame) {
+    state.startGame = true;
 
-  console.log("начало игры...");
+    if (room) {
+      router.push({
+        path: `game/room/${room}`,
+      });
+    }
+  }
 });

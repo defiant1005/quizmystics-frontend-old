@@ -50,14 +50,13 @@ export default {
 
   methods: {
     startGame() {
-      socket.emit("startGame", { room: this.userRoom }, (data) => {
-        console.log(data);
-      });
-    },
-  },
+      const gameData = {
+        room: this.userRoom,
+        players: this.usersList,
+      };
 
-  unmounted() {
-    socket.disconnect();
+      socket.emit("startGame", gameData);
+    },
   },
 };
 </script>

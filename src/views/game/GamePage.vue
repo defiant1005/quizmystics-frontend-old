@@ -1,16 +1,31 @@
 <script lang="ts">
 import { defineComponent } from "vue";
+import { mapState } from "pinia";
+import { useQuestionsStore } from "@/stores/questions.store";
+import QuestionGame from "@/components/game/QuestionGame.vue";
 
 export default defineComponent({
   name: "GamePage",
+  components: { QuestionGame },
 
   data() {
     return {
       timer: 5,
+      choiceAnswer: "",
     };
   },
 
+  computed: {
+    ...mapState(useQuestionsStore, {
+      question: "question",
+    }),
+  },
+
   methods: {
+    choiceAnswerHandler(answer: string) {
+      this.choiceAnswer = answer;
+    },
+
     startTimer() {
       this.timer--;
 
@@ -19,6 +34,10 @@ export default defineComponent({
           this.startTimer();
         }, 1000);
       }
+    },
+
+    setAnswerHandler() {
+      console.log(this.choiceAnswer);
     },
   },
 
@@ -36,7 +55,14 @@ export default defineComponent({
       {{ timer }}
     </div>
 
-    <div class="game-page__game game"></div>
+    <div v-else-if="question" class="game-page__game game">
+      <QuestionGame
+        :question="question"
+        :active-answer="choiceAnswer"
+        @choiceAnswer="choiceAnswerHandler"
+        @setAnswer="setAnswerHandler"
+      />
+    </div>
   </div>
 </template>
 

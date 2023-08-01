@@ -3,15 +3,18 @@ import stringGeneration from "@/package/helpers/string-generation";
 import { socket } from "@/socket";
 import { mapState } from "pinia";
 import { useUserStore } from "@/stores/user";
+import { useMainStore } from "@/stores/main";
 
 export default {
   name: "HomePage",
 
   data() {
     const userStore = useUserStore();
+    const mainStore = useMainStore();
 
     return {
       userStore,
+      mainStore,
       stringGeneration,
     };
   },
@@ -36,7 +39,10 @@ export default {
 
       socket.emit("createRoom", userData, (data) => {
         if (typeof data === "string") {
-          console.error(data);
+          this.mainStore.createNotification({
+            type: "danger",
+            description: data,
+          });
         } else {
           this.userStore.saveId(data.userId);
           this.$router.push(room);

@@ -2,15 +2,18 @@
 import { socket } from "@/socket";
 import { mapState } from "pinia";
 import { useUserStore } from "@/stores/user";
+import { useMainStore } from "@/stores/main";
 
 export default {
   name: "EnterRoom",
 
   data() {
     const userStore = useUserStore();
+    const mainStore = useMainStore();
 
     return {
       userStore,
+      mainStore,
       room: "",
     };
   },
@@ -32,7 +35,10 @@ export default {
 
       socket.emit("connectingExistingRoom", userData, (data) => {
         if (typeof data === "string") {
-          console.error(data);
+          this.mainStore.createNotification({
+            type: "danger",
+            description: data,
+          });
         } else {
           this.userStore.saveId(data.userId);
           this.$router.push(this.room);
