@@ -1,9 +1,9 @@
 import API from "@/package/services/axios-settings";
-import { ICategories, ISetQuestion } from "@/intefaces/IAdminInrefaces";
-import { IQuestion } from "@/intefaces/IGame";
+import { ISetQuestion } from "@/intefaces/IAdminInrefaces";
+import { ICheckAnswer, IQuestion } from "@/intefaces/IGame";
 
 export const apiGetQuestions = () => {
-  return API.get<Array<ICategories>>("api/question/");
+  return API.get("api/question/");
 };
 
 export const apiGetOneQuestions = (id: number) => {
@@ -19,7 +19,7 @@ export const apiSetQuestion = ({
   answer4,
   correct_answer,
 }: ISetQuestion) => {
-  return API.post<ICategories>("api/question/", {
+  return API.post("api/question/", {
     categoryId,
     title,
     answer1,
@@ -42,7 +42,7 @@ export const apiEditQuestion = (
     correct_answer,
   }: ISetQuestion
 ) => {
-  return API.put<ICategories>(`api/question/${id}`, {
+  return API.put(`api/question/${id}`, {
     categoryId,
     title,
     answer1,

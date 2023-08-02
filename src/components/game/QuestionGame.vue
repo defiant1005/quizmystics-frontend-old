@@ -38,7 +38,7 @@ export default defineComponent({
 
   methods: {
     startProgress() {
-      this.progress += this.answerTime / 100;
+      this.progress += 1;
       if (this.progress <= this.answerTime) {
         setTimeout(() => {
           this.startProgress();
@@ -120,7 +120,7 @@ export default defineComponent({
 
     .progress-bar {
       width: 0;
-      animation: change-width v-bind(answerTimeSec) ease-out;
+      animation: change-width v-bind(answerTimeSec) ease-in;
     }
   }
 

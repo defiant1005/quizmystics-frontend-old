@@ -1,22 +1,26 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { mapState } from "pinia";
-import { useQuestionsStore } from "@/stores/questions.store";
 import QuestionGame from "@/components/game/QuestionGame.vue";
+import { useGameStore } from "@/stores/game.store";
 
 export default defineComponent({
   name: "GamePage",
+
   components: { QuestionGame },
 
   data() {
+    const gameStore = useGameStore();
+
     return {
+      gameStore,
       timer: 5,
       choiceAnswer: "",
     };
   },
 
   computed: {
-    ...mapState(useQuestionsStore, {
+    ...mapState(useGameStore, {
       question: "question",
     }),
   },
@@ -37,7 +41,12 @@ export default defineComponent({
     },
 
     setAnswerHandler() {
-      console.log(this.choiceAnswer);
+      if (this.question?.id) {
+        this.gameStore.checkAnswer({
+          id: this.question.id,
+          answer: this.choiceAnswer,
+        });
+      }
     },
   },
 
