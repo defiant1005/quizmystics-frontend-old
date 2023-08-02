@@ -1,6 +1,6 @@
 import API from "@/package/services/axios-settings";
 import { ISetQuestion } from "@/intefaces/IAdminInrefaces";
-import { ICheckAnswer, IQuestion } from "@/intefaces/IGame";
+import { IQuestion } from "@/intefaces/IGame";
 
 export const apiGetQuestions = () => {
   return API.get("api/question/");
