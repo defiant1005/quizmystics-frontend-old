@@ -23,7 +23,7 @@ API.interceptors.request.use(
 );
 
 //Список POST запросов, на которые не нужно показывать нотификацию "Успешно"
-const postBackApiWithoutNotice = ["api/user/login", "api/question/answer"];
+const postBackApiWithoutNotice = ["api/user/login", "api/game/check-answer"];
 
 API.interceptors.response.use(
   function (response) {

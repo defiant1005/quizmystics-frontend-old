@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import * as gameApi from "@/api/game";
+import * as questionsApi from "@/api/questions";
 import { ICheckAnswer, IQuestion } from "@/intefaces/IGame";
 
 export const useGameStore = defineStore("game-store", {
@@ -10,7 +11,7 @@ export const useGameStore = defineStore("game-store", {
   actions: {
     getOneQuestion(id: number) {
       return new Promise((resolve, reject) => {
-        gameApi
+        questionsApi
           .apiGetOneQuestions(id)
           .then((response) => {
             this.question = response.data;
