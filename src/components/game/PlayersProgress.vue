@@ -49,13 +49,23 @@ export default defineComponent({
   },
 
   mounted() {
+    // setTimeout(() => {
+    //   const user = this.usersList.find((user) => user.userId === this.userId);
+    //
+    //   this.numbers_animation = true;
+    //   this.counter("count1", this.userCount, user.count, 2200);
+    //
+    //   this.gameStore.setCount(user.count);
+    // }, 1000);
+
     setTimeout(() => {
-      const user = this.usersList.find((user) => user.userId === this.userId);
-
       this.numbers_animation = true;
-      this.counter("count1", this.userCount, user.count, 2200);
 
-      this.gameStore.setCount(user.count);
+      this.usersList.forEach((user: any, index: any) => {
+        this.counter(index.toString(), user.oldCount, user.count, 2200);
+
+        this.gameStore.setCount(user.count);
+      });
     }, 1000);
   },
 });
@@ -64,11 +74,11 @@ export default defineComponent({
 <template>
   <div class="players-progress">
     <div
-      v-for="user in usersList"
+      v-for="(user, index) in usersList"
       :key="user.userId"
       class="players-progress__users users"
     >
-      <p id="count1">0</p>
+      <p :id="index.toString()">0</p>
       <p>{{ user.name }}</p>
     </div>
   </div>

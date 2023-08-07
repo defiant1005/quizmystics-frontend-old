@@ -4,8 +4,8 @@ import { mapState } from "pinia";
 import QuestionGame from "@/components/game/QuestionGame.vue";
 import { useGameStore } from "@/stores/game.store";
 import { useUserStore } from "@/stores/user";
-import { socket } from "@/socket";
 import PlayersProgress from "@/components/game/PlayersProgress.vue";
+import { socket, state } from "@/socket";
 
 export default defineComponent({
   name: "GamePage",
@@ -16,7 +16,6 @@ export default defineComponent({
     return {
       timer: 5,
       choiceAnswer: "",
-      isShowProgress: false,
     };
   },
 
@@ -28,6 +27,10 @@ export default defineComponent({
     ...mapState(useUserStore, {
       userId: "id",
     }),
+
+    isShowProgress() {
+      return state.isShowProgress;
+    },
   },
 
   methods: {
@@ -54,7 +57,7 @@ export default defineComponent({
         };
 
         socket.emit("changeUserCount", answerData, () => {
-          this.isShowProgress = true;
+          // this.isShowProgress = true;
         });
       }
     },

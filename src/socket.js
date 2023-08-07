@@ -9,7 +9,12 @@ export const state = reactive({
   messages: [],
   usersList: [],
   startGame: false,
+  isShowProgress: false,
 });
+
+export const changeConnected = () => {
+  state.isShowProgress = !state.isShowProgress;
+};
 
 export const socket = io(BASE_URL, {
   autoConnect: false,
@@ -31,7 +36,11 @@ socket.on("message", (message) => {
 
 socket.on("updateUserList", ({ data }) => {
   state.usersList = data.users;
-  console.log(state.usersList);
+});
+
+socket.on("finishQuestion", ({ data }) => {
+  state.isShowProgress = true;
+  state.usersList = data.users;
 });
 
 socket.on("startGame", async ({ room, questionId }) => {
