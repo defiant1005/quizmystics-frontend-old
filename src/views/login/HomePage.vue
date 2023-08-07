@@ -76,4 +76,10 @@ export default {
   border-radius: 10px;
   gap: 10px;
 }
+
+@media (max-width: 420px) {
+  .home-page {
+    width: 100%;
+  }
+}
 </style>

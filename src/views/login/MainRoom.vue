@@ -98,4 +98,10 @@ export default {
     gap: 12px;
   }
 }
+
+@media (max-width: 420px) {
+  .main-room {
+    width: 100%;
+  }
+}
 </style>

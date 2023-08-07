@@ -23,6 +23,7 @@ export default {
 
 <style lang="scss" scoped>
 .login-layout {
+  padding: 12px;
   width: 100%;
   height: 100%;
   background: rgba(74, 26, 194, 0.9);
@@ -31,5 +32,9 @@ export default {
   justify-content: center;
   flex-direction: column;
   gap: 20px;
+
+  > h1 {
+    text-align: center;
+  }
 }
 </style>

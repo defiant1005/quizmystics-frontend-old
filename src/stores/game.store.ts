@@ -1,11 +1,12 @@
 import { defineStore } from "pinia";
-import * as gameApi from "@/api/game";
 import * as questionsApi from "@/api/questions";
-import { ICheckAnswer, IQuestion } from "@/intefaces/IGame";
+import { IQuestion } from "@/intefaces/IGame";
 
 export const useGameStore = defineStore("game-store", {
   state: () => ({
     question: null as null | IQuestion,
+
+    userCount: 0,
   }),
 
   actions: {
@@ -23,17 +24,8 @@ export const useGameStore = defineStore("game-store", {
       });
     },
 
-    checkAnswer(data: ICheckAnswer) {
-      return new Promise((resolve, reject) => {
-        gameApi
-          .apiCheckAnswer(data)
-          .then((response) => {
-            resolve(response);
-          })
-          .catch((error) => {
-            reject(error);
-          });
-      });
+    setCount(countValue: number) {
+      this.userCount += countValue;
     },
   },
 });

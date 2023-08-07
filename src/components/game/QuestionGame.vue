@@ -22,7 +22,7 @@ export default defineComponent({
   data() {
     return {
       progress: 0,
-      answerTime: 30,
+      answerTime: 10,
     };
   },
 
@@ -106,7 +106,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .question-game {
   width: 100%;
-  height: 400px;
+  min-height: 400px;
   background: wheat;
   padding: 30px;
 
@@ -126,17 +126,20 @@ export default defineComponent({
 
   .answer {
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    align-items: center;
     justify-content: center;
+
     gap: 20px;
+    grid-template-columns: 400px 400px;
 
     &__item {
-      width: 400px;
+      width: 100%;
       height: 100px;
       border-radius: 10px;
       background: #5bf131;
       transition: background 0.2s ease;
+      padding: 10px;
 
       &:hover {
         background: #3fec0f;
@@ -145,6 +148,22 @@ export default defineComponent({
       &_active {
         background: #1a73e8 !important;
       }
+    }
+  }
+}
+
+@media (max-width: 886px) {
+  .question-game {
+    .answer {
+      grid-template-columns: 400px;
+    }
+  }
+}
+
+@media (max-width: 468px) {
+  .question-game {
+    .answer {
+      grid-template-columns: auto;
     }
   }
 }

@@ -79,4 +79,10 @@ export default {
   border-radius: 10px;
   gap: 10px;
 }
+
+@media (max-width: 420px) {
+  .enter-room {
+    width: 100%;
+  }
+}
 </style>

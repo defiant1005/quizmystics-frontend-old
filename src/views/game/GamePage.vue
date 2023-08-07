@@ -3,25 +3,30 @@ import { defineComponent } from "vue";
 import { mapState } from "pinia";
 import QuestionGame from "@/components/game/QuestionGame.vue";
 import { useGameStore } from "@/stores/game.store";
+import { useUserStore } from "@/stores/user";
+import { socket } from "@/socket";
+import PlayersProgress from "@/components/game/PlayersProgress.vue";
 
 export default defineComponent({
   name: "GamePage",
 
-  components: { QuestionGame },
+  components: { PlayersProgress, QuestionGame },
 
   data() {
-    const gameStore = useGameStore();
-
     return {
-      gameStore,
       timer: 5,
       choiceAnswer: "",
+      isShowProgress: false,
     };
   },
 
   computed: {
     ...mapState(useGameStore, {
       question: "question",
+    }),
+
+    ...mapState(useUserStore, {
+      userId: "id",
     }),
   },
 
@@ -41,10 +46,15 @@ export default defineComponent({
     },
 
     setAnswerHandler() {
-      if (this.question?.id) {
-        this.gameStore.checkAnswer({
+      if (this.question?.id && this.userId) {
+        const answerData = {
           id: this.question.id,
           answer: this.choiceAnswer,
+          userId: this.userId,
+        };
+
+        socket.emit("changeUserCount", answerData, () => {
+          this.isShowProgress = true;
         });
       }
     },
@@ -64,13 +74,17 @@ export default defineComponent({
       {{ timer }}
     </div>
 
-    <div v-else-if="question" class="game-page__game game">
+    <div v-else-if="question && !isShowProgress" class="game-page__game game">
       <QuestionGame
         :question="question"
         :active-answer="choiceAnswer"
         @choiceAnswer="choiceAnswerHandler"
         @setAnswer="setAnswerHandler"
       />
+    </div>
+
+    <div v-else class="game-page__progress progress">
+      <PlayersProgress />
     </div>
   </div>
 </template>
@@ -98,6 +112,11 @@ export default defineComponent({
     justify-content: center;
     align-items: center;
     font-size: 26px;
+  }
+
+  .progress {
+    width: 100%;
+    height: 100%;
   }
 }
 </style>

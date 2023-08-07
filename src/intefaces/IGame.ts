@@ -11,4 +11,5 @@ export interface IQuestion {
 export interface ICheckAnswer {
   id: number;
   answer: string;
+  userId: string;
 }

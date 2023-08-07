@@ -31,6 +31,7 @@ socket.on("message", (message) => {
 
 socket.on("updateUserList", ({ data }) => {
   state.usersList = data.users;
+  console.log(state.usersList);
 });
 
 socket.on("startGame", async ({ room, questionId }) => {
