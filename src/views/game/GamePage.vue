@@ -57,7 +57,7 @@ export default defineComponent({
         };
 
         socket.emit("changeUserCount", answerData, () => {
-          // this.isShowProgress = true;
+          this.isShowProgress = true;
         });
       }
     },

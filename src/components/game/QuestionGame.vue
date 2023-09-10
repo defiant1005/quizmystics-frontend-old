@@ -1,6 +1,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import { IQuestion } from "@/intefaces/IGame";
+import { CheckAnswerResponseType, IQuestion } from "@/intefaces/IGame";
+import { useGameStore } from "@/stores/game.store";
 
 export default defineComponent({
   name: "QuestionGame",
@@ -15,14 +16,18 @@ export default defineComponent({
 
     activeAnswer: {
       type: String,
-      required: false,
+      default: "",
     },
   },
 
   data() {
+    const gameStore = useGameStore();
+
     return {
+      gameStore,
       progress: 0,
       answerTime: 10,
+      isCorrectAnswer: null as null | CheckAnswerResponseType,
     };
   },
 
@@ -44,7 +49,17 @@ export default defineComponent({
           this.startProgress();
         }, 1000);
       } else {
-        this.$emit("setAnswer");
+        this.gameStore
+          .checkCorrectAnswer({
+            questionId: this.question.id,
+            answer: this.activeAnswer,
+          })
+          .then((res: any) => {
+            this.isCorrectAnswer = res.data.message;
+          });
+        setTimeout(() => {
+          this.$emit("setAnswer");
+        }, 1000);
       }
     },
   },
@@ -73,28 +88,68 @@ export default defineComponent({
     <div class="question-game__answer answer">
       <button
         class="answer__item"
-        :class="{ answer__item_active: activeAnswer === question.answer1 }"
+        :class="[
+          { answer__item_active: activeAnswer === question.answer1 },
+          {
+            answer__item_good:
+              activeAnswer === question.answer1 && isCorrectAnswer === 'good',
+          },
+          {
+            answer__item_bad:
+              activeAnswer === question.answer1 && isCorrectAnswer === 'bad',
+          },
+        ]"
         @click="$emit('choiceAnswer', question.answer1)"
       >
         {{ question.answer1 }}
       </button>
       <button
         class="answer__item"
-        :class="{ answer__item_active: activeAnswer === question.answer2 }"
+        :class="[
+          { answer__item_active: activeAnswer === question.answer2 },
+          {
+            answer__item_good:
+              activeAnswer === question.answer2 && isCorrectAnswer === 'good',
+          },
+          {
+            answer__item_bad:
+              activeAnswer === question.answer2 && isCorrectAnswer === 'bad',
+          },
+        ]"
         @click="$emit('choiceAnswer', question.answer2)"
       >
         {{ question.answer2 }}
       </button>
       <button
         class="answer__item"
-        :class="{ answer__item_active: activeAnswer === question.answer3 }"
+        :class="[
+          { answer__item_active: activeAnswer === question.answer3 },
+          {
+            answer__item_good:
+              activeAnswer === question.answer3 && isCorrectAnswer === 'good',
+          },
+          {
+            answer__item_bad:
+              activeAnswer === question.answer3 && isCorrectAnswer === 'bad',
+          },
+        ]"
         @click="$emit('choiceAnswer', question.answer3)"
       >
         {{ question.answer3 }}
       </button>
       <button
         class="answer__item"
-        :class="{ answer__item_active: activeAnswer === question.answer4 }"
+        :class="[
+          { answer__item_active: activeAnswer === question.answer4 },
+          {
+            answer__item_good:
+              activeAnswer === question.answer4 && isCorrectAnswer === 'good',
+          },
+          {
+            answer__item_bad:
+              activeAnswer === question.answer4 && isCorrectAnswer === 'bad',
+          },
+        ]"
         @click="$emit('choiceAnswer', question.answer4)"
       >
         {{ question.answer4 }}
@@ -147,6 +202,14 @@ export default defineComponent({
 
       &_active {
         background: #1a73e8 !important;
+      }
+
+      &_good {
+        background: #29b600 !important;
+      }
+
+      &_bad {
+        background: #910808 !important;
       }
     }
   }

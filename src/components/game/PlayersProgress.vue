@@ -36,35 +36,45 @@ export default defineComponent({
       const obj: any = document.getElementById(id);
       let current = start;
       const range = end - start;
-      const increment = end > start ? 1 : -1;
-      const step = Math.abs(Math.floor(duration / range));
-      const timer = setInterval(() => {
-        current += increment;
-        obj.textContent = current;
-        if (current === end) {
-          clearInterval(timer);
-        }
-      }, step);
+      if (range !== 0) {
+        const increment = end > start ? 1 : -1;
+        const step = Math.abs(Math.floor(duration / range));
+        const timer = setInterval(() => {
+          current += increment;
+          obj.textContent = current;
+          if (current === end) {
+            clearInterval(timer);
+          }
+        }, step);
+      } else {
+        console.error({
+          id,
+          start,
+          end,
+          duration,
+        });
+      }
     },
   },
 
   mounted() {
-    // setTimeout(() => {
-    //   const user = this.usersList.find((user) => user.userId === this.userId);
-    //
-    //   this.numbers_animation = true;
-    //   this.counter("count1", this.userCount, user.count, 2200);
-    //
-    //   this.gameStore.setCount(user.count);
-    // }, 1000);
-
     setTimeout(() => {
       this.numbers_animation = true;
 
       this.usersList.forEach((user: any, index: any) => {
-        this.counter(index.toString(), user.oldCount, user.count, 2200);
-
-        this.gameStore.setCount(user.count);
+        if (user.oldCount !== user.count) {
+          this.counter(index.toString(), user.oldCount, user.count, 2200);
+          this.gameStore.setCount(user.count);
+        } else {
+          //иногда обновление usersList происходит не сразу, иметь в виду этот баг
+          setTimeout(() => {
+            if (user.oldCount !== user.count) {
+              this.counter(index.toString(), user.oldCount, user.count, 2200);
+            } else {
+              console.error("почему-то не обновляется usersList");
+            }
+          }, 1000);
+        }
       });
     }, 1000);
   },

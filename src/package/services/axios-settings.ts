@@ -26,12 +26,13 @@ API.interceptors.request.use(
 const postBackApiWithoutNotice = ["api/user/login", "api/game/check-answer"];
 
 API.interceptors.response.use(
-  function (response) {
+  function (response: any) {
     const mainStore = useMainStore();
 
     if (
       response.config.method !== "get" &&
-      !postBackApiWithoutNotice.includes(response.config.url ?? "")
+      !postBackApiWithoutNotice.includes(response.config.url ?? "") &&
+      !response.config.notNotice
     ) {
       mainStore.createNotification({
         type: "success",

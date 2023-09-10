@@ -9,7 +9,12 @@ export interface IQuestion {
 }
 
 export interface ICheckAnswer {
-  id: number;
+  questionId: number;
   answer: string;
-  userId: string;
+}
+
+export type CheckAnswerResponseType = "good" | "bad";
+
+export interface ICheckAnswerResponse {
+  message: CheckAnswerResponseType;
 }
