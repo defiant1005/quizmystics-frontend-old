@@ -57,9 +57,15 @@ export default defineComponent({
         };
 
         socket.emit("changeUserCount", answerData, () => {
-          this.isShowProgress = true;
+          // this.isShowProgress = true;
         });
       }
+    },
+
+    nextQuestionHandler() {
+      state.isShowProgress = !state.isShowProgress;
+      // changeConnected();
+      // console.log(this.question);
     },
   },
 
@@ -87,7 +93,7 @@ export default defineComponent({
     </div>
 
     <div v-else class="game-page__progress progress">
-      <PlayersProgress />
+      <PlayersProgress @nextQuestion="nextQuestionHandler" />
     </div>
   </div>
 </template>

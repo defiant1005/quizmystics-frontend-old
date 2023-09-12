@@ -8,6 +8,8 @@ import { useUserStore } from "@/stores/user";
 export default defineComponent({
   name: "PlayersProgress",
 
+  emits: ["nextQuestion"],
+
   data() {
     const gameStore = useGameStore();
 
@@ -76,6 +78,10 @@ export default defineComponent({
           }, 1000);
         }
       });
+
+      setTimeout(() => {
+        this.$emit("nextQuestion");
+      }, 4000);
     }, 1000);
   },
 });
