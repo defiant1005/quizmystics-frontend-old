@@ -56,10 +56,12 @@ export default defineComponent({
           })
           .then((res: any) => {
             this.isCorrectAnswer = res.data.message;
+          })
+          .finally(() => {
+            setTimeout(() => {
+              this.$emit("setAnswer");
+            }, 1000);
           });
-        setTimeout(() => {
-          this.$emit("setAnswer");
-        }, 1000);
       }
     },
   },
