@@ -31,6 +31,10 @@ export default defineComponent({
     isShowProgress() {
       return state.isShowProgress;
     },
+
+    isFinishGame() {
+      return state.finishGame;
+    },
   },
 
   methods: {
@@ -57,15 +61,13 @@ export default defineComponent({
         };
 
         socket.emit("changeUserCount", answerData, () => {
-          // this.isShowProgress = true;
+          this.choiceAnswer = "";
         });
       }
     },
 
     nextQuestionHandler() {
       state.isShowProgress = !state.isShowProgress;
-      // changeConnected();
-      // console.log(this.question);
     },
   },
 
@@ -83,7 +85,10 @@ export default defineComponent({
       {{ timer }}
     </div>
 
-    <div v-else-if="question && !isShowProgress" class="game-page__game game">
+    <div
+      v-else-if="question && !isShowProgress && !isFinishGame"
+      class="game-page__game game"
+    >
       <QuestionGame
         :question="question"
         :active-answer="choiceAnswer"
@@ -93,7 +98,10 @@ export default defineComponent({
     </div>
 
     <div v-else class="game-page__progress progress">
-      <PlayersProgress @nextQuestion="nextQuestionHandler" />
+      <PlayersProgress
+        :is-finish-game="isFinishGame"
+        @nextQuestion="nextQuestionHandler"
+      />
     </div>
   </div>
 </template>

@@ -10,6 +10,13 @@ export default defineComponent({
 
   emits: ["nextQuestion"],
 
+  props: {
+    isFinishGame: {
+      type: Boolean,
+      default: false,
+    },
+  },
+
   data() {
     const gameStore = useGameStore();
 
@@ -30,6 +37,12 @@ export default defineComponent({
 
     usersList() {
       return state.usersList;
+    },
+  },
+
+  watch: {
+    isFinishGame() {
+      console.log("Игра закончилась");
     },
   },
 
