@@ -2,13 +2,13 @@
 import { useUserStore } from "@/stores/user";
 import { mapState } from "pinia";
 import { socket, state } from "@/socket";
-import UserAvatar from "@/components/UserAvatar.vue";
 import MainButtonIcon from "@/package/components/MainButtonIcon.vue";
+import UserCard from "@/components/UserCard.vue";
 
 export default {
   name: "MainRoom",
 
-  components: { MainButtonIcon, UserAvatar },
+  components: { UserCard, MainButtonIcon },
 
   data() {
     const userStore = useUserStore();
@@ -76,11 +76,7 @@ export default {
     </p>
 
     <div class="main-room__users users">
-      <UserAvatar
-        v-for="(user, index) in usersList"
-        :key="index"
-        :user="user"
-      />
+      <UserCard v-for="(user, index) in usersList" :key="index" :user="user" />
     </div>
 
     <button
@@ -95,8 +91,7 @@ export default {
 
 <style lang="scss" scoped>
 .main-room {
-  width: 400px;
-  background: white;
+  width: 100%;
   display: flex;
   flex-direction: column;
   padding: 10px;
@@ -125,14 +120,10 @@ export default {
   }
 
   .users {
-    display: flex;
-    gap: 12px;
-  }
-}
-
-@media (max-width: 420px) {
-  .main-room {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
   }
 }
 </style>

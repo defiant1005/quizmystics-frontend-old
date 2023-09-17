@@ -45,6 +45,7 @@ export default {
     <form class="main-registration__form" @submit.prevent="saveName">
       <MainInput
         v-model="name"
+        :maxlength="12"
         placeholder="Введите ваше имя"
         left-icon="user"
       />

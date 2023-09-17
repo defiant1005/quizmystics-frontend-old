@@ -32,6 +32,7 @@ export default {
   justify-content: center;
   flex-direction: column;
   gap: 20px;
+  transition: background 0.3s ease-out;
 
   > h1 {
     text-align: center;
