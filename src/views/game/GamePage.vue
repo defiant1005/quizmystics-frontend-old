@@ -69,6 +69,11 @@ export default defineComponent({
             console.error(error);
           }
         });
+      } else {
+        console.log({
+          questionId: this.question?.id,
+          userId: this.userId,
+        });
       }
     },
 

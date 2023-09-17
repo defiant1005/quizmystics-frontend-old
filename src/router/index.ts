@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { useUserStore } from "@/stores/user";
 import { useAuthStore } from "@/stores/auth";
+import { useGameStore } from "@/stores/game.store";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -96,6 +97,7 @@ const router = createRouter({
 router.beforeEach((to) => {
   const userStore = useUserStore();
   const authStore = useAuthStore();
+  const gameStore = useGameStore();
 
   if (userStore.id === null && to.name === "MainRoom") {
     return { name: "MainRegistration" };
@@ -103,6 +105,12 @@ router.beforeEach((to) => {
     return { name: "AdminLogin" };
   } else if (authStore.token && to.name === "AdminLogin") {
     return { name: "AdminLayout" };
+  } else if (
+    gameStore.question === null &&
+    userStore.room === "" &&
+    to.name === "GamePage"
+  ) {
+    return { name: "HomePage" };
   }
 });
 
