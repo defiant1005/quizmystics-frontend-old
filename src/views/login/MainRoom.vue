@@ -3,11 +3,12 @@ import { useUserStore } from "@/stores/user";
 import { mapState } from "pinia";
 import { socket, state } from "@/socket";
 import UserAvatar from "@/components/UserAvatar.vue";
+import MainButtonIcon from "@/package/components/MainButtonIcon.vue";
 
 export default {
   name: "MainRoom",
 
-  components: { UserAvatar },
+  components: { MainButtonIcon, UserAvatar },
 
   data() {
     const userStore = useUserStore();
@@ -63,7 +64,16 @@ export default {
 
 <template>
   <div class="main-room">
-    <p>Комната номер {{ currentRoom }}</p>
+    <p>
+      Комната номер
+      <MainButtonIcon
+        v-clipboard:copy="currentRoom"
+        class="main-room__copy-btn"
+      >
+        {{ currentRoom }}
+        <span class="icon-copy" />
+      </MainButtonIcon>
+    </p>
 
     <div class="main-room__users users">
       <UserAvatar
@@ -92,6 +102,27 @@ export default {
   padding: 10px;
   border-radius: 10px;
   gap: 10px;
+
+  &__copy-btn {
+    width: fit-content;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+
+    &:hover {
+      color: blue;
+
+      > span {
+        background: blue;
+      }
+    }
+
+    > span {
+      width: 20px;
+      height: 20px;
+      background: black;
+    }
+  }
 
   .users {
     display: flex;
