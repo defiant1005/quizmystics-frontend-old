@@ -1,198 +1,151 @@
-$gold-main: #ffda7a;
-$gold-secondary: #ffe5a2;
-$gold-third: #ffc46c;
-$gold-dark: #f8cb57;
-$gold-gradient-1: linear-gradient(
-  104.1deg,
-  #ffdc83 2.05%,
-  #ffc149 34.05%,
-  #ffdf6d 50.06%,
-  #ffcc49 66.35%,
-  #ffc93d 98.08%
-);
-$gold-gradient-2: linear-gradient(
-  273.4deg,
-  #d9914e 0%,
-  #ebbb59 11.14%,
-  #fdfdb7 41.61%,
-  #e9b861 94.25%,
-  #d78537 117.48%
-);
-$gold-gradient-3: linear-gradient(
-  271.46deg,
-  #d88c47 0%,
-  #ffe588 51.56%,
-  #ffefb8 100%,
-  #ffe7a8 100%
-);
+$black: #18191F;
+$black-800: #474A57;
+$black-700: #969BAB;
+$black-300: #9FA4B4;
+$black-200: #EEEFF4;
+$black-100: #F4F5F7;
 
-$money-pv: #f4943b;
-$money-cv: #5baf54;
+$white: #FFF;
 
-$red: #eb5757;
-$blue: #2f80ed;
-$green: #219653;
-$green-second: #399953;
-$green-dark: #3e8d60;
-$success-primary: #67c23a;
+$blue: #1947E5;
+$blue-800: #8094FF;
+$blue-100: #E9E7FC;
 
-$danger-stroke: #fbc4c4;
-$danger-primary: #f56c6c;
+$pink: #FF89BB;
+$pink-800: #FFC7DE;
+$pink-200: #FFF3F8;
 
-$light-primary: #ffffff;
-$light-second: #f8f8f8;
-$light-third: #f3f3f3;
-$light-fourth: #ececec;
-$light-fifth: #e9e9e9;
-$light-sixth: #bdbdbd;
+$yellow: #FFBD12;
+$yellow-800: #FFD465;
+$yellow-100: #FFF4CC;
 
-$dark-absolute: #000000;
-$dark-ultra: #171717;
-$dark-primary: #212121;
-$dark-second: #2f2f2f;
-$dark-third: #474747;
-$dark-fourth: #5c5c5c;
-$dark-fifth: #666666;
-$dark-sixth: #969696;
+$green: #00C6AE;
+$green-800: #61E4C5;
+$green-100: #D6FCF7;
 
-$service-taxi: #fff0c7;
-$service-food: #eeecfa;
-$service-fuel: #eefad1;
-$service-car: #e1f7ff;
-$service-gifteryLight: #ffebf1;
-$service-gifteryDark: #daa8b8;
-$service-onlineLight: #fff9dd;
-$service-onlineDark: #e0d592;
-$service-offlineLight: #e1f2f1;
-$service-offlineDark: #8dc1bd;
-$service-marketLight: #fdf0e8;
-$service-marketDark: #dcb194;
+$red: #F95A2C;
+$red-800: #FF9692;
+$red-100: #FFE8E8;
 
-$shadow-default: 0 0 20px rgba(0, 0, 0, 0.1);
 
-$link-blue: #2f80ed;
-$blue-light: #b3d8ff;
-
-$purple-primary: #9073b5;
-
-@mixin title-1 {
-  font-family: "Cormorant SC", serif;
+@mixin h-1 {
+  font-family: "Montserrat", sans-serif;
   font-style: normal;
-  font-weight: 500;
-  font-size: 60px;
-  line-height: 92%;
-  letter-spacing: -0.04em;
-  font-feature-settings: "pnum" on, "lnum" on;
-
-  @media (max-width: 576px) {
-    font-size: 60px;
-  }
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 40px;
 }
 
-@mixin title-2 {
-  font-style: normal;
-  font-weight: 600;
-  font-size: 32px;
-  line-height: 120%;
-  font-feature-settings: "pnum" on, "lnum" on;
-
-  @media (max-width: 576px) {
-    font-size: 26px;
-  }
-}
-
-@mixin title-3 {
-  font-style: normal;
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 120%;
-  font-feature-settings: "pnum" on, "lnum" on;
-
-  @media (max-width: 576px) {
-    font-size: 20px;
-  }
-}
 
 @mixin text-1 {
-  font-style: normal;
-  font-weight: normal;
-  font-size: 20px;
-  line-height: 140%;
-  font-feature-settings: "pnum" on, "lnum" on;
-
-  @media (max-width: 576px) {
-    font-size: 18px;
-  }
-}
-
-@mixin body-1 {
-  font-style: normal;
-  font-weight: normal;
-  font-size: 16px;
-  line-height: 140%;
-  font-feature-settings: "pnum" on, "lnum" on;
-
-  @media (max-width: 576px) {
-    font-size: 14px;
-  }
-}
-
-@mixin body-1-bold {
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 140%;
-  font-feature-settings: "pnum" on, "lnum" on;
-
-  @media (max-width: 576px) {
-    font-size: 14px;
-  }
-}
-
-@mixin text-2 {
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 140%;
-  font-feature-settings: "pnum" on, "lnum" on;
-
-  @media (max-width: 576px) {
-    font-size: 12px;
-  }
-}
-
-@mixin text-2-bold {
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 140%;
-  font-feature-settings: "pnum" on, "lnum" on;
-
-  @media (max-width: 576px) {
-    font-size: 12px;
-  }
-}
-
-@mixin caption-1 {
-  font-style: normal;
-  font-weight: normal;
-  font-size: 12px;
-  line-height: 140%;
-  font-feature-settings: "pnum" on, "lnum" on;
-
-  @media (max-width: 576px) {
-    font-size: 10px;
-  }
-}
-
-@mixin caption-1-bold {
+  font-family: "Montserrat", sans-serif;
+  font-size: 21px;
   font-style: normal;
   font-weight: 500;
-  font-size: 12px;
-  line-height: 140%;
-  font-feature-settings: "pnum" on, "lnum" on;
-
-  @media (max-width: 576px) {
-    font-size: 10px;
-  }
+  line-height: 28px;
 }
+
+
+//@mixin title-2 {
+//  font-family: "Montserrat", sans-serif;
+//  font-style: normal;
+//  font-weight: 600;
+//  font-size: 32px;
+//  line-height: 120%;
+//  font-feature-settings: "pnum" on, "lnum" on;
+//
+//  @media (max-width: 576px) {
+//    font-size: 26px;
+//  }
+//}
+
+//@mixin title-3 {
+//  font-family: "Montserrat", sans-serif;
+//  font-style: normal;
+//  font-weight: 600;
+//  font-size: 24px;
+//  line-height: 120%;
+//  font-feature-settings: "pnum" on, "lnum" on;
+//
+//  @media (max-width: 576px) {
+//    font-size: 20px;
+//  }
+//}
+//
+//@mixin body-1 {
+//  font-family: "Montserrat", sans-serif;
+//  font-style: normal;
+//  font-weight: normal;
+//  font-size: 16px;
+//  line-height: 140%;
+//  font-feature-settings: "pnum" on, "lnum" on;
+//
+//  @media (max-width: 576px) {
+//    font-size: 14px;
+//  }
+//}
+//
+//@mixin body-1-bold {
+//  font-family: "Montserrat", sans-serif;
+//  font-style: normal;
+//  font-weight: 600;
+//  font-size: 16px;
+//  line-height: 140%;
+//  font-feature-settings: "pnum" on, "lnum" on;
+//
+//  @media (max-width: 576px) {
+//    font-size: 14px;
+//  }
+//}
+//
+//@mixin text-2 {
+//  font-family: "Montserrat", sans-serif;
+//  font-style: normal;
+//  font-weight: normal;
+//  font-size: 14px;
+//  line-height: 140%;
+//  font-feature-settings: "pnum" on, "lnum" on;
+//
+//  @media (max-width: 576px) {
+//    font-size: 12px;
+//  }
+//}
+//
+//@mixin text-2-bold {
+//  font-family: "Montserrat", sans-serif;
+//  font-style: normal;
+//  font-weight: 600;
+//  font-size: 14px;
+//  line-height: 140%;
+//  font-feature-settings: "pnum" on, "lnum" on;
+//
+//  @media (max-width: 576px) {
+//    font-size: 12px;
+//  }
+//}
+//
+//@mixin caption-1 {
+//  font-family: "Montserrat", sans-serif;
+//  font-style: normal;
+//  font-weight: normal;
+//  font-size: 12px;
+//  line-height: 140%;
+//  font-feature-settings: "pnum" on, "lnum" on;
+//
+//  @media (max-width: 576px) {
+//    font-size: 10px;
+//  }
+//}
+//
+//@mixin caption-1-bold {
+//  font-family: "Montserrat", sans-serif;
+//  font-style: normal;
+//  font-weight: 500;
+//  font-size: 12px;
+//  line-height: 140%;
+//  font-feature-settings: "pnum" on, "lnum" on;
+//
+//  @media (max-width: 576px) {
+//    font-size: 10px;
+//  }
+//}

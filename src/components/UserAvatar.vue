@@ -16,14 +16,15 @@ export default defineComponent({
 <template>
   <div class="user-avatar">
     <div v-if="user.isRoomAdmin" class="user-avatar__crown crown" />
+    <img src="@/assets/avatars/avatar1.svg" alt="ava" />
     <span>{{ user.name }}</span>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .user-avatar {
-  width: 50px;
-  height: 50px;
+  //width: 50px;
+  //height: 50px;
   background: rgba(215, 64, 220, 0.5);
   display: flex;
   align-items: center;
@@ -38,6 +39,16 @@ export default defineComponent({
     background: #da9e18;
     top: 0;
     border-radius: 10px;
+  }
+
+  > img {
+    width: 50px;
+    height: 50px;
+  }
+
+  > span {
+    position: absolute;
+    //bottom: -20px;
   }
 }
 </style>

@@ -4,9 +4,11 @@ import { socket } from "@/socket";
 import { mapState } from "pinia";
 import { useUserStore } from "@/stores/user";
 import { useMainStore } from "@/stores/main";
+import MainButton from "@/package/components/MainButton.vue";
 
 export default {
   name: "HomePage",
+  components: { MainButton },
 
   data() {
     const userStore = useUserStore();
@@ -61,8 +63,9 @@ export default {
 
 <template>
   <div class="home-page">
-    <button class="main-button" @click="createRoom">Создать комнату</button>
-    <button class="main-button" @click="enterRoom">Войти в комнату</button>
+    <MainButton label="Создать комнату" @click="createRoom" />
+
+    <MainButton label="Войти в комнату" @click="enterRoom" />
   </div>
 </template>
 

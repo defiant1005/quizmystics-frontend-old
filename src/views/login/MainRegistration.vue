@@ -1,9 +1,12 @@
 <script>
 import { useUserStore } from "@/stores/user";
 import { mapState } from "pinia";
+import MainInput from "@/package/components/MainInput.vue";
+import MainButton from "@/package/components/MainButton.vue";
 
 export default {
   name: "MainRegistration",
+  components: { MainButton, MainInput },
 
   data() {
     const userStore = useUserStore();
@@ -40,14 +43,17 @@ export default {
 <template>
   <div class="main-registration">
     <form class="main-registration__form" @submit.prevent="saveName">
-      <input v-model="name" class="main-input" placeholder="Введите ваше имя" />
-      <button
+      <MainInput
+        v-model="name"
+        placeholder="Введите ваше имя"
+        left-icon="user"
+      />
+
+      <MainButton
         type="submit"
-        class="main-button"
         :disabled="name.trim().length === 0"
-      >
-        Сохранить
-      </button>
+        label="Сохранить"
+      />
     </form>
   </div>
 </template>

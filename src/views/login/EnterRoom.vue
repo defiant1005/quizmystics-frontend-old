@@ -3,9 +3,12 @@ import { socket } from "@/socket";
 import { mapState } from "pinia";
 import { useUserStore } from "@/stores/user";
 import { useMainStore } from "@/stores/main";
+import MainInput from "@/package/components/MainInput.vue";
+import MainButton from "@/package/components/MainButton.vue";
 
 export default {
   name: "EnterRoom",
+  components: { MainButton, MainInput },
 
   data() {
     const userStore = useUserStore();
@@ -56,16 +59,15 @@ export default {
 
 <template>
   <form class="enter-room" @submit.prevent="goRoom">
-    <input
+    <MainInput
       v-model="room"
-      class="main-input"
       placeholder="Номер комнаты"
+      left-icon="lock"
       maxlength="4"
       @input="checkUpperCase"
     />
-    <button type="submit" class="main-button" :disabled="room.length !== 4">
-      Войти
-    </button>
+
+    <MainButton type="submit" label="Войти" :disabled="room.length !== 4" />
   </form>
 </template>
 

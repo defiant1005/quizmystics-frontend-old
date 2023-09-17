@@ -26,7 +26,7 @@ export default {
   padding: 12px;
   width: 100%;
   height: 100%;
-  background: rgba(74, 26, 194, 0.9);
+  background: $white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,6 +35,7 @@ export default {
 
   > h1 {
     text-align: center;
+    @include h-1;
   }
 }
 </style>
