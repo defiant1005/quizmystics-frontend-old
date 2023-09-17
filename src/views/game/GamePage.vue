@@ -26,6 +26,7 @@ export default defineComponent({
 
     ...mapState(useUserStore, {
       userId: "id",
+      room: "room",
     }),
 
     isShowProgress() {
@@ -58,10 +59,15 @@ export default defineComponent({
           id: this.question.id,
           answer: this.choiceAnswer,
           userId: this.userId,
+          room: this.room,
         };
 
-        socket.emit("changeUserCount", answerData, () => {
+        socket.emit("changeUserCount", answerData, (error: string) => {
           this.choiceAnswer = "";
+
+          if (error) {
+            console.error(error);
+          }
         });
       }
     },

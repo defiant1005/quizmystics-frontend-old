@@ -31,6 +31,7 @@ export default {
         room: this.room,
       };
 
+      this.userStore.setRoom(this.room);
       socket.connect();
 
       socket.emit("connectingExistingRoom", userData, (data) => {

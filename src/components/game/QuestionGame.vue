@@ -26,7 +26,7 @@ export default defineComponent({
     return {
       gameStore,
       progress: 0,
-      answerTime: 10,
+      answerTime: 4,
       isCorrectAnswer: null as null | CheckAnswerResponseType,
     };
   },
