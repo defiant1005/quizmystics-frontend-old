@@ -1,15 +1,25 @@
-<script>
+<script lang="ts">
 import { useUserStore } from "@/stores/user";
 import { mapState } from "pinia";
 import { socket, state } from "@/socket";
 import MainButtonIcon from "@/package/components/MainButtonIcon.vue";
 import UserCard from "@/components/UserCard.vue";
 import MainButton from "@/package/components/MainButton.vue";
+import { defineComponent } from "vue";
+import { IPlayers } from "@/intefaces/IGame";
+import EditUserDrawer from "@/components/game/main-room/EditUserDrawer.vue";
+import ChangeAvatarModal from "@/components/game/main-room/ChangeAvatarModal.vue";
 
-export default {
+export default defineComponent({
   name: "MainRoom",
 
-  components: { MainButton, UserCard, MainButtonIcon },
+  components: {
+    ChangeAvatarModal,
+    EditUserDrawer,
+    MainButton,
+    UserCard,
+    MainButtonIcon,
+  },
 
   data() {
     const userStore = useUserStore();
@@ -18,6 +28,11 @@ export default {
       userStore,
       name: "",
       isNameExist: false,
+
+      isDrawerOpen: false,
+      isModalOpen: false,
+
+      currentUser: null as null | IPlayers,
     };
   },
 
@@ -40,8 +55,10 @@ export default {
       },
 
       isRoomAdmin() {
-        return !!this.usersList.find((user) => user.userId === this.id)
-          ?.isRoomAdmin;
+        //@ts-ignore
+        return !!this.usersList.find(
+          (user: IPlayers) => user.userId === this.id
+        )?.isRoomAdmin;
       },
     }),
 
@@ -59,8 +76,34 @@ export default {
 
       socket.emit("startGame", gameData);
     },
+
+    submitEdit() {
+      console.log(123);
+    },
+
+    openDrawerHandler(id: string) {
+      this.currentUser = this.usersList.find(
+        (user: IPlayers) => user.userId === id
+      );
+      this.isDrawerOpen = true;
+    },
+
+    closeDrawerHandler() {
+      this.isDrawerOpen = false;
+      this.currentUser = null;
+    },
+
+    saveAvatarHandler(avatar: string) {
+      if (!this.currentUser) {
+        console.error("Неожиданное поведение");
+        return;
+      }
+
+      this.currentUser.avatar = avatar;
+      this.isModalOpen = false;
+    },
   },
-};
+});
 </script>
 
 <template>
@@ -77,7 +120,12 @@ export default {
     </p>
 
     <div class="main-room__users users">
-      <UserCard v-for="(user, index) in usersList" :key="index" :user="user" />
+      <UserCard
+        v-for="(user, index) in usersList"
+        :key="index"
+        :user="user"
+        @openDrawer="openDrawerHandler"
+      />
     </div>
 
     <MainButton
@@ -87,6 +135,20 @@ export default {
       @click="startGame"
     />
   </div>
+
+  <EditUserDrawer
+    :user="currentUser"
+    :is-drawer-open="isDrawerOpen"
+    @close="closeDrawerHandler"
+    @openAvatarModal="isModalOpen = true"
+  />
+
+  <ChangeAvatarModal
+    :user-avatar="currentUser?.avatar ?? ''"
+    :is-modal-open="isModalOpen"
+    @close="isModalOpen = false"
+    @saveAvatar="saveAvatarHandler"
+  />
 </template>
 
 <style lang="scss" scoped>

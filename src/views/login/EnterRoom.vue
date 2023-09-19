@@ -5,6 +5,7 @@ import { useUserStore } from "@/stores/user";
 import { useMainStore } from "@/stores/main";
 import MainInput from "@/package/components/MainInput.vue";
 import MainButton from "@/package/components/MainButton.vue";
+import { getRandomAvatar } from "@/package/helpers/all-avatars-list";
 
 export default {
   name: "EnterRoom",
@@ -32,6 +33,7 @@ export default {
       const userData = {
         name: this.saveNameValue,
         room: this.room,
+        avatar: getRandomAvatar(),
       };
 
       this.userStore.setRoom(this.room);

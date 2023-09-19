@@ -18,3 +18,13 @@ export type CheckAnswerResponseType = "good" | "bad";
 export interface ICheckAnswerResponse {
   message: CheckAnswerResponseType;
 }
+
+export interface IPlayers {
+  name: string;
+  room: string;
+  userId: string;
+  count: number;
+  oldCount: number;
+  isRoomAdmin: boolean;
+  avatar: string;
+}

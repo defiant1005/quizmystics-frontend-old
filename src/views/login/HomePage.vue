@@ -5,6 +5,7 @@ import { mapState } from "pinia";
 import { useUserStore } from "@/stores/user";
 import { useMainStore } from "@/stores/main";
 import MainButton from "@/package/components/MainButton.vue";
+import { getRandomAvatar } from "@/package/helpers/all-avatars-list";
 
 export default {
   name: "HomePage",
@@ -35,6 +36,7 @@ export default {
       const userData = {
         name: this.saveNameValue,
         room: room,
+        avatar: getRandomAvatar(),
       };
 
       socket.connect();

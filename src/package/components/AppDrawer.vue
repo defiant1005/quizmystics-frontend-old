@@ -58,7 +58,7 @@ export default {
   bottom: -100%;
   left: 50%;
   transform: translate(-50%, 0);
-  transition: all 1s ease-out;
+  transition: all 0.3s ease-out;
   z-index: 999;
   padding: 20px;
   border-radius: 16px 16px 0 0;

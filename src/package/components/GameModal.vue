@@ -68,12 +68,12 @@ export default defineComponent({
     max-height: 95vh;
     min-height: 200px;
     overflow: auto;
-    padding: 24px;
+    padding: 16px;
 
     &__close-btn {
       position: absolute;
-      top: 24px;
-      right: 24px;
+      top: 16px;
+      right: 16px;
       width: 24px;
       height: 24px;
 
