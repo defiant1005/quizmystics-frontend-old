@@ -45,7 +45,7 @@ export default defineComponent({
     <div class="admin-login__login login">
       <span class="icon-logo login__logo" />
 
-      <h2 class="login__title">Вход Душнила</h2>
+      <h2 class="login__title">Quizmystics: Путь в Безвременье</h2>
 
       <form @submit.prevent="submitForm">
         <div class="mb-3">

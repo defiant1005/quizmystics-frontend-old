@@ -112,6 +112,9 @@ router.beforeEach((to) => {
   ) {
     return { name: "HomePage" };
   }
+
+  // @ts-ignore
+  document.title = to.meta.title ?? "quizmystics";
 });
 
 export default router;

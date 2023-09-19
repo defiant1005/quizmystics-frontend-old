@@ -83,6 +83,7 @@ export default defineComponent({
         top: 0;
         box-shadow: none;
         background: $black-800;
+        cursor: not-allowed;
       }
 
       .ui-button__icon {
