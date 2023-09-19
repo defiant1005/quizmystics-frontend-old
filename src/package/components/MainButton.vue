@@ -66,13 +66,43 @@ export default defineComponent({
   white-space: nowrap;
   top: 0;
   height: 60px;
+  @include text-1;
 
   &_color {
     &_blue {
       background: $blue;
       color: $white;
       box-shadow: 0 6px 0 0 #18191f;
-      @include text-1;
+
+      &:hover {
+        background: $blue-800;
+      }
+
+      &:active {
+        top: 3px;
+        box-shadow: 0 2px 0 #161b13;
+      }
+
+      &:disabled {
+        top: 0;
+        box-shadow: none;
+        background: $black-800;
+        cursor: not-allowed;
+      }
+
+      .ui-button__icon {
+        background: $white;
+      }
+    }
+
+    &_green {
+      background: $green;
+      color: $white;
+      box-shadow: 0 6px 0 0 #18191f;
+
+      &:hover {
+        background: $green-800;
+      }
 
       &:active {
         top: 3px;

@@ -4,11 +4,12 @@ import { mapState } from "pinia";
 import { socket, state } from "@/socket";
 import MainButtonIcon from "@/package/components/MainButtonIcon.vue";
 import UserCard from "@/components/UserCard.vue";
+import MainButton from "@/package/components/MainButton.vue";
 
 export default {
   name: "MainRoom",
 
-  components: { UserCard, MainButtonIcon },
+  components: { MainButton, UserCard, MainButtonIcon },
 
   data() {
     const userStore = useUserStore();
@@ -79,13 +80,12 @@ export default {
       <UserCard v-for="(user, index) in usersList" :key="index" :user="user" />
     </div>
 
-    <button
+    <MainButton
       v-if="isRoomAdmin"
-      class="main-button main-button_green"
+      label="Начать"
+      color="green"
       @click="startGame"
-    >
-      Начать
-    </button>
+    />
   </div>
 </template>
 

@@ -1,4 +1,4 @@
-# chat-example-front
+# Quizmystics-front
 
 ## Project Setup
 

@@ -36,6 +36,15 @@ $red-100: #FFE8E8;
   line-height: 40px;
 }
 
+@mixin h-4 {
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 120%;
+  font-feature-settings: "pnum" on, "lnum" on;
+}
+
 
 @mixin text-1 {
   font-family: "Montserrat", sans-serif;
