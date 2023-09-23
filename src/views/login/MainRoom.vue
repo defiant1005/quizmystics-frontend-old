@@ -215,6 +215,8 @@ export default defineComponent({
       align-items: center;
       gap: 4px;
       transition: color 0.1s ease-out;
+      color: $black;
+      @include text-2;
 
       &_active {
         color: $green;
@@ -226,8 +228,8 @@ export default defineComponent({
       }
 
       > span {
-        width: 20px;
-        height: 20px;
+        width: 18px;
+        height: 18px;
         background: black;
       }
     }

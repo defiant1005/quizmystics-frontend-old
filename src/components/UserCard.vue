@@ -38,23 +38,52 @@ export default defineComponent({
     ]"
     @click="openDrawer"
   >
-    <img :src="user.avatar" alt="ava" />
+    <div class="user-card__left left">
+      <img :src="user.avatar" alt="ava" />
 
-    <p>
-      {{ user.name }}
-      <span v-if="!disabled">(Вы)</span>
-    </p>
+      <p>
+        {{ user.name }}
+        <span v-if="!disabled">(Вы)</span>
+      </p>
+    </div>
+
+    <div v-if="user.stats" class="user-card__stats stats">
+      <div class="stats__stat stat">
+        <span class="icon-health" />
+        <p>{{ user.stats.health }}</p>
+      </div>
+
+      <div class="stats__stat stat">
+        <span class="icon-power" />
+        <p>{{ user.stats.power }}</p>
+      </div>
+
+      <div class="stats__stat stat">
+        <span class="icon-magic" />
+        <p>{{ user.stats.magic }}</p>
+      </div>
+
+      <div class="stats__stat stat">
+        <span class="icon-intelligence" />
+        <p>{{ user.stats.intelligence }}</p>
+      </div>
+
+      <div class="stats__stat stat">
+        <span class="icon-dexterity" />
+        <p>{{ user.stats.dexterity }}</p>
+      </div>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .user-card {
   width: 100%;
-  height: 56px;
+  height: 64px;
 
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: space-between;
 
   cursor: pointer;
   border-radius: 16px;
@@ -63,6 +92,7 @@ export default defineComponent({
   position: relative;
   transition: top 0.5s ease-out;
   background: $yellow-800;
+  padding: 8px;
 
   &:not(&_disabled):active {
     box-shadow: none;
@@ -77,16 +107,49 @@ export default defineComponent({
     background: $green-800;
   }
 
-  > img {
-    width: 32px;
-    height: 32px;
-  }
-
-  > p {
+  .left {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin: 0;
+
+    > img {
+      width: 32px;
+      height: 32px;
+    }
+
+    > p {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0;
+    }
+  }
+
+  .stats {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      gap: 4px;
+
+      > span {
+        width: 16px;
+        height: 16px;
+        background: $black;
+      }
+
+      > p {
+        color: $black;
+        @include text-2;
+        margin: 0;
+      }
+    }
   }
 }
 </style>
