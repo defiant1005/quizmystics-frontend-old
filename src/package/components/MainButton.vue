@@ -75,10 +75,6 @@ export default defineComponent({
       color: $white;
       box-shadow: 0 6px 0 0 #18191f;
 
-      &:hover {
-        //background: $blue-800;
-      }
-
       &:active {
         top: 3px;
         box-shadow: 0 2px 0 #161b13;
@@ -100,10 +96,6 @@ export default defineComponent({
       background: $green;
       color: $white;
       box-shadow: 0 6px 0 0 #18191f;
-
-      &:hover {
-        background: $green-800;
-      }
 
       &:active {
         top: 3px;
