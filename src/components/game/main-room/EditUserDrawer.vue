@@ -59,6 +59,9 @@ export default defineComponent({
       intelligence: 1,
       dexterity: 1,
 
+      //изменяется из родителя
+      avatar: null as null | string,
+
       startLvl: 15,
     };
   },
@@ -77,6 +80,10 @@ export default defineComponent({
 
     isMaxDisabled() {
       return this.remainsLvl === 0;
+    },
+
+    userAvatar() {
+      return this.avatar ?? this.user?.avatar;
     },
   },
 
@@ -101,6 +108,7 @@ export default defineComponent({
       } else {
         const normalize = {
           name: this.userName,
+          avatar: this.avatar,
           stats: {
             health: this.health,
             power: this.power,
@@ -112,6 +120,10 @@ export default defineComponent({
 
         this.$emit("saveUserData", normalize);
       }
+    },
+
+    changeAvatar(avatar: string) {
+      this.avatar = avatar;
     },
   },
 });
@@ -128,7 +140,7 @@ export default defineComponent({
         class="edit-user-form__ava-btn"
         @click="$emit('openAvatarModal')"
       >
-        <img :src="user.avatar" alt="ava" />
+        <img :src="userAvatar" alt="ava" />
       </MainButtonIcon>
 
       <MainInput

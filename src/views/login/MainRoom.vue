@@ -104,7 +104,8 @@ export default defineComponent({
         return;
       }
 
-      this.currentUser.avatar = avatar;
+      //@ts-ignore
+      this.$refs.mainRoomEditUserDrawer.changeAvatar(avatar);
       this.isModalOpen = false;
     },
 
@@ -116,6 +117,7 @@ export default defineComponent({
 
       this.currentUser.name = userData.name;
       this.currentUser.stats = userData.stats;
+      this.currentUser.avatar = userData.avatar;
       this.currentUser.isReady = true;
       console.log(this.currentUser);
 
@@ -163,6 +165,7 @@ export default defineComponent({
   </div>
 
   <EditUserDrawer
+    ref="mainRoomEditUserDrawer"
     :user="currentUser"
     :is-drawer-open="isDrawerOpen"
     @close="closeDrawerHandler"

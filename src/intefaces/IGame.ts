@@ -41,5 +41,6 @@ export interface IPlayers {
 
 export interface IPlayersEditData {
   name: string;
+  avatar: string;
   stats: IPlayersStats;
 }
