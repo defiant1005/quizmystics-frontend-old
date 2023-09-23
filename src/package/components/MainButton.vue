@@ -67,6 +67,7 @@ export default defineComponent({
   top: 0;
   height: 60px;
   @include text-1;
+  transition: top 0.1s ease-out;
 
   &_color {
     &_blue {
@@ -75,7 +76,7 @@ export default defineComponent({
       box-shadow: 0 6px 0 0 #18191f;
 
       &:hover {
-        background: $blue-800;
+        //background: $blue-800;
       }
 
       &:active {

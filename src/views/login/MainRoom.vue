@@ -34,6 +34,8 @@ export default defineComponent({
       isModalOpen: false,
 
       currentUser: null as null | IPlayers,
+
+      isCopyRoom: false,
     };
   },
 
@@ -135,28 +137,34 @@ export default defineComponent({
 
 <template>
   <div class="main-room">
-    <p>
-      Комната номер
-      <MainButtonIcon
-        v-clipboard:copy="currentRoom"
-        class="main-room__copy-btn"
-      >
-        {{ currentRoom }}
-        <span class="icon-copy" />
-      </MainButtonIcon>
-    </p>
+    <div class="main-room__main main">
+      <p>
+        Комната номер
+        <MainButtonIcon
+          v-clipboard:copy="currentRoom"
+          class="main__copy-btn"
+          :class="{ 'main__copy-btn_active': isCopyRoom }"
+          @click="isCopyRoom = true"
+        >
+          {{ currentRoom }}
+          <span :class="!isCopyRoom ? 'icon-copy' : 'icon-check'" />
+        </MainButtonIcon>
+      </p>
 
-    <div class="main-room__users users">
-      <UserCard
-        v-for="(user, index) in usersList"
-        :key="index"
-        :user="user"
-        @openDrawer="openDrawerHandler"
-      />
+      <div class="main__users users">
+        <UserCard
+          v-for="(user, index) in usersList"
+          :key="index"
+          :user="user"
+          :disabled="id !== user.userId"
+          @openDrawer="openDrawerHandler"
+        />
+      </div>
     </div>
 
     <MainButton
       v-if="isRoomAdmin"
+      class="main-room__start-game"
       label="Начать"
       color="green"
       :disabled="isStartDisabled"
@@ -184,38 +192,56 @@ export default defineComponent({
 <style lang="scss" scoped>
 .main-room {
   width: 100%;
+  height: 100%;
+  padding: 10px;
   display: flex;
   flex-direction: column;
-  padding: 10px;
-  border-radius: 10px;
-  gap: 10px;
 
-  &__copy-btn {
-    width: fit-content;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
+  .main {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 
-    &:hover {
-      color: blue;
+    > p {
+      color: $black;
+      @include text-2;
+      text-align: center;
+    }
+
+    &__copy-btn {
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: color 0.1s ease-out;
+
+      &_active {
+        color: $green;
+
+        > span {
+          transition: background 0.1s ease-out;
+          background: $green !important;
+        }
+      }
 
       > span {
-        background: blue;
+        width: 20px;
+        height: 20px;
+        background: black;
       }
     }
 
-    > span {
-      width: 20px;
-      height: 20px;
-      background: black;
+    .users {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
   }
 
-  .users {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  &__start-game {
+    flex: 0 0 auto;
   }
 }
 </style>

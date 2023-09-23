@@ -63,6 +63,7 @@ export default {
   padding: 20px;
   border-radius: 16px 16px 0 0;
   border: 2px solid $black;
+  overflow-y: auto;
 
   &_open {
     bottom: 0;

@@ -108,7 +108,7 @@ export default defineComponent({
       } else {
         const normalize = {
           name: this.userName,
-          avatar: this.avatar,
+          avatar: this.avatar ?? this.user?.avatar,
           stats: {
             health: this.health,
             power: this.power,
@@ -252,7 +252,11 @@ export default defineComponent({
         />
       </div>
 
-      <MainButton type="submit" label="Сохранить" />
+      <MainButton
+        type="submit"
+        label="Сохранить"
+        class="edit-user-form__submit"
+      />
     </form>
   </AppDrawer>
 </template>
@@ -264,6 +268,7 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   gap: 20px;
+  overflow-y: auto;
 
   &__ava-btn {
     width: 100px;
@@ -309,6 +314,10 @@ export default defineComponent({
         background: $black;
       }
     }
+  }
+
+  &__submit {
+    margin-bottom: 4px;
   }
 }
 </style>
