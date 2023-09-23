@@ -11,11 +11,14 @@ import VueCookies from "vue3-cookies";
 //@ts-ignore
 import VueClipboard from "vue3-clipboard";
 
+import Popper from "vue3-popper";
+
 const app = createApp(App);
 
 app.use(createPinia());
 app.use(router);
 app.use(VueCookies);
+app.component("PopperLib", Popper);
 
 app.use(VueClipboard, {
   autoSetContainer: true,

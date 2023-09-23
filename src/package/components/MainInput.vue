@@ -35,6 +35,11 @@ export default defineComponent({
       type: Number,
       default: 255,
     },
+
+    errorMessage: {
+      type: String,
+      default: "",
+    },
   },
 
   computed: {
@@ -53,7 +58,11 @@ export default defineComponent({
 
 <template>
   <div class="main-input">
-    <span v-if="leftIcon" :class="`icon-${leftIcon}`" />
+    <span
+      v-if="leftIcon"
+      :class="`icon-${leftIcon}`"
+      class="main-input__icon"
+    />
 
     <input
       v-model="formattedValue"
@@ -65,6 +74,10 @@ export default defineComponent({
       :maxlength="maxlength"
       @input="$emit('input', $event.target.value)"
     />
+
+    <span v-if="errorMessage.trim() !== ''" class="main-input__error-message">
+      {{ errorMessage }}
+    </span>
   </div>
 </template>
 
@@ -75,7 +88,7 @@ export default defineComponent({
   height: 56px;
   display: flex;
 
-  > span {
+  &__icon {
     position: absolute;
     top: 16px;
     left: 16px;
@@ -95,6 +108,13 @@ export default defineComponent({
     &_left-padding {
       padding-left: 52px;
     }
+  }
+
+  &__error-message {
+    position: absolute;
+    top: 100%;
+    color: $red;
+    @include text-2;
   }
 }
 </style>

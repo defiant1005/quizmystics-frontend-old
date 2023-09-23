@@ -52,6 +52,14 @@ ul li {
 
 button {
   cursor: pointer;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+  outline: none !important;
+  background: transparent;
+
+  &:disabled {
+    cursor: not-allowed;
+    background: $black-200;
+  }
 }
 
 input::-webkit-outer-spin-button,
@@ -62,8 +70,4 @@ input::-webkit-inner-spin-button {
 
 input[type="number"] {
   -moz-appearance: textfield;
-}
-
-.dp__arrow_top {
-  display: none !important;
 }

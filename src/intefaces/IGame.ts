@@ -19,6 +19,14 @@ export interface ICheckAnswerResponse {
   message: CheckAnswerResponseType;
 }
 
+export interface IPlayersStats {
+  health: number;
+  power: number;
+  magic: number;
+  intelligence: number;
+  dexterity: number;
+}
+
 export interface IPlayers {
   name: string;
   room: string;
@@ -27,4 +35,15 @@ export interface IPlayers {
   oldCount: number;
   isRoomAdmin: boolean;
   avatar: string;
+  isReady?: boolean;
+  stats?: IPlayersStats;
+}
+
+export interface IPlayersEditData {
+  name: string;
+  health: number;
+  power: number;
+  magic: number;
+  intelligence: number;
+  dexterity: number;
 }

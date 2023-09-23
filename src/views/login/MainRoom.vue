@@ -6,7 +6,7 @@ import MainButtonIcon from "@/package/components/MainButtonIcon.vue";
 import UserCard from "@/components/UserCard.vue";
 import MainButton from "@/package/components/MainButton.vue";
 import { defineComponent } from "vue";
-import { IPlayers } from "@/intefaces/IGame";
+import { IPlayers, IPlayersEditData } from "@/intefaces/IGame";
 import EditUserDrawer from "@/components/game/main-room/EditUserDrawer.vue";
 import ChangeAvatarModal from "@/components/game/main-room/ChangeAvatarModal.vue";
 
@@ -102,6 +102,10 @@ export default defineComponent({
       this.currentUser.avatar = avatar;
       this.isModalOpen = false;
     },
+
+    saveUserDataHandler(userData: IPlayersEditData) {
+      console.log(userData);
+    },
   },
 });
 </script>
@@ -141,6 +145,7 @@ export default defineComponent({
     :is-drawer-open="isDrawerOpen"
     @close="closeDrawerHandler"
     @openAvatarModal="isModalOpen = true"
+    @saveUserData="saveUserDataHandler"
   />
 
   <ChangeAvatarModal

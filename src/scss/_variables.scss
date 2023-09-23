@@ -51,7 +51,15 @@ $red-100: #FFE8E8;
   font-size: 21px;
   font-style: normal;
   font-weight: 500;
-  line-height: 28px;
+  line-height: 120%;
+}
+
+@mixin text-2 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
 }
 
 
