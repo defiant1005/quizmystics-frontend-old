@@ -20,7 +20,10 @@ export default defineComponent({
   <div class="user-card" @click="$emit('openDrawer', user.userId)">
     <img :src="user.avatar" alt="ava" />
 
-    <p>{{ user.name }}</p>
+    <p>
+      {{ user.name }}
+      <span :class="user.isReady ? 'icon-check' : 'icon-cross'" />
+    </p>
   </div>
 </template>
 
@@ -45,6 +48,22 @@ export default defineComponent({
     -webkit-box-orient: vertical;
     word-break: break-all;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .icon-check {
+      background: $green;
+    }
+
+    .icon-cross {
+      background: $red;
+    }
+
+    > span {
+      width: 24px;
+      height: 24px;
+    }
   }
 }
 </style>

@@ -101,11 +101,13 @@ export default defineComponent({
       } else {
         const normalize = {
           name: this.userName,
-          health: this.health,
-          power: this.power,
-          magic: this.magic,
-          intelligence: this.intelligence,
-          dexterity: this.dexterity,
+          stats: {
+            health: this.health,
+            power: this.power,
+            magic: this.magic,
+            intelligence: this.intelligence,
+            dexterity: this.dexterity,
+          },
         };
 
         this.$emit("saveUserData", normalize);

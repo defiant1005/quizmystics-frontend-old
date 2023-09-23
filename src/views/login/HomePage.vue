@@ -37,6 +37,7 @@ export default {
         name: this.saveNameValue,
         room: room,
         avatar: getRandomAvatar(),
+        isReady: false,
       };
 
       socket.connect();

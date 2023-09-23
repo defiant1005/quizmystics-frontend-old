@@ -9,3 +9,8 @@ export interface IMainSelector {
   id: string;
   name: string;
 }
+
+export interface ICbData {
+  error: boolean;
+  message?: string;
+}

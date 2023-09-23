@@ -6,7 +6,6 @@ import { useGameStore } from "@/stores/game.store.ts";
 
 export const state = reactive({
   connected: false,
-  messages: [],
   usersList: [],
   startGame: false,
   isShowProgress: false,
@@ -26,10 +25,6 @@ socket.on("connect", () => {
 socket.on("disconnect", () => {
   state.connected = false;
   state.startGame = false;
-});
-
-socket.on("message", (message) => {
-  state.messages.push(message);
 });
 
 socket.on("updateUserList", ({ data }) => {

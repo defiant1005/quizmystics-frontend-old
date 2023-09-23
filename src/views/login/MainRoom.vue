@@ -9,6 +9,7 @@ import { defineComponent } from "vue";
 import { IPlayers, IPlayersEditData } from "@/intefaces/IGame";
 import EditUserDrawer from "@/components/game/main-room/EditUserDrawer.vue";
 import ChangeAvatarModal from "@/components/game/main-room/ChangeAvatarModal.vue";
+import { ICbData } from "@/intefaces/IMain";
 
 export default defineComponent({
   name: "MainRoom",
@@ -46,10 +47,6 @@ export default defineComponent({
         return state.connected;
       },
 
-      messages() {
-        return state.messages;
-      },
-
       usersList() {
         return state.usersList;
       },
@@ -65,10 +62,18 @@ export default defineComponent({
     currentRoom() {
       return this.$route.params.id;
     },
+
+    isStartDisabled() {
+      return !!this.usersList.find((item: IPlayers) => !item.isReady);
+    },
   },
 
   methods: {
     startGame() {
+      if (this.isStartDisabled) {
+        return;
+      }
+
       const gameData = {
         room: this.userRoom,
         players: this.usersList,
@@ -104,7 +109,23 @@ export default defineComponent({
     },
 
     saveUserDataHandler(userData: IPlayersEditData) {
-      console.log(userData);
+      if (this.currentUser === null) {
+        console.error("Неожиданное поведение");
+        return;
+      }
+
+      this.currentUser.name = userData.name;
+      this.currentUser.stats = userData.stats;
+      this.currentUser.isReady = true;
+      console.log(this.currentUser);
+
+      socket.emit("changeUserData", this.currentUser, (cbData: ICbData) => {
+        if (cbData.error) {
+          console.error(cbData?.message);
+        } else {
+          this.closeDrawerHandler();
+        }
+      });
     },
   },
 });
@@ -136,6 +157,7 @@ export default defineComponent({
       v-if="isRoomAdmin"
       label="Начать"
       color="green"
+      :disabled="isStartDisabled"
       @click="startGame"
     />
   </div>

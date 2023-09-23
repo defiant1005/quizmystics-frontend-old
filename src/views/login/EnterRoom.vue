@@ -33,6 +33,7 @@ export default {
       const userData = {
         name: this.saveNameValue,
         room: this.room,
+        isReady: false,
         avatar: getRandomAvatar(),
       };
 
@@ -65,7 +66,7 @@ export default {
       v-model="room"
       placeholder="Номер комнаты"
       left-icon="lock"
-      maxlength="4"
+      :maxlength="4"
       @input="checkUpperCase"
     />
 

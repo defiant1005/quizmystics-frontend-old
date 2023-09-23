@@ -35,15 +35,11 @@ export interface IPlayers {
   oldCount: number;
   isRoomAdmin: boolean;
   avatar: string;
-  isReady?: boolean;
+  isReady: boolean;
   stats?: IPlayersStats;
 }
 
 export interface IPlayersEditData {
   name: string;
-  health: number;
-  power: number;
-  magic: number;
-  intelligence: number;
-  dexterity: number;
+  stats: IPlayersStats;
 }

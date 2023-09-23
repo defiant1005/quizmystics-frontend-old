@@ -68,6 +68,7 @@ export default defineComponent({
             class="form-control"
           />
         </div>
+
         <button type="submit" :disabled="isLoading" class="btn btn-primary">
           Войти
         </button>
