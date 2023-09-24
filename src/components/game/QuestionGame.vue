@@ -2,9 +2,11 @@
 import { defineComponent, PropType } from "vue";
 import { CheckAnswerResponseType, IQuestion } from "@/intefaces/IGame";
 import { useGameStore } from "@/stores/game.store";
+import MainButton from "@/package/components/MainButton.vue";
 
 export default defineComponent({
   name: "QuestionGame",
+  components: { MainButton },
 
   emits: ["choiceAnswer", "setAnswer"],
 
@@ -90,8 +92,10 @@ export default defineComponent({
     </div>
 
     <div class="question-game__answer answer">
-      <button
+      <MainButton
         class="answer__item"
+        color="green"
+        :label="question.answer1"
         :class="[
           { answer__item_active: activeAnswer === question.answer1 },
           {
@@ -104,10 +108,11 @@ export default defineComponent({
           },
         ]"
         @click="$emit('choiceAnswer', question.answer1)"
-      >
-        {{ question.answer1 }}
-      </button>
-      <button
+      />
+
+      <MainButton
+        :label="question.answer2"
+        color="green"
         class="answer__item"
         :class="[
           { answer__item_active: activeAnswer === question.answer2 },
@@ -121,10 +126,11 @@ export default defineComponent({
           },
         ]"
         @click="$emit('choiceAnswer', question.answer2)"
-      >
-        {{ question.answer2 }}
-      </button>
-      <button
+      />
+
+      <MainButton
+        :label="question.answer3"
+        color="green"
         class="answer__item"
         :class="[
           { answer__item_active: activeAnswer === question.answer3 },
@@ -138,10 +144,11 @@ export default defineComponent({
           },
         ]"
         @click="$emit('choiceAnswer', question.answer3)"
-      >
-        {{ question.answer3 }}
-      </button>
-      <button
+      />
+
+      <MainButton
+        :label="question.answer4"
+        color="green"
         class="answer__item"
         :class="[
           { answer__item_active: activeAnswer === question.answer4 },
@@ -155,9 +162,7 @@ export default defineComponent({
           },
         ]"
         @click="$emit('choiceAnswer', question.answer4)"
-      >
-        {{ question.answer4 }}
-      </button>
+      />
     </div>
   </div>
 </template>
@@ -165,17 +170,18 @@ export default defineComponent({
 <style lang="scss" scoped>
 .question-game {
   width: 100%;
-  height: 100%;
-  background: $yellow-100;
+  height: fit-content;
   padding: 30px;
   display: grid;
   grid-template-rows: fit-content(20px) 1fr;
-  gap: 20px;
+  gap: 60px;
+  justify-content: center;
 
   .header {
     &__title {
       text-align: center;
       margin-bottom: 20px;
+      @include h-1;
     }
 
     .progress {
@@ -187,56 +193,74 @@ export default defineComponent({
   }
 
   .answer {
-    width: 100%;
-    height: 100%;
+    height: fit-content;
     display: grid;
+    grid-template-columns: 600px 600px;
+    grid-template-rows: 200px 200px;
+    gap: 40px;
     align-items: center;
     justify-content: center;
-
-    gap: 20px;
-    grid-template-columns: 400px 400px;
 
     &__item {
       width: 100%;
       height: 100%;
       border-radius: 10px;
-      background: #5bf131;
       transition: background 0.2s ease;
       padding: 10px;
-
-      &:hover {
-        background: #3fec0f;
-      }
+      @include h-4;
 
       &_active {
-        background: #1a73e8 !important;
+        background: $blue !important;
       }
 
       &_good {
-        background: #29b600 !important;
+        background: $green-800 !important;
       }
 
       &_bad {
-        background: #910808 !important;
+        background: $red !important;
       }
+    }
+  }
+}
+
+@media (max-width: 1439px) {
+  .question-game {
+    .answer {
+      grid-template-columns: 450px 450px;
+      grid-template-rows: 180px 180px;
+      gap: 30px;
+    }
+  }
+}
+
+@media (max-width: 1023px) {
+  .question-game {
+    .answer {
+      grid-template-columns: 350px 350px;
+      grid-template-rows: 150px 150px;
+      gap: 25px;
     }
   }
 }
 
 @media (max-width: 886px) {
   .question-game {
+    height: 100%;
+    gap: 40px;
+
     .answer {
+      height: 100%;
       grid-template-columns: 1fr;
-      grid-template-rows: 1fr 1fr 1fr 1fr;
+      grid-template-rows: repeat(4, 1fr);
+      gap: 20px;
     }
   }
 }
 
 @media (max-width: 468px) {
   .question-game {
-    .answer {
-      //grid-template-columns: auto;
-    }
+    gap: 30px;
   }
 }
 

@@ -36,6 +36,10 @@ export default defineComponent({
     isFinishGame() {
       return state.finishGame;
     },
+
+    isShowQuestion() {
+      return this.question && !this.isShowProgress && !this.isFinishGame;
+    },
   },
 
   methods: {
@@ -95,12 +99,9 @@ export default defineComponent({
       {{ timer }}
     </div>
 
-    <div
-      v-else-if="question && !isShowProgress && !isFinishGame"
-      class="game-page__game game"
-    >
+    <div v-else-if="isShowQuestion" class="game-page__game game">
       <QuestionGame
-        :question="question"
+        :question="question!"
         :active-answer="choiceAnswer"
         @choiceAnswer="choiceAnswerHandler"
         @setAnswer="setAnswerHandler"
@@ -122,7 +123,7 @@ export default defineComponent({
   display: flex;
   justify-content: center;
   align-items: center;
-  background: $blue-800;
+  background: $yellow-100;
   transition: all 1s ease;
 
   &_active {
@@ -142,7 +143,11 @@ export default defineComponent({
   }
 
   .game {
+    width: 100%;
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .progress {
