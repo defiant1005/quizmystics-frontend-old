@@ -73,6 +73,11 @@ export default defineComponent({
         <p>{{ user.stats.dexterity }}</p>
       </div>
     </div>
+
+    <span
+      v-else-if="!user.stats && !disabled"
+      class="icon-settings user-card__settings"
+    />
   </div>
 </template>
 
@@ -92,7 +97,7 @@ export default defineComponent({
   position: relative;
   transition: top 0.5s ease-out;
   background: $yellow-800;
-  padding: 8px;
+  padding: 8px 16px;
 
   &:not(&_disabled):active {
     box-shadow: none;
@@ -150,6 +155,12 @@ export default defineComponent({
         margin: 0;
       }
     }
+  }
+
+  &__settings {
+    width: 24px;
+    height: 24px;
+    background: $black;
   }
 }
 </style>
