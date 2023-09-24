@@ -19,6 +19,7 @@ export default {
       userStore,
       mainStore,
       stringGeneration,
+      isSubmitDisabled: false,
     };
   },
 
@@ -30,6 +31,7 @@ export default {
 
   methods: {
     createRoom() {
+      this.isSubmitDisabled = true;
       const room = this.stringGeneration(4).toUpperCase();
       this.userStore.setRoom(room);
 
@@ -52,6 +54,8 @@ export default {
           this.userStore.saveId(data.userId);
           this.$router.push(room);
         }
+
+        this.isSubmitDisabled = false;
       });
     },
 
@@ -66,7 +70,11 @@ export default {
 
 <template>
   <div class="home-page">
-    <MainButton label="Создать комнату" @click="createRoom" />
+    <MainButton
+      label="Создать комнату"
+      :disabled="isSubmitDisabled"
+      @click="createRoom"
+    />
 
     <MainButton label="Войти в комнату" @click="enterRoom" />
   </div>

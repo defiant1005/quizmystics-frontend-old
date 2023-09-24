@@ -19,6 +19,7 @@ export default {
       userStore,
       mainStore,
       room: "",
+      isSubmitDisabled: false,
     };
   },
 
@@ -30,6 +31,8 @@ export default {
 
   methods: {
     goRoom() {
+      this.isSubmitDisabled = true;
+
       const userData = {
         name: this.saveNameValue,
         room: this.room,
@@ -50,6 +53,8 @@ export default {
           this.userStore.saveId(data.userId);
           this.$router.push(this.room);
         }
+
+        this.isSubmitDisabled = false;
       });
     },
 
@@ -70,7 +75,11 @@ export default {
       @input="checkUpperCase"
     />
 
-    <MainButton type="submit" label="Войти" :disabled="room.length !== 4" />
+    <MainButton
+      type="submit"
+      label="Войти"
+      :disabled="room.length !== 4 || isSubmitDisabled"
+    />
   </form>
 </template>
 
