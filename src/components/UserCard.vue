@@ -22,6 +22,21 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+
+    isShowOtherStats: {
+      type: Boolean,
+      default: false,
+    },
+  },
+
+  computed: {
+    showStats() {
+      return this.user.stats && this.isShowOtherStats;
+    },
+
+    showSettings() {
+      return !this.user.stats && !this.disabled;
+    },
   },
 
   methods: {
@@ -53,37 +68,34 @@ export default defineComponent({
       </p>
     </div>
 
-    <div v-if="user.stats" class="user-card__stats stats">
+    <div v-if="showStats" class="user-card__stats stats">
       <div class="stats__stat stat">
         <span class="icon-health" />
-        <p>{{ user.stats.health }}</p>
+        <p>{{ user.stats!.health }}</p>
       </div>
 
       <div class="stats__stat stat">
         <span class="icon-power" />
-        <p>{{ user.stats.power }}</p>
+        <p>{{ user.stats!.power }}</p>
       </div>
 
       <div class="stats__stat stat">
         <span class="icon-magic" />
-        <p>{{ user.stats.magic }}</p>
+        <p>{{ user.stats!.magic }}</p>
       </div>
 
       <div class="stats__stat stat">
         <span class="icon-intelligence" />
-        <p>{{ user.stats.intelligence }}</p>
+        <p>{{ user.stats!.intelligence }}</p>
       </div>
 
       <div class="stats__stat stat">
         <span class="icon-dexterity" />
-        <p>{{ user.stats.dexterity }}</p>
+        <p>{{ user.stats!.dexterity }}</p>
       </div>
     </div>
 
-    <span
-      v-else-if="!user.stats && !disabled"
-      class="icon-settings user-card__settings"
-    />
+    <span v-else-if="showSettings" class="icon-settings user-card__settings" />
   </div>
 </template>
 

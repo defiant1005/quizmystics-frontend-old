@@ -53,11 +53,14 @@ export default defineComponent({
         return state.usersList;
       },
 
+      currentUserData() {
+        //@ts-ignore
+        return this.usersList.find((user: IPlayers) => user.userId === this.id);
+      },
+
       isRoomAdmin() {
         //@ts-ignore
-        return !!this.usersList.find(
-          (user: IPlayers) => user.userId === this.id
-        )?.isRoomAdmin;
+        return !!this.currentUserData?.isRoomAdmin;
       },
     }),
 
@@ -82,10 +85,6 @@ export default defineComponent({
       };
 
       socket.emit("startGame", gameData);
-    },
-
-    submitEdit() {
-      console.log(123);
     },
 
     openDrawerHandler(id: string) {
@@ -154,8 +153,9 @@ export default defineComponent({
         <UserCard
           v-for="(user, index) in usersList"
           :key="index"
+          :is-show-other-stats="currentUserData.stats ?? false"
           :user="user"
-          :disabled="id !== user.userId"
+          :disabled="id !== user.userId || typeof user.stats !== 'undefined'"
           @openDrawer="openDrawerHandler"
         />
       </div>

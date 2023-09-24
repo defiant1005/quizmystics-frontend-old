@@ -5,7 +5,7 @@ import QuestionGame from "@/components/game/QuestionGame.vue";
 import { useGameStore } from "@/stores/game.store";
 import { useUserStore } from "@/stores/user";
 import PlayersProgress from "@/components/game/PlayersProgress.vue";
-import { socket, state } from "@/socket";
+import { state } from "@/socket";
 
 export default defineComponent({
   name: "GamePage",
@@ -62,18 +62,17 @@ export default defineComponent({
           room: this.room,
         };
 
-        socket.emit("changeUserCount", answerData, (error: string) => {
-          this.choiceAnswer = "";
+        console.log(answerData);
 
-          if (error) {
-            console.error(error);
-          }
-        });
+        // socket.emit("changeUserCount", answerData, (error: string) => {
+        //   this.choiceAnswer = "";
+        //
+        //   if (error) {
+        //     console.error(error);
+        //   }
+        // });
       } else {
-        console.log({
-          questionId: this.question?.id,
-          userId: this.userId,
-        });
+        console.error("Неожиданное поведение");
       }
     },
 
@@ -123,23 +122,27 @@ export default defineComponent({
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #7563bb;
+  background: $blue-800;
   transition: all 1s ease;
 
   &_active {
-    background: #a994ff;
+    background: $blue-100;
   }
 
   .timer {
     width: 100px;
     height: 100px;
-    background: #ffffff;
-    color: #a994ff;
+    background: $white;
+    color: $blue-100;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 26px;
+  }
+
+  .game {
+    height: 100%;
   }
 
   .progress {

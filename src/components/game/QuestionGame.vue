@@ -74,17 +74,19 @@ export default defineComponent({
 
 <template>
   <div class="question-game">
-    <h3 class="question-game__title">{{ question.title }}</h3>
+    <div class="question-game__header header">
+      <h3 class="header__title">{{ question.title }}</h3>
 
-    <div
-      class="progress"
-      role="progressbar"
-      aria-label="Info example"
-      :aria-valuenow="progressPercent"
-      aria-valuemin="0"
-      aria-valuemax="100"
-    >
-      <div class="progress-bar bg-info"></div>
+      <div
+        class="progress"
+        role="progressbar"
+        aria-label="Info example"
+        :aria-valuenow="progressPercent"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      >
+        <div class="progress-bar bg-info" />
+      </div>
     </div>
 
     <div class="question-game__answer answer">
@@ -163,26 +165,30 @@ export default defineComponent({
 <style lang="scss" scoped>
 .question-game {
   width: 100%;
-  min-height: 400px;
-  background: wheat;
+  height: 100%;
+  background: $yellow-100;
   padding: 30px;
+  display: grid;
+  grid-template-rows: fit-content(20px) 1fr;
+  gap: 20px;
 
-  &__title {
-    text-align: center;
-    margin-bottom: 20px;
-  }
+  .header {
+    &__title {
+      text-align: center;
+      margin-bottom: 20px;
+    }
 
-  .progress {
-    margin-bottom: 30px;
-
-    .progress-bar {
-      width: 0;
-      animation: change-width v-bind(answerTimeSec) ease-in;
+    .progress {
+      .progress-bar {
+        width: 0;
+        animation: change-width v-bind(answerTimeSec) ease-in;
+      }
     }
   }
 
   .answer {
     width: 100%;
+    height: 100%;
     display: grid;
     align-items: center;
     justify-content: center;
@@ -192,7 +198,7 @@ export default defineComponent({
 
     &__item {
       width: 100%;
-      height: 100px;
+      height: 100%;
       border-radius: 10px;
       background: #5bf131;
       transition: background 0.2s ease;
@@ -220,7 +226,8 @@ export default defineComponent({
 @media (max-width: 886px) {
   .question-game {
     .answer {
-      grid-template-columns: 400px;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr 1fr 1fr;
     }
   }
 }
@@ -228,7 +235,7 @@ export default defineComponent({
 @media (max-width: 468px) {
   .question-game {
     .answer {
-      grid-template-columns: auto;
+      //grid-template-columns: auto;
     }
   }
 }

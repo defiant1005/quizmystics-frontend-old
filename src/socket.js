@@ -46,7 +46,7 @@ socket.on("startGame", async ({ room, questionId }) => {
     state.startGame = true;
 
     if (room) {
-      router.push({
+      await router.push({
         path: `game/room/${room}`,
       });
     }
