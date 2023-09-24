@@ -121,7 +121,6 @@ export default defineComponent({
       this.currentUser.stats = userData.stats;
       this.currentUser.avatar = userData.avatar;
       this.currentUser.isReady = true;
-      console.log(this.currentUser);
 
       socket.emit("changeUserData", this.currentUser, (cbData: ICbData) => {
         if (cbData.error) {
