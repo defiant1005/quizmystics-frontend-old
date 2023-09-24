@@ -17,6 +17,11 @@ export default defineComponent({
       type: Boolean,
       default: true,
     },
+
+    isRoomAdmin: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   methods: {
@@ -44,6 +49,7 @@ export default defineComponent({
       <p>
         {{ user.name }}
         <span v-if="!disabled">(Вы)</span>
+        <span v-if="user.isRoomAdmin" class="left__vip">VIP</span>
       </p>
     </div>
 
@@ -127,6 +133,11 @@ export default defineComponent({
       align-items: center;
       gap: 8px;
       margin: 0;
+    }
+
+    &__vip {
+      color: $blue;
+      @include text-2;
     }
   }
 
