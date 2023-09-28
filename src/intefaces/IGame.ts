@@ -20,11 +20,19 @@ export interface ICheckAnswerResponse {
 }
 
 export interface IPlayersStats {
-  health: number;
-  power: number;
-  magic: number;
-  intelligence: number;
-  dexterity: number;
+  health: stateValue;
+  power: stateValue;
+  magic: stateValue;
+  intelligence: stateValue;
+  dexterity: stateValue;
+}
+
+export type stateValue = 1 | 2 | 3 | 4 | 5;
+
+export interface ISpell {
+  name: magicSpellType;
+  label: string;
+  quantity: number;
 }
 
 export interface IPlayers {
@@ -37,6 +45,7 @@ export interface IPlayers {
   isRoomAdmin: boolean;
   avatar: string;
   isReady: boolean;
+  spellList?: Array<ISpell>;
   stats?: IPlayersStats;
 }
 
@@ -46,3 +55,10 @@ export interface IPlayersEditData {
   winningQuote: string;
   stats: IPlayersStats;
 }
+
+export type magicSpellType =
+  | "coldCharm"
+  | "secretException"
+  | "silenceWisdom"
+  | "amuletAbsoluteProtection"
+  | "antagonisticRiddle";

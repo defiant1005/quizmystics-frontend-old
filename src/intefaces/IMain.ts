@@ -14,3 +14,5 @@ export interface ICbData {
   error: boolean;
   message?: string;
 }
+
+export type buttonColor = "blue" | "green" | "pink" | "red" | "yellow";

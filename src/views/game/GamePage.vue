@@ -8,7 +8,8 @@ import PlayersProgress from "@/components/game/game-page/PlayersProgress.vue";
 //@ts-ignore
 import { state, socket } from "@/socket";
 
-import MagicUsage from "@/components/game/game-page/MagicUsage.vue";
+import MagicUsage from "@/components/game/game-page/magic-usage/MagicUsage.vue";
+import { IPlayers } from "@/intefaces/IGame";
 
 export default defineComponent({
   name: "GamePage",
@@ -52,6 +53,16 @@ export default defineComponent({
 
     isShowTimer() {
       return this.timer > -1 && this.step === 1;
+    },
+
+    userList() {
+      return state.usersList;
+    },
+
+    currentUser() {
+      return this.userList.find(
+        (user: IPlayers) => user.userId === this.userId
+      );
     },
   },
 
@@ -116,7 +127,11 @@ export default defineComponent({
       {{ timer }}
     </div>
 
-    <MagicUsage v-else-if="step === 2" />
+    <MagicUsage
+      v-else-if="step === 2"
+      :current-user="currentUser"
+      :user-list="userList"
+    />
 
     <div v-else-if="isShowQuestion" class="game-page__game game">
       <QuestionGame

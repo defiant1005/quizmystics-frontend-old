@@ -1,12 +1,13 @@
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
+import { buttonColor } from "@/intefaces/IMain";
 
 export default defineComponent({
   name: "MainButton",
 
   props: {
     color: {
-      type: String,
+      type: String as PropType<buttonColor>,
       default: "blue",
     },
 
@@ -50,8 +51,10 @@ export default defineComponent({
     :type="type"
     :disabled="disabled || loading"
   >
-    <span v-if="icon" class="ui-button__icon" :class="`icon-${icon}`"></span>
-    <span class="ui-button__label">{{ label }}</span>
+    <span class="ui-button__label">
+      {{ label }}
+      <span v-if="icon" class="ui-button__icon" :class="`icon-${icon}`" />
+    </span>
   </button>
 </template>
 
@@ -68,6 +71,11 @@ export default defineComponent({
   height: 60px;
   @include text-1;
   transition: top 0.1s ease-out;
+
+  .ui-button__icon {
+    width: 16px;
+    height: 16px;
+  }
 
   &_color {
     &_blue {
@@ -94,6 +102,72 @@ export default defineComponent({
 
     &_green {
       background: $green;
+      color: $white;
+      box-shadow: 0 6px 0 0 #18191f;
+
+      &:active {
+        top: 3px;
+        box-shadow: 0 2px 0 #161b13;
+      }
+
+      &:disabled {
+        top: 0;
+        box-shadow: none;
+        background: $black-800;
+        cursor: not-allowed;
+      }
+
+      .ui-button__icon {
+        background: $white;
+      }
+    }
+
+    &_pink {
+      background: $pink;
+      color: $white;
+      box-shadow: 0 6px 0 0 #18191f;
+
+      &:active {
+        top: 3px;
+        box-shadow: 0 2px 0 #161b13;
+      }
+
+      &:disabled {
+        top: 0;
+        box-shadow: none;
+        background: $black-800;
+        cursor: not-allowed;
+      }
+
+      .ui-button__icon {
+        background: $white;
+      }
+    }
+
+    &_red {
+      background: $red;
+      color: $white;
+      box-shadow: 0 6px 0 0 #18191f;
+
+      &:active {
+        top: 3px;
+        box-shadow: 0 2px 0 #161b13;
+      }
+
+      &:disabled {
+        top: 0;
+        box-shadow: none;
+        background: $black-800;
+        cursor: not-allowed;
+      }
+
+      .ui-button__icon {
+        background: $white;
+      }
+    }
+
+    &_yellow {
+      background: $yellow;
       color: $white;
       box-shadow: 0 6px 0 0 #18191f;
 
