@@ -1,21 +1,25 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { mapState } from "pinia";
-import QuestionGame from "@/components/game/QuestionGame.vue";
+import QuestionGame from "@/components/game/game-page/QuestionGame.vue";
 import { useGameStore } from "@/stores/game.store";
 import { useUserStore } from "@/stores/user";
-import PlayersProgress from "@/components/game/PlayersProgress.vue";
-import { state } from "@/socket";
+import PlayersProgress from "@/components/game/game-page/PlayersProgress.vue";
+//@ts-ignore
+import { state, socket } from "@/socket";
+
+import MagicUsage from "@/components/game/game-page/MagicUsage.vue";
 
 export default defineComponent({
   name: "GamePage",
 
-  components: { PlayersProgress, QuestionGame },
+  components: { MagicUsage, PlayersProgress, QuestionGame },
 
   data() {
     return {
       timer: 5,
       choiceAnswer: "",
+      step: 1,
     };
   },
 
@@ -38,7 +42,16 @@ export default defineComponent({
     },
 
     isShowQuestion() {
-      return this.question && !this.isShowProgress && !this.isFinishGame;
+      return (
+        this.question &&
+        !this.isShowProgress &&
+        !this.isFinishGame &&
+        this.step === 2
+      );
+    },
+
+    isShowTimer() {
+      return this.timer > -1 && this.step === 1;
     },
   },
 
@@ -66,15 +79,13 @@ export default defineComponent({
           room: this.room,
         };
 
-        console.log(answerData);
+        socket.emit("changeUserCount", answerData, (error: string) => {
+          this.choiceAnswer = "";
 
-        // socket.emit("changeUserCount", answerData, (error: string) => {
-        //   this.choiceAnswer = "";
-        //
-        //   if (error) {
-        //     console.error(error);
-        //   }
-        // });
+          if (error) {
+            console.error(error);
+          }
+        });
       } else {
         console.error("Неожиданное поведение");
       }
@@ -86,6 +97,12 @@ export default defineComponent({
   },
 
   mounted() {
+    this.step = 1;
+
+    setTimeout(() => {
+      this.step = 2;
+    }, this.timer * 1000);
+
     setTimeout(() => {
       this.startTimer();
     }, 500);
@@ -95,9 +112,11 @@ export default defineComponent({
 
 <template>
   <div class="game-page" :class="{ 'game-page_active': timer > -1 }">
-    <div v-if="timer > -1" class="game-page__timer timer">
+    <div v-if="isShowTimer" class="game-page__timer timer">
       {{ timer }}
     </div>
+
+    <MagicUsage v-else-if="step === 2" />
 
     <div v-else-if="isShowQuestion" class="game-page__game game">
       <QuestionGame

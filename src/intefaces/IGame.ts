@@ -33,6 +33,7 @@ export interface IPlayers {
   userId: string;
   count: number;
   oldCount: number;
+  winningQuote: string;
   isRoomAdmin: boolean;
   avatar: string;
   isReady: boolean;
@@ -42,5 +43,6 @@ export interface IPlayers {
 export interface IPlayersEditData {
   name: string;
   avatar: string;
+  winningQuote: string;
   stats: IPlayersStats;
 }

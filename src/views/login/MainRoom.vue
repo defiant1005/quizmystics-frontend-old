@@ -119,6 +119,7 @@ export default defineComponent({
       this.currentUser.name = userData.name;
       this.currentUser.stats = userData.stats;
       this.currentUser.avatar = userData.avatar;
+      this.currentUser.winningQuote = userData.winningQuote;
       this.currentUser.isReady = true;
 
       socket.emit("changeUserData", this.currentUser, (cbData: ICbData) => {
@@ -153,7 +154,7 @@ export default defineComponent({
         <UserCard
           v-for="(user, index) in usersList"
           :key="index"
-          :is-show-other-stats="currentUserData.stats ?? false"
+          :is-show-other-stats="!!currentUserData.stats ?? false"
           :user="user"
           :disabled="id !== user.userId || typeof user.stats !== 'undefined'"
           @openDrawer="openDrawerHandler"

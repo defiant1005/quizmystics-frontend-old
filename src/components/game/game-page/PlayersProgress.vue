@@ -1,9 +1,10 @@
 <script lang="ts">
 import { defineComponent } from "vue";
-import { state } from "@/socket";
 import { useGameStore } from "@/stores/game.store";
 import { mapState } from "pinia";
 import { useUserStore } from "@/stores/user";
+//@ts-ignore
+import { state } from "@/socket";
 
 export default defineComponent({
   name: "PlayersProgress",

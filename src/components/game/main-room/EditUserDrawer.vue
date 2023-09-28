@@ -14,11 +14,13 @@ import {
   magic_description,
   power_description,
 } from "@/package/stats-description";
+import MainTextarea from "@/package/components/MainTextarea.vue";
 
 export default defineComponent({
   name: "EditUserDrawer",
 
   components: {
+    MainTextarea,
     MainPopper,
     MainCounter,
     AppDrawer,
@@ -52,6 +54,9 @@ export default defineComponent({
       userName: "",
       nameErrorMessage: "",
       lvlErrorMessage: "",
+
+      winningQuote: "",
+      winningQuoteErrorMessage: "",
 
       health: 1,
       power: 1,
@@ -99,16 +104,20 @@ export default defineComponent({
     submitEdit() {
       this.nameErrorMessage = "";
       this.lvlErrorMessage = "";
+      this.winningQuoteErrorMessage = "";
 
       if (this.userName.trim() === "") {
         this.nameErrorMessage = "Имя не может быть пустым";
         return;
       } else if (!this.isMaxDisabled) {
         this.lvlErrorMessage = "Распределите все уровни";
+      } else if (this.winningQuote.trim() === "") {
+        this.winningQuoteErrorMessage = "Победителей не судят";
       } else {
         const normalize = {
           name: this.userName,
           avatar: this.avatar ?? this.user?.avatar,
+          winningQuote: this.winningQuote,
           stats: {
             health: this.health,
             power: this.power,
@@ -252,6 +261,14 @@ export default defineComponent({
         />
       </div>
 
+      <MainTextarea
+        v-model="winningQuote"
+        :maxlength="150"
+        placeholder="Победная цитата"
+        class="edit-user-form__winning-quote"
+        :error-message="winningQuoteErrorMessage"
+      />
+
       <MainButton
         type="submit"
         label="Сохранить"
@@ -314,6 +331,10 @@ export default defineComponent({
         background: $black;
       }
     }
+  }
+
+  &__winning-quote {
+    margin-bottom: 20px;
   }
 
   &__submit {
