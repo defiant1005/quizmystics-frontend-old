@@ -35,6 +35,11 @@ export interface ISpell {
   quantity: number;
 }
 
+export interface ICurse {
+  who: string;
+  spell: string;
+}
+
 export interface IPlayers {
   name: string;
   room: string;
@@ -46,6 +51,7 @@ export interface IPlayers {
   avatar: string;
   isReady: boolean;
   spellList?: Array<ISpell>;
+  curse: Array<ICurse>;
   stats?: IPlayersStats;
 }
 

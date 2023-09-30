@@ -35,6 +35,11 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+
+    drawerDisabled: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   methods: {
@@ -54,13 +59,19 @@ export default defineComponent({
           return "blue";
       }
     },
+
+    setSpell(spell: ISpell) {
+      if (spell.quantity > 0) {
+        this.$emit("setSpell", spell.name);
+      }
+    },
   },
 });
 </script>
 
 <template>
   <AppDrawer
-    :is-open="isDrawerOpen"
+    :is-open="isDrawerOpen && !drawerDisabled"
     title="Выберите способность"
     @close="$emit('close')"
   >
@@ -73,9 +84,9 @@ export default defineComponent({
         <MainButton
           :label="spell.label + ` (${spell.quantity})`"
           icon="magic"
-          :disabled="disabled"
+          :disabled="disabled || spell.quantity === 0"
           :color="getColor(index)"
-          @click="$emit('setSpell', spell.name)"
+          @click="setSpell(spell)"
         />
       </div>
     </div>

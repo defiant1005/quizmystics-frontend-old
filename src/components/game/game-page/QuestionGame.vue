@@ -6,6 +6,7 @@ import MainButton from "@/package/components/MainButton.vue";
 
 export default defineComponent({
   name: "QuestionGame",
+
   components: { MainButton },
 
   emits: ["choiceAnswer", "setAnswer"],
