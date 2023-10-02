@@ -37,7 +37,7 @@ export interface ISpell {
 
 export interface ICurse {
   who: string;
-  spell: string;
+  spell: magicSpellType;
 }
 
 export interface IPlayers {
