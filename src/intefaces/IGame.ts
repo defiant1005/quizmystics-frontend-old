@@ -37,6 +37,7 @@ export interface ISpell {
 
 export interface ICurse {
   who: string;
+  evaded: boolean;
   spell: magicSpellType;
 }
 

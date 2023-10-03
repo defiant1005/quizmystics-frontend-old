@@ -49,10 +49,12 @@ export const testUserData: Array<IPlayers> = [
       {
         who: "IPhWqwbBgeyamfC8AAAN",
         spell: "secretException",
+        evaded: true,
       },
       {
         who: "IPhWqwbBgeyamfC8AAAN2",
         spell: "secretException",
+        evaded: true,
       },
     ],
   },
@@ -89,6 +91,7 @@ export const testUserData: Array<IPlayers> = [
       {
         who: "vnY1fxlT3WPi7HNRAAAL",
         spell: "antagonisticRiddle",
+        evaded: true,
       },
     ],
   },
@@ -125,6 +128,7 @@ export const testUserData: Array<IPlayers> = [
       {
         who: "vnY1fxlT3WPi7HNRAAAL",
         spell: "antagonisticRiddle",
+        evaded: false,
       },
     ],
   },

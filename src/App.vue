@@ -3,12 +3,11 @@ import { defineComponent } from "vue";
 import MainNotice from "@/package/components/MainNotice.vue";
 import { mapState } from "pinia";
 import { useMainStore } from "@/stores/main";
-import MagicAnimation from "@/components/game/game-page/magic-usage/MagicAnimation.vue";
 
 export default defineComponent({
   name: "App",
 
-  components: { MagicAnimation, MainNotice },
+  components: { MainNotice },
 
   data() {
     const mainStore = useMainStore();
@@ -29,19 +28,11 @@ export default defineComponent({
       this.mainStore.createNotification(null);
     },
   },
-
-  // mounted() {
-  //   this.mainStore.createNotification({
-  //     type: "success",
-  //     description: "Все хорошо",
-  //   });
-  // },
 });
 </script>
 
 <template>
-  <MagicAnimation />
-  <!--  <router-view />-->
+  <router-view />
 
   <MainNotice
     :notice-data="notification"

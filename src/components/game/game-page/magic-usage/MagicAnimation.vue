@@ -15,8 +15,6 @@ export default defineComponent({
 
   data() {
     return {
-      // testUserList: testUserData,
-
       spellTime: 5,
 
       testValueChild: 1,
@@ -26,17 +24,11 @@ export default defineComponent({
 
       isLoadingPage: false,
 
-      timer: 0,
-
       userAnimation: 1,
     };
   },
 
   computed: {
-    userAnimationSec() {
-      return this.userAnimation + "s";
-    },
-
     spellTimeSec() {
       return this.spellTime + "s";
     },
@@ -50,6 +42,7 @@ export default defineComponent({
 
   methods: {
     spellName,
+
     getUser(userId: string) {
       return this.userList.find((user) => user.userId === userId);
     },
@@ -61,10 +54,10 @@ export default defineComponent({
       };
     },
 
-    setUserStyle(index: number, curseLength: number) {
+    setUserStyle(index: number, user: IPlayers) {
       return {
         "animation-delay": `${this.userInfoDelaysList[index]}s`,
-        "animation-duration": `${curseLength * this.spellTime + "s"}`,
+        "animation-duration": `${user.curse.length * this.spellTime + "s"}`,
       };
     },
 
@@ -127,31 +120,18 @@ export default defineComponent({
         curseCount += this.spellTime;
       }
     },
-
-    startTimer() {
-      this.timer += 1;
-
-      if (this.timer < 50) {
-        setTimeout(() => {
-          this.startTimer();
-        }, 1000);
-      }
-    },
   },
 
   mounted() {
     this.isLoadingPage = true;
     this.setDelayList();
     this.isLoadingPage = false;
-
-    this.startTimer();
   },
 });
 </script>
 
 <template>
   <div v-if="!isLoadingPage" class="magic-animation">
-    {{ timer }}
     <div
       v-for="(user, userInfoIndex) in userList"
       :key="user.userId"
@@ -168,7 +148,14 @@ export default defineComponent({
           <div
             class="who__spell spell"
             :style="setSpellStyle(index, userInfoIndex, who.spell)"
-          />
+          >
+            <p
+              class="spell__miss"
+              :style="setSpellNameStyle(index, userInfoIndex)"
+            >
+              {{ who.evaded ? "miss" : "" }}
+            </p>
+          </div>
 
           <p
             class="spell__name"
@@ -184,7 +171,7 @@ export default defineComponent({
 
       <div
         class="user-info__user user"
-        :style="setUserStyle(userInfoIndex, user.curse.length)"
+        :style="setUserStyle(userInfoIndex, user)"
       >
         <img :src="user.avatar" alt="ava" />
         <p>{{ user.name }}</p>
@@ -225,6 +212,7 @@ export default defineComponent({
       justify-content: center;
       border: 1px solid $black;
       border-radius: 50%;
+      background: $white;
       animation: user-animation ease-in;
 
       > img {
@@ -261,7 +249,7 @@ export default defineComponent({
         justify-content: center;
         border: 1px solid $black;
         border-radius: 50%;
-        background: white;
+        background: $white;
 
         .spell {
           position: fixed;
@@ -286,6 +274,15 @@ export default defineComponent({
             @include text-2;
             color: $black;
             text-align: center;
+          }
+
+          &__miss {
+            animation: spell-miss-animation v-bind(spellTimeSec) ease-in;
+            position: fixed;
+            z-index: 99;
+            left: 30vw;
+            color: $red;
+            @include text-1;
           }
         }
 
@@ -408,6 +405,32 @@ export default defineComponent({
 
   100% {
     opacity: 0;
+  }
+}
+
+@keyframes spell-miss-animation {
+  0% {
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0;
+  }
+
+  60% {
+    opacity: 0;
+  }
+
+  70% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
   }
 }
 
