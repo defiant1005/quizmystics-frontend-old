@@ -62,6 +62,13 @@ export default defineComponent({
       };
     },
 
+    setUserStyle(index: number, curseLength: number) {
+      return {
+        "animation-delay": `${this.userInfoDelaysList[index]}s`,
+        "animation-duration": `${curseLength * this.spellTime + "s"}`,
+      };
+    },
+
     setWhoStyle(index: number, userInfoIndex: number) {
       let delay = 0;
 
@@ -176,7 +183,10 @@ export default defineComponent({
         </div>
       </div>
 
-      <div class="user-info__user user">
+      <div
+        class="user-info__user user"
+        :style="setUserStyle(userInfoIndex, user.curse.length)"
+      >
         <img :src="user.avatar" alt="ava" />
         <p>{{ user.name }}</p>
       </div>
@@ -206,7 +216,7 @@ export default defineComponent({
       width: 100px;
       height: 100px;
       position: fixed;
-      left: 50%;
+      left: 150%;
       bottom: 10px;
       transform: translate(-50%, 0);
       display: flex;
@@ -216,7 +226,7 @@ export default defineComponent({
       justify-content: center;
       border: 1px solid $black;
       border-radius: 50%;
-      animation: user-animation v-bind(userAnimationSec) ease-in;
+      animation: user-animation ease-in;
 
       > img {
         width: 40px;
@@ -262,6 +272,7 @@ export default defineComponent({
           z-index: -1;
           left: 50%;
           transform: translate(-50%, 0);
+          opacity: 0;
           top: 0;
           animation: spell-animation v-bind(spellTimeSec) ease-in;
 
@@ -326,23 +337,32 @@ export default defineComponent({
     left: 50%;
   }
 
+  80% {
+    left: 50%;
+  }
+
+  90% {
+    left: 150%;
+  }
+
   99% {
     opacity: 1;
-    left: 50%;
   }
 
   100% {
     opacity: 0;
-    left: 50%;
+    left: 150%;
   }
 }
 
 @keyframes spell-animation {
   0% {
+    opacity: 0;
     top: 0;
   }
 
   30% {
+    opacity: 1;
     top: 0;
   }
 
@@ -352,6 +372,11 @@ export default defineComponent({
 
   60% {
     top: calc(100vh - 120px);
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 0;
   }
 
   100% {
@@ -374,8 +399,16 @@ export default defineComponent({
     opacity: 1;
   }
 
-  100% {
+  70% {
     opacity: 1;
+  }
+
+  80% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
   }
 }
 
@@ -384,12 +417,16 @@ export default defineComponent({
     left: 150%;
   }
 
-  50% {
+  5% {
+    left: 50%;
+  }
+
+  90% {
     left: 50%;
   }
 
   100% {
-    left: 50%;
+    left: 150%;
   }
 }
 </style>
