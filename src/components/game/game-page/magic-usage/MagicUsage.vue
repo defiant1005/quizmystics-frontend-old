@@ -80,7 +80,7 @@ export default defineComponent({
           this.startProgress();
         }, 1000);
       } else {
-        // this.isShowSpellAnimation = true;
+        this.isShowSpellAnimation = true;
       }
     },
 
