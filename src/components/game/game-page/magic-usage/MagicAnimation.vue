@@ -2,7 +2,7 @@
 import { defineComponent, PropType } from "vue";
 import { IPlayers, magicSpellType } from "@/intefaces/IGame";
 import { testUserData } from "@/package/constants/test-user-data";
-import spellColor from "@/package/helpers/spell-color";
+import { spellColor, spellName } from "@/package/helpers/spells";
 
 export default defineComponent({
   name: "MagicAnimation",
@@ -28,10 +28,16 @@ export default defineComponent({
       isLoadingPage: false,
 
       timer: 0,
+
+      userAnimation: 1,
     };
   },
 
   computed: {
+    userAnimationSec() {
+      return this.userAnimation + "s";
+    },
+
     spellTimeSec() {
       return this.spellTime + "s";
     },
@@ -44,6 +50,7 @@ export default defineComponent({
   },
 
   methods: {
+    spellName,
     getUser(userId: string) {
       return this.testUserList.find((user) => user.userId === userId);
     },
@@ -82,6 +89,20 @@ export default defineComponent({
         }s`,
 
         background: spellColor(spell),
+      };
+    },
+
+    setSpellNameStyle(index: number, userInfoIndex: number) {
+      let delay = 0;
+
+      for (let i = 0; i < userInfoIndex; i++) {
+        delay += this.testUserList[i].curse.length;
+      }
+
+      return {
+        "animation-delay": `${
+          delay * this.spellTime + this.spellTime * index
+        }s`,
       };
     },
 
@@ -143,9 +164,15 @@ export default defineComponent({
             :style="setSpellStyle(index, userInfoIndex, who.spell)"
           />
 
+          <p
+            class="spell__name"
+            :style="setSpellNameStyle(index, userInfoIndex)"
+          >
+            {{ spellName(who.spell) }}
+          </p>
+
           <img :src="getUser(who.who)?.avatar" alt="ava" />
           <p>{{ getUser(who.who)?.name }}</p>
-          <p>{{ who.spell }}</p>
         </div>
       </div>
 
@@ -178,7 +205,7 @@ export default defineComponent({
     .user {
       width: 100px;
       height: 100px;
-      position: absolute;
+      position: fixed;
       left: 50%;
       bottom: 10px;
       transform: translate(-50%, 0);
@@ -189,6 +216,7 @@ export default defineComponent({
       justify-content: center;
       border: 1px solid $black;
       border-radius: 50%;
+      animation: user-animation v-bind(userAnimationSec) ease-in;
 
       > img {
         width: 40px;
@@ -211,9 +239,9 @@ export default defineComponent({
       .who {
         width: 100px;
         height: 100px;
-        animation: start-animation v-bind(spellTimeSec) ease-in;
+        animation: who-animation v-bind(spellTimeSec) ease-in;
         opacity: 0;
-        position: absolute;
+        position: fixed;
         left: 50%;
         top: 10px;
         transform: translate(-50%, 0);
@@ -224,6 +252,7 @@ export default defineComponent({
         justify-content: center;
         border: 1px solid $black;
         border-radius: 50%;
+        background: white;
 
         .spell {
           position: fixed;
@@ -233,9 +262,21 @@ export default defineComponent({
           z-index: -1;
           left: 50%;
           transform: translate(-50%, 0);
-          top: 10px;
-          background: rgba(255, 0, 0, 0.1);
+          top: 0;
           animation: spell-animation v-bind(spellTimeSec) ease-in;
+
+          &__name {
+            opacity: 0;
+            position: fixed;
+            top: calc(50vh);
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: spell-name-animation v-bind(spellTimeSec) ease-in;
+            margin: 0;
+            @include text-2;
+            color: $black;
+            text-align: center;
+          }
         }
 
         > img {
@@ -267,17 +308,88 @@ export default defineComponent({
   }
 }
 
-@keyframes spell-animation {
+@keyframes who-animation {
   0% {
-    top: 10px;
+    opacity: 0;
+    left: 150%;
   }
 
-  96% {
+  5% {
+    opacity: 1;
+  }
+
+  10% {
+    left: 150%;
+  }
+
+  20% {
+    left: 50%;
+  }
+
+  99% {
+    opacity: 1;
+    left: 50%;
+  }
+
+  100% {
+    opacity: 0;
+    left: 50%;
+  }
+}
+
+@keyframes spell-animation {
+  0% {
+    top: 0;
+  }
+
+  30% {
+    top: 0;
+  }
+
+  40% {
+    top: 0;
+  }
+
+  60% {
     top: calc(100vh - 120px);
   }
 
   100% {
     top: calc(100vh - 120px);
+  }
+}
+
+@keyframes spell-name-animation {
+  0% {
+    opacity: 0;
+    top: calc(50vh);
+    left: 50%;
+  }
+
+  20% {
+    opacity: 0;
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes user-animation {
+  0% {
+    left: 150%;
+  }
+
+  50% {
+    left: 50%;
+  }
+
+  100% {
+    left: 50%;
   }
 }
 </style>
