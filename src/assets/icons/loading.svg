@@ -1,0 +1,26 @@
+<svg
+        width="24"
+        height="25"
+        viewBox="0 0 24 24"
+        fill="none"
+        x="0px"
+        y="0px"
+        xmlns="http://www.w3.org/2000/svg">
+    <path d="M24 12.5C24 19.1274 18.6274 24.5 12 24.5C5.37258 24.5 0 19.1274 0 12.5C0 5.87258 5.37258 0.5 12 0.5C18.6274 0.5 24 5.87258 24 12.5ZM2.4 12.5C2.4 17.8019 6.69807 22.1 12 22.1C17.3019 22.1 21.6 17.8019 21.6 12.5C21.6 7.19807 17.3019 2.9 12 2.9C6.69807 2.9 2.4 7.19807 2.4 12.5Z" fill="url(#paint0_linear_1272_17822)">
+        <animateTransform
+                attributeName="transform"
+                attributeType="XML"
+                type="rotate"
+                dur="1s"
+                from="0 12 12.5"
+                to="360 12 12.5"
+                repeatCount="indefinite"
+        />
+    </path>
+<defs>
+<linearGradient id="paint0_linear_1272_17822" x1="5" y1="8.5" x2="17.5" y2="24.5" gradientUnits="userSpaceOnUse">
+<stop stop-color="#F8CB57"/>
+<stop offset="1" stop-color="#F8CB57" stop-opacity="0"/>
+</linearGradient>
+</defs>
+</svg>

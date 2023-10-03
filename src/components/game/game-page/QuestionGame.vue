@@ -44,12 +44,15 @@ export default defineComponent({
       getRandomNumber,
       gameStore,
       progress: 0,
-      answerTime: 4,
+      answerTime: 10,
       isCorrectAnswer: null as null | CheckAnswerResponseType,
       randomNumbers: [] as Array<number>,
+      randomValues: [] as Array<string>,
       hiddenAnswer: null as null | number,
       isLoadingPage: false,
       isSecretRiddle: false,
+      isSilenceWisdom: false,
+      isAntagonisticRiddle: false,
     };
   },
 
@@ -79,6 +82,16 @@ export default defineComponent({
     },
   },
 
+  watch: {
+    isSilenceWisdom(newValue) {
+      if (newValue) {
+        setTimeout(() => {
+          this.isSilenceWisdom = false;
+        }, (this.answerTime * 1000) / 1.5);
+      }
+    },
+  },
+
   methods: {
     startProgress() {
       this.progress += 1;
@@ -97,7 +110,11 @@ export default defineComponent({
           })
           .finally(() => {
             setTimeout(() => {
-              // this.$emit("setAnswer");
+              this.finishQuestion();
+
+              setTimeout(() => {
+                // this.$emit("setAnswer");
+              }, 2000);
             }, 1000);
           });
       }
@@ -112,7 +129,7 @@ export default defineComponent({
     },
 
     startSilenceWisdom() {
-      console.log("startSilenceWisdom");
+      this.isSilenceWisdom = true;
     },
 
     startSecretRiddle() {
@@ -120,7 +137,21 @@ export default defineComponent({
     },
 
     startAntagonisticRiddle() {
-      console.log("startAntagonisticRiddle");
+      this.isAntagonisticRiddle = true;
+      this.randomValues = this.getRandomNumbers([
+        this.question.answer1,
+        this.question.answer2,
+        this.question.answer3,
+        this.question.answer4,
+      ]);
+    },
+
+    finishQuestion() {
+      this.hiddenAnswer = null;
+      this.isLoadingPage = false;
+      this.isSecretRiddle = false;
+      this.isSilenceWisdom = false;
+      this.isAntagonisticRiddle = false;
     },
   },
 
@@ -128,7 +159,7 @@ export default defineComponent({
     this.isLoadingPage = true;
     this.startProgress();
 
-    this.randomNumbers = this.getRandomNumbers();
+    this.randomNumbers = this.getRandomNumbers([0, 1, 2, 3]);
 
     if (this.curse.find((curse) => curse === "secretException")) {
       this.startSecretException();
@@ -179,11 +210,11 @@ export default defineComponent({
       </div>
     </div>
 
-    <div class="question-game__answer answer">
+    <div v-if="!isSilenceWisdom" class="question-game__answer answer">
       <MainButton
         class="answer__item"
         color="green"
-        :label="question.answer1"
+        :label="!isAntagonisticRiddle ? question.answer1 : randomValues[0]"
         :class="[
           { answer__item_active: activeAnswer === question.answer1 },
           { answer__hidden: hiddenAnswer === 0 },
@@ -200,7 +231,7 @@ export default defineComponent({
       />
 
       <MainButton
-        :label="question.answer2"
+        :label="!isAntagonisticRiddle ? question.answer2 : randomValues[1]"
         color="green"
         class="answer__item"
         :class="[
@@ -219,7 +250,7 @@ export default defineComponent({
       />
 
       <MainButton
-        :label="question.answer3"
+        :label="!isAntagonisticRiddle ? question.answer3 : randomValues[2]"
         color="green"
         class="answer__item"
         :class="[
@@ -238,7 +269,7 @@ export default defineComponent({
       />
 
       <MainButton
-        :label="question.answer4"
+        :label="!isAntagonisticRiddle ? question.answer4 : randomValues[3]"
         color="green"
         class="answer__item"
         :class="[
@@ -256,6 +287,8 @@ export default defineComponent({
         @click="$emit('choiceAnswer', question.answer4)"
       />
     </div>
+
+    <span v-else class="icon-loading" />
   </div>
 </template>
 
@@ -337,6 +370,16 @@ export default defineComponent({
     &__hidden {
       opacity: 0 !important;
     }
+  }
+
+  .icon-loading {
+    width: 24px;
+    height: 24px;
+    background: $yellow;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
 

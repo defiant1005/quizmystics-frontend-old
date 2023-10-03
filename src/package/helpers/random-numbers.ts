@@ -1,5 +1,4 @@
-export const getRandomNumbers = () => {
-  const array = [0, 1, 2, 3];
+export const getRandomNumbers = (array: any) => {
   return array.sort(() => Math.random() - 0.5);
 };
 

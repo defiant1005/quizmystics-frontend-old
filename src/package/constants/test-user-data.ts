@@ -144,10 +144,12 @@ export const testQuestion = {
   categoryId: 1,
 };
 
-export const testCurse1: Array<magicSpellType> = ["coldCharm"];
-export const testCurse2: Array<magicSpellType> = [
+export const testCurse2: Array<magicSpellType> = ["coldCharm"];
+export const testCurse1: Array<magicSpellType> = [
   "secretException",
   "secretRiddle",
+  "silenceWisdom",
+  "antagonisticRiddle",
 ];
 export const testCurse3: Array<magicSpellType> = ["silenceWisdom"];
 export const testCurse4: Array<magicSpellType> = ["secretRiddle"];
