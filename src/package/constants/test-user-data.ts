@@ -1,4 +1,4 @@
-import { IPlayers } from "@/intefaces/IGame";
+import { IPlayers, magicSpellType } from "@/intefaces/IGame";
 
 export const testUserData: Array<IPlayers> = [
   {
@@ -133,3 +133,19 @@ export const testUserData: Array<IPlayers> = [
     ],
   },
 ];
+
+export const testQuestion = {
+  id: 13,
+  title: "Чему равно значение выражения 3! (факториал)?",
+  answer1: "3",
+  answer2: "6",
+  answer3: "9",
+  answer4: "12",
+  categoryId: 1,
+};
+
+export const testCurse1: Array<magicSpellType> = ["coldCharm"];
+export const testCurse2: Array<magicSpellType> = ["secretException"];
+export const testCurse3: Array<magicSpellType> = ["silenceWisdom"];
+export const testCurse4: Array<magicSpellType> = ["secretRiddle"];
+export const testCurse5: Array<magicSpellType> = ["antagonisticRiddle"];

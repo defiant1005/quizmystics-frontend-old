@@ -7,6 +7,10 @@ import {
 } from "@/intefaces/IGame";
 import { useGameStore } from "@/stores/game.store";
 import MainButton from "@/package/components/MainButton.vue";
+import {
+  getRandomNumber,
+  getRandomNumbers,
+} from "@/package/helpers/random-numbers";
 
 export default defineComponent({
   name: "QuestionGame",
@@ -36,10 +40,15 @@ export default defineComponent({
     const gameStore = useGameStore();
 
     return {
+      getRandomNumbers,
+      getRandomNumber,
       gameStore,
       progress: 0,
       answerTime: 4,
       isCorrectAnswer: null as null | CheckAnswerResponseType,
+      randomNumbers: [] as Array<number>,
+      hiddenAnswer: null as null | number,
+      isLoadingPage: false,
     };
   },
 
@@ -50,6 +59,22 @@ export default defineComponent({
 
     answerTimeSec() {
       return this.answerTime + "s";
+    },
+
+    firstAnswer() {
+      return this.randomNumbers[0];
+    },
+
+    secondAnswer() {
+      return this.randomNumbers[1];
+    },
+
+    thirdAnswer() {
+      return this.randomNumbers[2];
+    },
+
+    fourthAnswer() {
+      return this.randomNumbers[3];
     },
   },
 
@@ -76,16 +101,63 @@ export default defineComponent({
           });
       }
     },
+
+    startColdCharm() {
+      console.log("startColdCharm");
+    },
+
+    startSecretException() {
+      this.hiddenAnswer = this.getRandomNumber(this.randomNumbers);
+    },
+
+    startSilenceWisdom() {
+      console.log("startSilenceWisdom");
+    },
+
+    startSecretRiddle() {
+      console.log("startSecretRiddle");
+    },
+
+    startAntagonisticRiddle() {
+      console.log("startAntagonisticRiddle");
+    },
   },
 
   mounted() {
+    this.isLoadingPage = true;
     this.startProgress();
+
+    this.randomNumbers = this.getRandomNumbers();
+
+    if (this.curse.find((curse) => curse === "secretException")) {
+      this.startSecretException();
+    }
+
+    if (this.curse.find((curse) => curse === "coldCharm")) {
+      this.startColdCharm();
+    }
+
+    if (this.curse.find((curse) => curse === "silenceWisdom")) {
+      this.startSilenceWisdom();
+    }
+
+    if (this.curse.find((curse) => curse === "secretRiddle")) {
+      this.startSecretRiddle();
+    }
+
+    if (this.curse.find((curse) => curse === "antagonisticRiddle")) {
+      this.startAntagonisticRiddle();
+    }
+
+    setTimeout(() => {
+      this.isLoadingPage = false;
+    }, 100);
   },
 });
 </script>
 
 <template>
-  <div class="question-game">
+  <div v-if="!isLoadingPage" class="question-game">
     <div class="question-game__header header">
       <h3 class="header__title">{{ question.title }}</h3>
 
@@ -108,6 +180,7 @@ export default defineComponent({
         :label="question.answer1"
         :class="[
           { answer__item_active: activeAnswer === question.answer1 },
+          { answer__hidden: hiddenAnswer === 0 },
           {
             answer__item_good:
               activeAnswer === question.answer1 && isCorrectAnswer === 'good',
@@ -126,6 +199,7 @@ export default defineComponent({
         class="answer__item"
         :class="[
           { answer__item_active: activeAnswer === question.answer2 },
+          { answer__hidden: hiddenAnswer === 1 },
           {
             answer__item_good:
               activeAnswer === question.answer2 && isCorrectAnswer === 'good',
@@ -144,6 +218,7 @@ export default defineComponent({
         class="answer__item"
         :class="[
           { answer__item_active: activeAnswer === question.answer3 },
+          { answer__hidden: hiddenAnswer === 2 },
           {
             answer__item_good:
               activeAnswer === question.answer3 && isCorrectAnswer === 'good',
@@ -162,6 +237,7 @@ export default defineComponent({
         class="answer__item"
         :class="[
           { answer__item_active: activeAnswer === question.answer4 },
+          { answer__hidden: hiddenAnswer === 3 },
           {
             answer__item_good:
               activeAnswer === question.answer4 && isCorrectAnswer === 'good',
@@ -219,6 +295,22 @@ export default defineComponent({
       padding: 10px;
       @include h-4;
 
+      &:nth-child(1) {
+        order: v-bind(firstAnswer);
+      }
+
+      &:nth-child(2) {
+        order: v-bind(secondAnswer);
+      }
+
+      &:nth-child(3) {
+        order: v-bind(thirdAnswer);
+      }
+
+      &:nth-child(4) {
+        order: v-bind(fourthAnswer);
+      }
+
       &_active {
         background: $blue !important;
       }
@@ -230,6 +322,10 @@ export default defineComponent({
       &_bad {
         background: $red !important;
       }
+    }
+
+    &__hidden {
+      opacity: 0 !important;
     }
   }
 }
