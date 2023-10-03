@@ -82,6 +82,7 @@ export default defineComponent({
         class="magic-usage-drawer__spell spell"
       >
         <MainButton
+          class="spell__btn"
           :label="spell.label + ` (${spell.quantity})`"
           icon="magic"
           :disabled="disabled || spell.quantity === 0"
@@ -98,5 +99,13 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   gap: 12px;
+
+  .spell {
+    :deep(.ui-button) {
+      > span {
+        word-wrap: break-word;
+      }
+    }
+  }
 }
 </style>

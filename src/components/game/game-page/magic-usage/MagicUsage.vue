@@ -16,6 +16,8 @@ export default defineComponent({
 
   components: { MagicAnimation, MagicUsageDrawer },
 
+  emits: ["animationEnd"],
+
   props: {
     currentUser: {
       type: Object as PropType<IPlayers>,
@@ -40,7 +42,7 @@ export default defineComponent({
       isDrawerDisabled: false,
 
       progress: 0,
-      timer: 20,
+      timer: 10,
 
       isShowDrawer: false,
 
@@ -78,7 +80,7 @@ export default defineComponent({
           this.startProgress();
         }, 1000);
       } else {
-        this.isShowSpellAnimation = true;
+        // this.isShowSpellAnimation = true;
       }
     },
 
@@ -108,6 +110,10 @@ export default defineComponent({
       this.isDrawerDisabled = true;
 
       this.isShowDrawer = false;
+    },
+
+    animationEndHandler() {
+      this.$emit("animationEnd");
     },
   },
 
@@ -151,7 +157,11 @@ export default defineComponent({
       </div>
     </template>
 
-    <MagicAnimation v-else :user-list="userList" />
+    <MagicAnimation
+      v-else
+      :user-list="userList"
+      @animationEnd="animationEndHandler"
+    />
   </div>
 
   <MagicUsageDrawer
@@ -161,6 +171,7 @@ export default defineComponent({
     :drawer-disabled="isDrawerDisabled"
     :spells="currentUser!.spellList"
     @setSpell="setSpellHandler"
+    @close="isShowDrawer = !isShowDrawer"
   />
 </template>
 

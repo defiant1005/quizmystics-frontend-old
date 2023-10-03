@@ -43,12 +43,7 @@ export default defineComponent({
     },
 
     isShowQuestion() {
-      return (
-        this.question &&
-        !this.isShowProgress &&
-        !this.isFinishGame &&
-        this.step === 2
-      );
+      return this.question && !this.isFinishGame && this.step === 3;
     },
 
     isShowTimer() {
@@ -97,6 +92,8 @@ export default defineComponent({
             console.error(error);
           }
         });
+
+        this.step = 4;
       } else {
         console.error("Неожиданное поведение");
       }
@@ -104,6 +101,11 @@ export default defineComponent({
 
     nextQuestionHandler() {
       state.isShowProgress = !state.isShowProgress;
+      this.step = 2;
+    },
+
+    animationEndHandler() {
+      this.step = 3;
     },
   },
 
@@ -131,9 +133,10 @@ export default defineComponent({
       v-else-if="step === 2"
       :current-user="currentUser"
       :user-list="userList"
+      @animationEnd="animationEndHandler"
     />
 
-    <div v-else-if="isShowQuestion" class="game-page__game game">
+    <div v-else-if="isShowQuestion && step === 3" class="game-page__game game">
       <QuestionGame
         :question="question!"
         :active-answer="choiceAnswer"
@@ -142,7 +145,7 @@ export default defineComponent({
       />
     </div>
 
-    <div v-else class="game-page__progress progress">
+    <div v-else-if="step === 4" class="game-page__progress progress">
       <PlayersProgress
         :is-finish-game="isFinishGame"
         @nextQuestion="nextQuestionHandler"

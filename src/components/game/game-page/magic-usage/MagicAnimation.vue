@@ -6,6 +6,8 @@ import { spellColor, spellName } from "@/package/helpers/spells";
 export default defineComponent({
   name: "MagicAnimation",
 
+  emits: ["animationEnd"],
+
   props: {
     userList: {
       type: Array as PropType<Array<IPlayers>>,
@@ -23,12 +25,20 @@ export default defineComponent({
       whoDelaysList: [] as Array<number>,
 
       isLoadingPage: false,
-
-      userAnimation: 1,
     };
   },
 
   computed: {
+    allAnimationCurseCount() {
+      return this.userList.reduce((sum: number, user: IPlayers) => {
+        return sum + user.curse.length;
+      }, 0);
+    },
+
+    allAnimationTime() {
+      return this.allAnimationCurseCount * this.spellTime * 1000;
+    },
+
     spellTimeSec() {
       return this.spellTime + "s";
     },
@@ -126,6 +136,10 @@ export default defineComponent({
     this.isLoadingPage = true;
     this.setDelayList();
     this.isLoadingPage = false;
+
+    setTimeout(() => {
+      this.$emit("animationEnd");
+    }, this.allAnimationTime);
   },
 });
 </script>

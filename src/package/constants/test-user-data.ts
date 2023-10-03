@@ -21,17 +21,17 @@ export const testUserData: Array<IPlayers> = [
     spellList: [
       {
         name: "coldCharm",
-        label: "Холодное Очарование",
+        label: "Криострасть",
         quantity: 2,
       },
       {
         name: "secretException",
-        label: "Тайное Исключение",
+        label: "Секретел",
         quantity: 2,
       },
       {
         name: "silenceWisdom",
-        label: "Молчание Мудрости",
+        label: "Интерруптус",
         quantity: 2,
       },
       {
@@ -41,7 +41,7 @@ export const testUserData: Array<IPlayers> = [
       },
       {
         name: "antagonisticRiddle",
-        label: "Антагонистическая Загадка",
+        label: "Антаговеяние",
         quantity: 1,
       },
     ],
@@ -78,12 +78,12 @@ export const testUserData: Array<IPlayers> = [
     spellList: [
       {
         name: "coldCharm",
-        label: "Холодное Очарование",
+        label: "Криострасть",
         quantity: 2,
       },
       {
         name: "secretException",
-        label: "Тайное Исключение",
+        label: "Секретел",
         quantity: 1,
       },
     ],
@@ -115,12 +115,12 @@ export const testUserData: Array<IPlayers> = [
     spellList: [
       {
         name: "coldCharm",
-        label: "Холодное Очарование",
+        label: "Криострасть",
         quantity: 2,
       },
       {
         name: "secretException",
-        label: "Тайное Исключение",
+        label: "Секретел",
         quantity: 1,
       },
     ],

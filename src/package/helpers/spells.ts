@@ -29,16 +29,16 @@ export function spellName(spell: magicSpellType) {
       return "Антимагический Эксцесс";
 
     case "antagonisticRiddle":
-      return "Антагонистическая Загадка";
+      return "Антаговеяние";
 
     case "coldCharm":
-      return "Холодное Очарование";
+      return "Криострасть";
 
     case "secretException":
-      return "Тайное Исключение";
+      return "Секретел";
 
     case "silenceWisdom":
-      return "Молчание Мудрости";
+      return "Интерруптус";
 
     default:
       return assertUnreachable(spell);
