@@ -3,7 +3,7 @@ import assertUnreachable from "@/package/helpers/assert-unreachable";
 
 export function spellColor(spell: magicSpellType) {
   switch (spell) {
-    case "amuletAbsoluteProtection":
+    case "antimagicExcess":
       return "#1947E5";
 
     case "antagonisticRiddle":
@@ -25,8 +25,8 @@ export function spellColor(spell: magicSpellType) {
 
 export function spellName(spell: magicSpellType) {
   switch (spell) {
-    case "amuletAbsoluteProtection":
-      return "Амулет Абсолютной Защиты";
+    case "antimagicExcess":
+      return "Антимагический Эксцесс";
 
     case "antagonisticRiddle":
       return "Антагонистическая Загадка";

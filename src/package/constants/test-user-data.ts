@@ -35,7 +35,7 @@ export const testUserData: Array<IPlayers> = [
         quantity: 2,
       },
       {
-        name: "amuletAbsoluteProtection",
+        name: "antimagicExcess",
         label: "Амулет Абсолютной Защиты",
         quantity: 2,
       },
