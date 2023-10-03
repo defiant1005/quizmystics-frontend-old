@@ -35,8 +35,8 @@ export const testUserData: Array<IPlayers> = [
         quantity: 2,
       },
       {
-        name: "antimagicExcess",
-        label: "Амулет Абсолютной Защиты",
+        name: "secretRiddle",
+        label: "Секретная загадка",
         quantity: 2,
       },
       {

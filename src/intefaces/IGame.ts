@@ -67,5 +67,5 @@ export type magicSpellType =
   | "coldCharm"
   | "secretException"
   | "silenceWisdom"
-  | "antimagicExcess"
+  | "secretRiddle"
   | "antagonisticRiddle";

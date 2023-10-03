@@ -9,7 +9,7 @@ import PlayersProgress from "@/components/game/game-page/PlayersProgress.vue";
 import { state, socket } from "@/socket";
 
 import MagicUsage from "@/components/game/game-page/magic-usage/MagicUsage.vue";
-import { IPlayers } from "@/intefaces/IGame";
+import { ICurse, IPlayers } from "@/intefaces/IGame";
 
 export default defineComponent({
   name: "GamePage",
@@ -58,6 +58,12 @@ export default defineComponent({
       return this.userList.find(
         (user: IPlayers) => user.userId === this.userId
       );
+    },
+
+    currentUserCurse() {
+      return this.currentUser.curse?.map((curse: ICurse) => {
+        return curse.spell;
+      });
     },
   },
 
@@ -139,6 +145,7 @@ export default defineComponent({
     <div v-else-if="isShowQuestion && step === 3" class="game-page__game game">
       <QuestionGame
         :question="question!"
+        :curse="currentUserCurse"
         :active-answer="choiceAnswer"
         @choiceAnswer="choiceAnswerHandler"
         @setAnswer="setAnswerHandler"

@@ -1,6 +1,10 @@
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import { CheckAnswerResponseType, IQuestion } from "@/intefaces/IGame";
+import {
+  CheckAnswerResponseType,
+  IQuestion,
+  magicSpellType,
+} from "@/intefaces/IGame";
 import { useGameStore } from "@/stores/game.store";
 import MainButton from "@/package/components/MainButton.vue";
 
@@ -20,6 +24,11 @@ export default defineComponent({
     activeAnswer: {
       type: String,
       default: "",
+    },
+
+    curse: {
+      type: Array as PropType<Array<magicSpellType>>,
+      default: () => [],
     },
   },
 
@@ -62,7 +71,7 @@ export default defineComponent({
           })
           .finally(() => {
             setTimeout(() => {
-              this.$emit("setAnswer");
+              // this.$emit("setAnswer");
             }, 1000);
           });
       }
