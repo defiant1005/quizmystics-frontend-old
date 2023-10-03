@@ -1,7 +1,6 @@
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
 import { IPlayers, magicSpellType } from "@/intefaces/IGame";
-import { testUserData } from "@/package/constants/test-user-data";
 import { spellColor, spellName } from "@/package/helpers/spells";
 
 export default defineComponent({
@@ -16,7 +15,7 @@ export default defineComponent({
 
   data() {
     return {
-      testUserList: testUserData,
+      // testUserList: testUserData,
 
       spellTime: 5,
 
@@ -43,7 +42,7 @@ export default defineComponent({
     },
 
     curseLength() {
-      return this.testUserList.reduce((sum: number, user: IPlayers) => {
+      return this.userList.reduce((sum: number, user: IPlayers) => {
         return sum + user.curse.length;
       }, 0);
     },
@@ -52,7 +51,7 @@ export default defineComponent({
   methods: {
     spellName,
     getUser(userId: string) {
-      return this.testUserList.find((user) => user.userId === userId);
+      return this.userList.find((user) => user.userId === userId);
     },
 
     setUserInfoStyle(index: number, curseLength: number) {
@@ -73,7 +72,7 @@ export default defineComponent({
       let delay = 0;
 
       for (let i = 0; i < userInfoIndex; i++) {
-        delay += this.testUserList[i].curse.length;
+        delay += this.userList[i].curse.length;
       }
 
       return {
@@ -87,7 +86,7 @@ export default defineComponent({
       let delay = 0;
 
       for (let i = 0; i < userInfoIndex; i++) {
-        delay += this.testUserList[i].curse.length;
+        delay += this.userList[i].curse.length;
       }
 
       return {
@@ -103,7 +102,7 @@ export default defineComponent({
       let delay = 0;
 
       for (let i = 0; i < userInfoIndex; i++) {
-        delay += this.testUserList[i].curse.length;
+        delay += this.userList[i].curse.length;
       }
 
       return {
@@ -116,7 +115,7 @@ export default defineComponent({
     setDelayList() {
       let count = 0;
 
-      this.testUserList.forEach((user) => {
+      this.userList.forEach((user) => {
         this.userInfoDelaysList.push(count * this.spellTime);
         count += user.curse.length;
       });
@@ -154,7 +153,7 @@ export default defineComponent({
   <div v-if="!isLoadingPage" class="magic-animation">
     {{ timer }}
     <div
-      v-for="(user, userInfoIndex) in testUserList"
+      v-for="(user, userInfoIndex) in userList"
       :key="user.userId"
       :style="setUserInfoStyle(userInfoIndex, user.curse.length)"
       class="magic-animation__user-info user-info"
