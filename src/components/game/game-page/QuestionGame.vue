@@ -53,6 +53,11 @@ export default defineComponent({
       isSecretRiddle: false,
       isSilenceWisdom: false,
       isAntagonisticRiddle: false,
+
+      coldCharmAnswer1: 0,
+      coldCharmAnswer2: 0,
+      coldCharmAnswer3: 0,
+      coldCharmAnswer4: 0,
     };
   },
 
@@ -121,7 +126,10 @@ export default defineComponent({
     },
 
     startColdCharm() {
-      console.log("startColdCharm");
+      this.coldCharmAnswer1 = 5;
+      this.coldCharmAnswer2 = 5;
+      this.coldCharmAnswer3 = 5;
+      this.coldCharmAnswer4 = 5;
     },
 
     startSecretException() {
@@ -152,6 +160,11 @@ export default defineComponent({
       this.isSecretRiddle = false;
       this.isSilenceWisdom = false;
       this.isAntagonisticRiddle = false;
+
+      this.coldCharmAnswer1 = 0;
+      this.coldCharmAnswer2 = 0;
+      this.coldCharmAnswer3 = 0;
+      this.coldCharmAnswer4 = 0;
     },
   },
 
@@ -212,6 +225,7 @@ export default defineComponent({
 
     <div v-if="!isSilenceWisdom" class="question-game__answer answer">
       <MainButton
+        v-if="coldCharmAnswer1 === 0"
         class="answer__item"
         color="green"
         :label="!isAntagonisticRiddle ? question.answer1 : randomValues[0]"
@@ -231,6 +245,14 @@ export default defineComponent({
       />
 
       <MainButton
+        v-else
+        class="answer__item"
+        :label="`Разморозка (${coldCharmAnswer1})`"
+        @click="coldCharmAnswer1--"
+      />
+
+      <MainButton
+        v-if="coldCharmAnswer2 === 0"
         :label="!isAntagonisticRiddle ? question.answer2 : randomValues[1]"
         color="green"
         class="answer__item"
@@ -250,6 +272,14 @@ export default defineComponent({
       />
 
       <MainButton
+        v-else
+        class="answer__item"
+        :label="`Разморозка (${coldCharmAnswer2})`"
+        @click="coldCharmAnswer2--"
+      />
+
+      <MainButton
+        v-if="coldCharmAnswer3 === 0"
         :label="!isAntagonisticRiddle ? question.answer3 : randomValues[2]"
         color="green"
         class="answer__item"
@@ -269,6 +299,14 @@ export default defineComponent({
       />
 
       <MainButton
+        v-else
+        class="answer__item"
+        :label="`Разморозка (${coldCharmAnswer3})`"
+        @click="coldCharmAnswer3--"
+      />
+
+      <MainButton
+        v-if="coldCharmAnswer4 === 0"
         :label="!isAntagonisticRiddle ? question.answer4 : randomValues[3]"
         color="green"
         class="answer__item"
@@ -285,6 +323,13 @@ export default defineComponent({
           },
         ]"
         @click="$emit('choiceAnswer', question.answer4)"
+      />
+
+      <MainButton
+        v-else
+        class="answer__item"
+        :label="`Разморозка (${coldCharmAnswer4})`"
+        @click="coldCharmAnswer4--"
       />
     </div>
 
