@@ -145,7 +145,10 @@ export const testQuestion = {
 };
 
 export const testCurse1: Array<magicSpellType> = ["coldCharm"];
-export const testCurse2: Array<magicSpellType> = ["secretException"];
+export const testCurse2: Array<magicSpellType> = [
+  "secretException",
+  "secretRiddle",
+];
 export const testCurse3: Array<magicSpellType> = ["silenceWisdom"];
 export const testCurse4: Array<magicSpellType> = ["secretRiddle"];
 export const testCurse5: Array<magicSpellType> = ["antagonisticRiddle"];

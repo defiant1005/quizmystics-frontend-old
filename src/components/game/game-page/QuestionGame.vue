@@ -49,6 +49,7 @@ export default defineComponent({
       randomNumbers: [] as Array<number>,
       hiddenAnswer: null as null | number,
       isLoadingPage: false,
+      isSecretRiddle: false,
     };
   },
 
@@ -115,7 +116,7 @@ export default defineComponent({
     },
 
     startSecretRiddle() {
-      console.log("startSecretRiddle");
+      this.isSecretRiddle = true;
     },
 
     startAntagonisticRiddle() {
@@ -159,7 +160,12 @@ export default defineComponent({
 <template>
   <div v-if="!isLoadingPage" class="question-game">
     <div class="question-game__header header">
-      <h3 class="header__title">{{ question.title }}</h3>
+      <h3
+        class="header__title"
+        :class="{ header__title_hidden: isSecretRiddle }"
+      >
+        {{ question.title }}
+      </h3>
 
       <div
         class="progress"
@@ -268,6 +274,10 @@ export default defineComponent({
       text-align: center;
       margin-bottom: 20px;
       @include h-1;
+
+      &_hidden {
+        opacity: 0 !important;
+      }
     }
 
     .progress {
