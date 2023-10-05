@@ -61,7 +61,9 @@ export default defineComponent({
 
     currentUserCurse() {
       return this.currentUser.curse?.map((curse: ICurse) => {
-        return curse.spell;
+        if (!curse.evaded) {
+          return curse.spell;
+        }
       });
     },
   },

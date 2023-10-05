@@ -67,11 +67,12 @@ export default defineComponent({
   align-items: center;
   cursor: pointer;
   position: relative;
-  white-space: nowrap;
+  //white-space: nowrap;
   top: 0;
   height: 60px;
   @include text-1;
   transition: top 0.1s ease-out;
+  overflow: hidden;
 
   .ui-button__icon {
     width: 16px;

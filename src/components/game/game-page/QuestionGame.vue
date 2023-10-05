@@ -1,5 +1,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
+//@ts-ignore
+import { socket } from "@/socket";
 import {
   CheckAnswerResponseType,
   IQuestion,
@@ -11,6 +13,8 @@ import {
   getRandomNumber,
   getRandomNumbers,
 } from "@/package/helpers/random-numbers";
+import { mapState } from "pinia";
+import { useUserStore } from "@/stores/user";
 
 export default defineComponent({
   name: "QuestionGame",
@@ -51,6 +55,7 @@ export default defineComponent({
       isSecretRiddle: false,
       isSilenceWisdom: false,
       isAntagonisticRiddle: false,
+      correctAnswer: "",
 
       coldCharmAnswer1: 0,
       coldCharmAnswer2: 0,
@@ -60,6 +65,10 @@ export default defineComponent({
   },
 
   computed: {
+    ...mapState(useUserStore, {
+      room: "room",
+    }),
+
     progressPercent() {
       return (this.progress * 100) / this.answerTime;
     },
@@ -119,7 +128,7 @@ export default defineComponent({
               this.finishQuestion();
 
               setTimeout(() => {
-                // this.$emit("setAnswer");
+                this.$emit("setAnswer");
               }, 2000);
             }, 1000);
           });
@@ -166,6 +175,15 @@ export default defineComponent({
       this.coldCharmAnswer2 = 0;
       this.coldCharmAnswer3 = 0;
       this.coldCharmAnswer4 = 0;
+
+      const normalize = {
+        questionId: this.question.id,
+        room: this.room,
+      };
+
+      socket.emit("getCorrectAnswer", normalize, (correctAnswer: string) => {
+        this.correctAnswer = correctAnswer;
+      });
     },
   },
 
@@ -235,7 +253,9 @@ export default defineComponent({
           { answer__hidden: hiddenAnswer === 0 },
           {
             answer__item_good:
-              activeAnswer === question.answer1 && isCorrectAnswer === 'good',
+              (activeAnswer === question.answer1 &&
+                isCorrectAnswer === 'good') ||
+              correctAnswer === question.answer1,
           },
           {
             answer__item_bad:
@@ -262,7 +282,9 @@ export default defineComponent({
           { answer__hidden: hiddenAnswer === 1 },
           {
             answer__item_good:
-              activeAnswer === question.answer2 && isCorrectAnswer === 'good',
+              (activeAnswer === question.answer2 &&
+                isCorrectAnswer === 'good') ||
+              correctAnswer === question.answer2,
           },
           {
             answer__item_bad:
@@ -289,7 +311,9 @@ export default defineComponent({
           { answer__hidden: hiddenAnswer === 2 },
           {
             answer__item_good:
-              activeAnswer === question.answer3 && isCorrectAnswer === 'good',
+              (activeAnswer === question.answer3 &&
+                isCorrectAnswer === 'good') ||
+              correctAnswer === question.answer3,
           },
           {
             answer__item_bad:
@@ -316,7 +340,9 @@ export default defineComponent({
           { answer__hidden: hiddenAnswer === 3 },
           {
             answer__item_good:
-              activeAnswer === question.answer4 && isCorrectAnswer === 'good',
+              (activeAnswer === question.answer4 &&
+                isCorrectAnswer === 'good') ||
+              correctAnswer === question.answer4,
           },
           {
             answer__item_bad:
@@ -401,11 +427,11 @@ export default defineComponent({
       }
 
       &_active {
-        background: $blue !important;
+        background: $blue-800 !important;
       }
 
       &_good {
-        background: $green-800 !important;
+        background: $green-success !important;
       }
 
       &_bad {
