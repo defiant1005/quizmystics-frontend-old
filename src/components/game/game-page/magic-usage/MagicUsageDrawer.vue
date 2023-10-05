@@ -1,9 +1,10 @@
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
 import AppDrawer from "@/package/components/AppDrawer.vue";
-import { ISpell, stateValue } from "@/intefaces/IGame";
+import { ISpell, magicSpellType, stateValue } from "@/intefaces/IGame";
 import MainButton from "@/package/components/MainButton.vue";
 import { buttonColor } from "@/intefaces/IMain";
+import { spellColor } from "@/package/helpers/spells";
 
 export default defineComponent({
   name: "MagicUsageDrawer",
@@ -43,21 +44,10 @@ export default defineComponent({
   },
 
   methods: {
-    getColor(index: number): buttonColor {
-      switch (index) {
-        case 0:
-          return "blue";
-        case 1:
-          return "yellow";
-        case 2:
-          return "green";
-        case 3:
-          return "pink";
-        case 4:
-          return "red";
-        default:
-          return "blue";
-      }
+    getColor(spell: magicSpellType) {
+      return {
+        background: spellColor(spell),
+      };
     },
 
     setSpell(spell: ISpell) {
@@ -86,7 +76,7 @@ export default defineComponent({
           :label="spell.label + ` (${spell.quantity})`"
           icon="magic"
           :disabled="disabled || spell.quantity === 0"
-          :color="getColor(index)"
+          :style="getColor(spell.name)"
           @click="setSpell(spell)"
         />
       </div>

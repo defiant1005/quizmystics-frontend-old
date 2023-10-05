@@ -4,19 +4,19 @@ import assertUnreachable from "@/package/helpers/assert-unreachable";
 export function spellColor(spell: magicSpellType) {
   switch (spell) {
     case "secretRiddle":
-      return "#1947E5";
-
-    case "antagonisticRiddle":
-      return "#FF89BB";
-
-    case "coldCharm":
-      return "#FFBD12";
-
-    case "secretException":
       return "#00C6AE";
 
-    case "silenceWisdom":
+    case "antagonisticRiddle":
       return "#F95A2C";
+
+    case "coldCharm":
+      return "#1947E5";
+
+    case "secretException":
+      return "#FFBD12";
+
+    case "silenceWisdom":
+      return "#FF89BB";
 
     default:
       return assertUnreachable(spell);
