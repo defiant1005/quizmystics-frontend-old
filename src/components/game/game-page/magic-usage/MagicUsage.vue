@@ -79,6 +79,8 @@ export default defineComponent({
         }, 1000);
       } else {
         this.isShowSpellAnimation = true;
+        this.spellsButtonsDisabled = true;
+        this.isShowDrawer = false;
       }
     },
 
