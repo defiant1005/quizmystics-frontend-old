@@ -1,4 +1,5 @@
-<script>
+<script lang="ts">
+//@ts-ignore
 import { socket } from "@/socket";
 import { mapState } from "pinia";
 import { useUserStore } from "@/stores/user";
@@ -6,8 +7,9 @@ import { useMainStore } from "@/stores/main";
 import MainInput from "@/package/components/MainInput.vue";
 import MainButton from "@/package/components/MainButton.vue";
 import { getRandomAvatar } from "@/package/helpers/all-avatars-list";
+import { defineComponent } from "vue";
 
-export default {
+export default defineComponent({
   name: "EnterRoom",
   components: { MainButton, MainInput },
 
@@ -43,7 +45,7 @@ export default {
       this.userStore.setRoom(this.room);
       socket.connect();
 
-      socket.emit("connectingExistingRoom", userData, (data) => {
+      socket.emit("connectingExistingRoom", userData, (data: any) => {
         if (typeof data === "string") {
           this.mainStore.createNotification({
             type: "danger",
@@ -62,7 +64,7 @@ export default {
       this.room = this.room.toUpperCase();
     },
   },
-};
+});
 </script>
 
 <template>

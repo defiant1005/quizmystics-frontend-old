@@ -1,10 +1,11 @@
-<script>
+<script lang="ts">
 import { useUserStore } from "@/stores/user";
 import { mapState } from "pinia";
 import MainInput from "@/package/components/MainInput.vue";
 import MainButton from "@/package/components/MainButton.vue";
+import { defineComponent } from "vue";
 
-export default {
+export default defineComponent({
   name: "MainRegistration",
   components: { MainButton, MainInput },
 
@@ -37,7 +38,7 @@ export default {
       this.name = this.saveNameValue;
     }
   },
-};
+});
 </script>
 
 <template>

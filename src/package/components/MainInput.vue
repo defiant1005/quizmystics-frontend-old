@@ -3,7 +3,6 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "MainInput",
-
   emits: ["update:modelValue", "input"],
 
   props: {
@@ -14,6 +13,8 @@ export default defineComponent({
 
     placeholder: {
       type: String,
+      required: false,
+      default: undefined,
     },
 
     type: {
@@ -28,6 +29,7 @@ export default defineComponent({
 
     leftIcon: {
       type: String,
+      default: undefined,
       required: false,
     },
 

@@ -8,7 +8,7 @@ export default defineComponent({
 
 <template>
   <div class="game-layout">
-    <router-view></router-view>
+    <RouterView></RouterView>
   </div>
 </template>
 

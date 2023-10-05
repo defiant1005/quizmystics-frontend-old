@@ -1,12 +1,11 @@
-<script>
+<script lang="ts">
 import { activeScroll, disableScroll } from "@/package/helpers/scrollActions";
 import MainButtonIcon from "@/package/components/MainButtonIcon.vue";
+import { defineComponent } from "vue";
 
-export default {
+export default defineComponent({
   name: "AppDrawer",
-
   components: { MainButtonIcon },
-
   emits: ["close"],
 
   props: {
@@ -28,7 +27,7 @@ export default {
   unmounted() {
     activeScroll();
   },
-};
+});
 </script>
 
 <template>

@@ -72,11 +72,11 @@ export default defineComponent({
       Создать категорию
     </button>
 
-    <MainModal :id-value="'createCategory'" :title="'Создать категорию'">
+    <MainModal id-value="createCategory" title="Создать категорию">
       <AdminModalFormCreateCategory @closeModal="closeModalHandler" />
     </MainModal>
 
-    <MainModal :title="'Редактировать категорию'" :id-value="'editCategory'">
+    <MainModal title="Редактировать категорию" id-value="editCategory">
       <AdminModalFormEditCategory :edit-category-id="editCategoryId" />
     </MainModal>
   </div>

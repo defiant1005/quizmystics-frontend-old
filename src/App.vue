@@ -7,7 +7,6 @@ import { testQuestion, testCurse2 } from "@/package/constants/test-user-data";
 
 export default defineComponent({
   name: "App",
-
   components: { MainNotice },
 
   data() {
@@ -40,7 +39,7 @@ export default defineComponent({
 
   <MainNotice
     :notice-data="notification"
-    :auto-close="true"
+    auto-close
     @close="clearNotification"
   />
 </template>

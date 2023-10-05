@@ -13,7 +13,6 @@ import { ICurse, IPlayers } from "@/intefaces/IGame";
 
 export default defineComponent({
   name: "GamePage",
-
   components: { MagicUsage, PlayersProgress, QuestionGame },
 
   data() {

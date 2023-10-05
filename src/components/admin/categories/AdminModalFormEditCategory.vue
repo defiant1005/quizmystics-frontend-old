@@ -41,6 +41,7 @@ export default defineComponent({
           this.title = newValue.title;
         }
       },
+
       deep: true,
     },
   },

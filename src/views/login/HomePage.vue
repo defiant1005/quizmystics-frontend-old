@@ -1,13 +1,15 @@
-<script>
-import stringGeneration from "@/package/helpers/string-generation";
+<script lang="ts">
+//@ts-ignore
 import { socket } from "@/socket";
+import stringGeneration from "@/package/helpers/string-generation";
 import { mapState } from "pinia";
 import { useUserStore } from "@/stores/user";
 import { useMainStore } from "@/stores/main";
 import MainButton from "@/package/components/MainButton.vue";
 import { getRandomAvatar } from "@/package/helpers/all-avatars-list";
+import { defineComponent } from "vue";
 
-export default {
+export default defineComponent({
   name: "HomePage",
   components: { MainButton },
 
@@ -44,7 +46,7 @@ export default {
 
       socket.connect();
 
-      socket.emit("createRoom", userData, (data) => {
+      socket.emit("createRoom", userData, (data: any) => {
         if (typeof data === "string") {
           this.mainStore.createNotification({
             type: "danger",
@@ -65,7 +67,7 @@ export default {
       });
     },
   },
-};
+});
 </script>
 
 <template>

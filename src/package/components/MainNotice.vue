@@ -4,7 +4,6 @@ import { INoticeData } from "@/intefaces/IMain";
 
 export default defineComponent({
   name: "MainNotice",
-
   emits: ["close"],
 
   props: {

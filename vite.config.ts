@@ -7,6 +7,10 @@ import tsconfigPaths from "vite-tsconfig-paths";
 export default defineConfig({
   plugins: [vue(), eslintPlugin(), tsconfigPaths()],
 
+  server: {
+    port: 8080,
+  },
+
   resolve: {
     alias: [{ find: "@", replacement: "/src" }],
     extensions: [".ts", ".js", ".vue"],

@@ -3,7 +3,8 @@
   font-family: "Montserrat";
   font-weight: 100;
   font-style: normal;
-  src: url("./Montserrat-Thin.woff2") format("woff2"),
+  src:
+    url("./Montserrat-Thin.woff2") format("woff2"),
     url("./Montserrat-Thin.woff") format("woff");
 }
 
@@ -12,7 +13,8 @@
   font-family: "Montserrat";
   font-weight: 200;
   font-style: normal;
-  src: url("./Montserrat-ExtraLight.woff2") format("woff2"),
+  src:
+    url("./Montserrat-ExtraLight.woff2") format("woff2"),
     url("./Montserrat-ExtraLight.woff") format("woff");
 }
 
@@ -21,7 +23,8 @@
   font-family: "Montserrat";
   font-weight: 300;
   font-style: normal;
-  src: url("./Montserrat-Light.woff2") format("woff2"),
+  src:
+    url("./Montserrat-Light.woff2") format("woff2"),
     url("./Montserrat-Light.woff") format("woff");
 }
 
@@ -30,7 +33,8 @@
   font-family: "Montserrat";
   font-weight: 400;
   font-style: normal;
-  src: url("./Montserrat-Regular.woff2") format("woff2"),
+  src:
+    url("./Montserrat-Regular.woff2") format("woff2"),
     url("./Montserrat-Regular.woff") format("woff");
 }
 
@@ -39,7 +43,8 @@
   font-family: "Montserrat";
   font-weight: 500;
   font-style: normal;
-  src: url("./Montserrat-Medium.woff2") format("woff2"),
+  src:
+    url("./Montserrat-Medium.woff2") format("woff2"),
     url("./Montserrat-Medium.woff") format("woff");
 }
 
@@ -48,7 +53,8 @@
   font-family: "Montserrat";
   font-weight: 600;
   font-style: normal;
-  src: url("./Montserrat-SemiBold.woff2") format("woff2"),
+  src:
+    url("./Montserrat-SemiBold.woff2") format("woff2"),
     url("./Montserrat-SemiBold.woff") format("woff");
 }
 
@@ -57,7 +63,8 @@
   font-family: "Montserrat";
   font-weight: 700;
   font-style: normal;
-  src: url("./Montserrat-Bold.woff2") format("woff2"),
+  src:
+    url("./Montserrat-Bold.woff2") format("woff2"),
     url("./Montserrat-Bold.woff") format("woff");
 }
 
@@ -66,7 +73,8 @@
   font-family: "Montserrat";
   font-weight: 800;
   font-style: normal;
-  src: url("./Montserrat-ExtraBold.woff2") format("woff2"),
+  src:
+    url("./Montserrat-ExtraBold.woff2") format("woff2"),
     url("./Montserrat-ExtraBold.woff") format("woff");
 }
 
@@ -75,6 +83,7 @@
   font-family: "Montserrat";
   font-weight: 900;
   font-style: normal;
-  src: url("./Montserrat-Black.woff2") format("woff2"),
+  src:
+    url("./Montserrat-Black.woff2") format("woff2"),
     url("./Montserrat-Black.woff") format("woff");
 }

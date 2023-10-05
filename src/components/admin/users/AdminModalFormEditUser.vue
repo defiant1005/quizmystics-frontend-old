@@ -52,6 +52,7 @@ export default defineComponent({
           this.userId = newValue.id;
         }
       },
+
       deep: true,
     },
   },

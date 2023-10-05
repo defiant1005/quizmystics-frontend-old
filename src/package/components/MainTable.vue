@@ -3,7 +3,6 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "MainTable",
-
   emits: ["deleteEntity", "editEntity"],
 
   props: {
@@ -51,7 +50,6 @@ export default defineComponent({
         >
           Удалить
         </button>
-
         <button
           type="button"
           class="btn btn-outline-secondary"

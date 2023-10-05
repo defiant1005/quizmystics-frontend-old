@@ -3,7 +3,6 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "MainCounter",
-
   emits: ["update:count"],
 
   props: {

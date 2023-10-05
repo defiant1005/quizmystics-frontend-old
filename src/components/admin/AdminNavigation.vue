@@ -30,19 +30,19 @@ export default defineComponent({
       <div id="navbarNav" class="collapse navbar-collapse">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <router-link class="nav-link" :to="{ name: 'AdminPageUsers' }">
+            <RouterLink class="nav-link" :to="{ name: 'AdminPageUsers' }">
               Users
-            </router-link>
+            </RouterLink>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" :to="{ name: 'AdminPageCategories' }">
+            <RouterLink class="nav-link" :to="{ name: 'AdminPageCategories' }">
               Categories
-            </router-link>
+            </RouterLink>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" :to="{ name: 'AdminPageQuestions' }">
+            <RouterLink class="nav-link" :to="{ name: 'AdminPageQuestions' }">
               Questions
-            </router-link>
+            </RouterLink>
           </li>
         </ul>
       </div>

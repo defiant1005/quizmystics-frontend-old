@@ -67,11 +67,11 @@ export default defineComponent({
       Создать пользователя
     </button>
 
-    <MainModal :id-value="'createUser'" :title="'Создать пользователя'">
+    <MainModal id-value="createUser" title="Создать пользователя">
       <AdminModalFormCreateUser />
     </MainModal>
 
-    <MainModal :title="'Редактировать пользователя'" :id-value="'editUser'">
+    <MainModal title="Редактировать пользователя" id-value="editUser">
       <AdminModalFormEditUser :edit-user-id="editUserId" />
     </MainModal>
   </div>

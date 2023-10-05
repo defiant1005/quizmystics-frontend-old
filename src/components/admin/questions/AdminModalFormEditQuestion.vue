@@ -76,6 +76,7 @@ export default defineComponent({
           this.correct_answer = newValue.correct_answer;
         }
       },
+
       deep: true,
     },
   },

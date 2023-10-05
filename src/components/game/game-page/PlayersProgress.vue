@@ -8,7 +8,6 @@ import { state } from "@/socket";
 
 export default defineComponent({
   name: "PlayersProgress",
-
   emits: ["nextQuestion"],
 
   props: {

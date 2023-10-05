@@ -14,9 +14,7 @@ import {
 
 export default defineComponent({
   name: "QuestionGame",
-
   components: { MainButton },
-
   emits: ["choiceAnswer", "setAnswer"],
 
   props: {
@@ -90,9 +88,12 @@ export default defineComponent({
   watch: {
     isSilenceWisdom(newValue) {
       if (newValue) {
-        setTimeout(() => {
-          this.isSilenceWisdom = false;
-        }, (this.answerTime * 1000) / 1.5);
+        setTimeout(
+          () => {
+            this.isSilenceWisdom = false;
+          },
+          (this.answerTime * 1000) / 1.5
+        );
       }
     },
   },

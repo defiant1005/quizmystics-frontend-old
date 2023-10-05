@@ -18,6 +18,7 @@ export default defineComponent({
 
     icon: {
       type: String,
+      default: undefined,
       required: false,
     },
 

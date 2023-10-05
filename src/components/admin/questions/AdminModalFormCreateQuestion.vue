@@ -6,7 +6,6 @@ import { useCategoriesStore } from "@/stores/admin/categories.store";
 
 export default defineComponent({
   name: "AdminModalFormCreateQuestion",
-
   emits: ["closeModal"],
 
   data() {

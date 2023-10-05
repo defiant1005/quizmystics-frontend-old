@@ -4,7 +4,6 @@ import MainButtonIcon from "@/package/components/MainButtonIcon.vue";
 
 export default defineComponent({
   name: "MainBack",
-
   components: { MainButtonIcon },
 
   methods: {

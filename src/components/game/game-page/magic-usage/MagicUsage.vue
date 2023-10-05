@@ -13,9 +13,7 @@ import MagicAnimation from "@/components/game/game-page/magic-usage/MagicAnimati
 
 export default defineComponent({
   name: "MagicUsage",
-
   components: { MagicAnimation, MagicUsageDrawer },
-
   emits: ["animationEnd"],
 
   props: {
@@ -128,9 +126,7 @@ export default defineComponent({
     <template v-if="!isShowSpellAnimation">
       <h2>Ваш уровень магии: {{ currentUser!.stats!.magic }}</h2>
       <h2>Ваш уровень зашиты от магии: {{ dexterityPercent }}</h2>
-
       <p>У вас есть время заколдовать противника:</p>
-
       <div
         class="progress"
         role="progressbar"
@@ -141,7 +137,6 @@ export default defineComponent({
       >
         <div class="progress-bar bg-info" />
       </div>
-
       <div class="magic-usage__user-list user-list">
         <div
           v-for="user in userListWithoutMe"

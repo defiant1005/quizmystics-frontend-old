@@ -20,7 +20,7 @@ export default defineComponent({
 
 <template>
   <div class="admin-layout">
-    <router-view></router-view>
+    <RouterView></RouterView>
   </div>
 </template>
 

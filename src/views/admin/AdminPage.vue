@@ -7,7 +7,6 @@ import { useQuestionsStore } from "@/stores/admin/questions.store";
 
 export default defineComponent({
   name: "AdminPage",
-
   components: { AdminNavigation },
 
   data() {
@@ -50,7 +49,7 @@ export default defineComponent({
       </div>
     </div>
 
-    <router-view v-else></router-view>
+    <RouterView v-else></RouterView>
   </div>
 </template>
 

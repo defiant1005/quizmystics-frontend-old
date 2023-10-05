@@ -1,11 +1,11 @@
-<script>
+<script lang="ts">
 import { mapState } from "pinia";
 import { useUserStore } from "@/stores/user";
 import MainBack from "@/components/MainBack.vue";
+import { defineComponent } from "vue";
 
-export default {
+export default defineComponent({
   name: "LoginLayout",
-
   components: { MainBack },
 
   computed: {
@@ -21,7 +21,7 @@ export default {
       return this.$route.name === "EnterRoom";
     },
   },
-};
+});
 </script>
 
 <template>

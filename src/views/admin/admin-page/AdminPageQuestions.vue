@@ -72,11 +72,11 @@ export default defineComponent({
       Создать вопрос
     </button>
 
-    <MainModal :id-value="'createQuestion'" :title="'Создать вопрос'">
+    <MainModal id-value="createQuestion" title="Создать вопрос">
       <AdminModalFormCreateQuestion @closeModal="closeModalHandler" />
     </MainModal>
 
-    <MainModal :title="'Редактировать вопрос'" :id-value="'editQuestion'">
+    <MainModal title="Редактировать вопрос" id-value="editQuestion">
       <AdminModalFormEditQuestion :edit-question-id="editQuestionId" />
     </MainModal>
   </div>

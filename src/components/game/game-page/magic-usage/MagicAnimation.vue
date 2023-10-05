@@ -5,7 +5,6 @@ import { spellColor, spellName } from "@/package/helpers/spells";
 
 export default defineComponent({
   name: "MagicAnimation",
-
   emits: ["animationEnd"],
 
   props: {
@@ -179,6 +178,7 @@ export default defineComponent({
           </p>
 
           <img :src="getUser(who.who)?.avatar" alt="ava" />
+
           <p>{{ getUser(who.who)?.name }}</p>
         </div>
       </div>

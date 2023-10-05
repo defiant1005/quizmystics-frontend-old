@@ -7,9 +7,7 @@ import MainButton from "@/package/components/MainButton.vue";
 
 export default defineComponent({
   name: "ChangeAvatarModal",
-
   components: { MainButton, MainButtonIcon, GameModal },
-
   emits: ["close", "saveAvatar"],
 
   props: {

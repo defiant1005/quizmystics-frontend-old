@@ -20,113 +20,15 @@ module.exports = {
         endOfLine: "auto",
       },
     ],
-    "no-unused-vars": "error",
     "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
-    "unused-imports/no-unused-imports": "error",
     "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
+
     quotes: [
       "error",
       "double",
       { avoidEscape: true, allowTemplateLiterals: false },
     ],
-    "vue/attributes-order": [
-      "error",
-      {
-        order: [
-          "DEFINITION",
-          "LIST_RENDERING",
-          "CONDITIONALS",
-          "RENDER_MODIFIERS",
-          "GLOBAL",
-          ["UNIQUE", "SLOT"],
-          "TWO_WAY_BINDING",
-          "OTHER_DIRECTIVES",
-          "OTHER_ATTR",
-          "EVENTS",
-          "CONTENT",
-        ],
-        alphabetical: false,
-      },
-    ],
-    "vue/attribute-hyphenation": [
-      "error",
-      "always",
-      {
-        ignore: [],
-      },
-    ],
-    "vue/component-definition-name-casing": ["error", "PascalCase"],
-    "vue/html-closing-bracket-newline": [
-      "error",
-      {
-        singleline: "never",
-        multiline: "always",
-      },
-    ],
-    "vue/multi-word-component-names": [
-      "error",
-      {
-        ignores: [],
-      },
-    ],
-    "vue/prop-name-casing": ["error", "camelCase"],
-    "vue/require-default-prop": "off",
-    "vue/first-attribute-linebreak": [
-      "error",
-      {
-        singleline: "ignore",
-        multiline: "below",
-      },
-    ],
-    "vue/no-spaces-around-equal-signs-in-attribute": ["error"],
-    "vue/no-multi-spaces": [
-      "error",
-      {
-        ignoreProperties: false,
-      },
-    ],
-    "vue/v-bind-style": ["error", "shorthand"],
-    "vue/v-on-style": ["error", "shorthand"],
-    "vue/order-in-components": [
-      "error",
-      {
-        order: [
-          "el",
-          "name",
-          "key",
-          "parent",
-          "functional",
-          ["delimiters", "comments"],
-          ["components", "directives", "filters"],
-          "extends",
-          "mixins",
-          ["provide", "inject"],
-          "ROUTER_GUARDS",
-          "layout",
-          "middleware",
-          "validate",
-          "scrollToTop",
-          "transition",
-          "loading",
-          "inheritAttrs",
-          "model",
-          "emits",
-          ["props", "propsData"],
-          "setup",
-          "asyncData",
-          "data",
-          "fetch",
-          "head",
-          "computed",
-          "watch",
-          "watchQuery",
-          "methods",
-          "LIFECYCLE_HOOKS",
-          ["template", "render"],
-          "renderError",
-        ],
-      },
-    ],
+
     "vue/v-on-event-hyphenation": [
       "error",
       "never",
@@ -135,16 +37,21 @@ module.exports = {
         ignore: [],
       },
     ],
-    "vue/require-explicit-emits": [
+
+    "vue/block-lang": [
       "error",
       {
-        allowProps: false,
+        script: {
+          lang: "ts",
+        },
       },
     ],
+
     "vue/block-tag-newline": [
       "error",
       { singleline: "always", multiline: "always", maxEmptyLines: 1 },
     ],
+    "vue/singleline-html-element-content-newline": "off",
     "vue/component-name-in-template-casing": [
       "error",
       "PascalCase",
@@ -153,6 +60,7 @@ module.exports = {
         ignores: [],
       },
     ],
+    "vue/component-options-name-casing": ["error", "PascalCase"],
     "vue/custom-event-name-casing": [
       "error",
       "camelCase",
@@ -160,11 +68,72 @@ module.exports = {
         ignores: [],
       },
     ],
-    "vue/component-options-name-casing": ["error", "PascalCase"],
-    "@typescript-eslint/ban-ts-comment": "off",
-    "@typescript-eslint/no-non-null-assertion": "off",
+    "vue/define-emits-declaration": ["error", "runtime"],
+    "vue/define-macros-order": [
+      "error",
+      {
+        order: ["defineProps", "defineEmits"],
+      },
+    ],
+    "vue/html-button-has-type": [
+      "error",
+      {
+        button: true,
+        submit: true,
+        reset: true,
+      },
+    ],
+    "vue/new-line-between-multi-line-property": [
+      "error",
+      {
+        minLineOfMultilineProperty: 2,
+      },
+    ],
+    "vue/next-tick-style": ["error", "callback"],
+    "vue/no-deprecated-model-definition": [
+      "error",
+      {
+        allowVue3Compat: true,
+      },
+    ],
+    "vue/no-unused-refs": ["error"],
+    "vue/no-use-v-else-with-v-for": ["error"],
+    "vue/no-useless-v-bind": [
+      "error",
+      {
+        ignoreIncludesComment: false,
+        ignoreStringEscape: false,
+      },
+    ],
+    "vue/padding-line-between-blocks": ["error", "always"],
+    "vue/padding-line-between-tags": [
+      "error",
+      [{ blankLine: "consistent", prev: "*", next: "*" }],
+    ],
+    "vue/padding-lines-in-component-definition": [
+      "error",
+      {
+        betweenOptions: "always",
 
+        withinOption: "always",
+
+        groupSingleLineProperties: true,
+      },
+    ],
+    "vue/prefer-define-options": ["error"],
+    "vue/prefer-separate-static-class": ["error"],
+    "vue/prefer-true-attribute-shorthand": ["error", "always"],
+    "vue/require-direct-export": [
+      "error",
+      {
+        disallowFunctionalComponentFunction: false,
+      },
+    ],
+    "vue/require-typed-ref": ["error"],
+    "vue/v-for-delimiter-style": ["error", "in"],
+    "vue/valid-define-options": ["error"],
+    "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/no-explicit-any": 0,
-    "@typescript-eslint/no-this-alias": 0,
+    "@typescript-eslint/no-non-null-assertion": "off",
   },
 };

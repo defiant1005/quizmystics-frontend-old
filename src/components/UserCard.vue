@@ -4,7 +4,6 @@ import { IPlayers } from "@/intefaces/IGame";
 
 export default defineComponent({
   name: "UserCard",
-
   emits: ["openDrawer"],
 
   props: {
