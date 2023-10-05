@@ -1,32 +1,31 @@
-$black: #18191F;
-$black-800: #474A57;
-$black-700: #969BAB;
-$black-300: #9FA4B4;
-$black-200: #EEEFF4;
-$black-100: #F4F5F7;
+$black: #18191f;
+$black-800: #474a57;
+$black-700: #969bab;
+$black-300: #9fa4b4;
+$black-200: #eeeff4;
+$black-100: #f4f5f7;
 
-$white: #FFF;
+$white: #fff;
 
-$blue: #1947E5;
-$blue-800: #8094FF;
-$blue-100: #E9E7FC;
+$blue: #1947e5;
+$blue-800: #8094ff;
+$blue-100: #e9e7fc;
 
-$pink: #FF89BB;
-$pink-800: #FFC7DE;
-$pink-200: #FFF3F8;
+$pink: #ff89bb;
+$pink-800: #ffc7de;
+$pink-200: #fff3f8;
 
-$yellow: #FFBD12;
-$yellow-800: #FFD465;
-$yellow-100: #FFF4CC;
+$yellow: #ffbd12;
+$yellow-800: #ffd465;
+$yellow-100: #fff4cc;
 
-$green: #00C6AE;
-$green-800: #61E4C5;
-$green-100: #D6FCF7;
+$green: #00c6ae;
+$green-800: #61e4c5;
+$green-100: #d6fcf7;
 
-$red: #F95A2C;
-$red-800: #FF9692;
-$red-100: #FFE8E8;
-
+$red: #f95a2c;
+$red-800: #ff9692;
+$red-100: #ffe8e8;
 
 @mixin h-1 {
   font-family: "Montserrat", sans-serif;
@@ -49,7 +48,6 @@ $red-100: #FFE8E8;
   font-feature-settings: "pnum" on, "lnum" on;
 }
 
-
 @mixin text-1 {
   font-family: "Montserrat", sans-serif;
   font-size: 21px;
@@ -65,7 +63,6 @@ $red-100: #FFE8E8;
   font-weight: 500;
   line-height: 120%;
 }
-
 
 //@mixin title-2 {
 //  font-family: "Montserrat", sans-serif;

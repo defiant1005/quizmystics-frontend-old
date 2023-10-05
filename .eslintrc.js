@@ -1,5 +1,3 @@
-require("@rushstack/eslint-patch/modern-module-resolution");
-
 module.exports = {
   root: true,
   env: {
@@ -7,17 +5,30 @@ module.exports = {
   },
   extends: [
     "eslint:recommended",
-    "plugin:vue/vue3-recommended",
-    "plugin:prettier/recommended",
     "@vue/eslint-config-typescript/recommended",
+    "plugin:vue/vue3-strongly-recommended",
+    "plugin:prettier/recommended",
   ],
   parser: "vue-eslint-parser",
   parserOptions: {
     parser: "@typescript-eslint/parser",
   },
   rules: {
+    "prettier/prettier": [
+      "error",
+      {
+        endOfLine: "auto",
+      },
+    ],
+    "no-unused-vars": "error",
     "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
+    "unused-imports/no-unused-imports": "error",
     "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
+    quotes: [
+      "error",
+      "double",
+      { avoidEscape: true, allowTemplateLiterals: false },
+    ],
     "vue/attributes-order": [
       "error",
       {
@@ -116,12 +127,6 @@ module.exports = {
         ],
       },
     ],
-    "prettier/prettier": [
-      "error",
-      {
-        endOfLine: "auto",
-      },
-    ],
     "vue/v-on-event-hyphenation": [
       "error",
       "never",
@@ -136,6 +141,26 @@ module.exports = {
         allowProps: false,
       },
     ],
+    "vue/block-tag-newline": [
+      "error",
+      { singleline: "always", multiline: "always", maxEmptyLines: 1 },
+    ],
+    "vue/component-name-in-template-casing": [
+      "error",
+      "PascalCase",
+      {
+        registeredComponentsOnly: false,
+        ignores: [],
+      },
+    ],
+    "vue/custom-event-name-casing": [
+      "error",
+      "camelCase",
+      {
+        ignores: [],
+      },
+    ],
+    "vue/component-options-name-casing": ["error", "PascalCase"],
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
 

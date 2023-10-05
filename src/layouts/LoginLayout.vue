@@ -35,7 +35,7 @@ export default {
       <h1 v-else>Добро пожаловать в игру!</h1>
     </template>
 
-    <router-view />
+    <RouterView />
   </div>
 </template>
 

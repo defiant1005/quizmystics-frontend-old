@@ -37,8 +37,6 @@ textarea {
   font-family: "Montserrat", sans-serif;
 }
 
-
-
 .main-button {
   width: 100%;
   display: inline-block;
@@ -63,7 +61,6 @@ textarea {
   touch-action: manipulation;
   z-index: 1;
 
-
   > span {
     position: absolute;
     background: #fff;
@@ -75,13 +72,13 @@ textarea {
 
   &:hover {
     box-shadow: 0 1px 2px 0 rgb(26 115 232 / 45%),
-    0 1px 3px 1px rgb(26 115 232 / 30%);
+      0 1px 3px 1px rgb(26 115 232 / 30%);
     background-color: #297be6;
   }
 
   &:active {
     box-shadow: 0 1px 2px 0 rgb(26 115 232 / 45%),
-    0 2px 6px 2px rgb(26 115 232 / 30%);
+      0 2px 6px 2px rgb(26 115 232 / 30%);
     background-color: #1a73e8 !important;
   }
 
@@ -99,17 +96,16 @@ textarea {
 
     &:hover {
       box-shadow: 0 1px 2px 0 rgba(26, 232, 129, 0.45),
-      0 1px 3px 1px rgba(56, 154, 71, 0.3);
+        0 1px 3px 1px rgba(56, 154, 71, 0.3);
       background-color: #0c793b;
     }
 
     &:active {
       box-shadow: 0 1px 2px 0 rgba(39, 105, 50, 0.45),
-      0 2px 6px 2px rgba(14, 136, 108, 0.3);
+        0 2px 6px 2px rgba(14, 136, 108, 0.3);
       background-color: #5bf131 !important;
     }
   }
-
 }
 @keyframes main-button_ripples {
   0% {

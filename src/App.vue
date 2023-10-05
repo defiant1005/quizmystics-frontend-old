@@ -4,12 +4,11 @@ import MainNotice from "@/package/components/MainNotice.vue";
 import { mapState } from "pinia";
 import { useMainStore } from "@/stores/main";
 import { testQuestion, testCurse2 } from "@/package/constants/test-user-data";
-import QuestionGame from "@/components/game/game-page/QuestionGame.vue";
 
 export default defineComponent({
   name: "App",
 
-  components: { QuestionGame, MainNotice },
+  components: { MainNotice },
 
   data() {
     const mainStore = useMainStore();
@@ -37,8 +36,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <!--  <router-view />-->
-  <QuestionGame :question="testQuestion" :curse="testCurse2" />
+  <RouterView />
 
   <MainNotice
     :notice-data="notification"

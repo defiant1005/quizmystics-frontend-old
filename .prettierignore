@@ -18,5 +18,8 @@ coverage
 **/.svn
 **/.hg
 
-.yaml
+**/*.html
+**/*.yaml
+**/*.yml
+**/*.lock
 
