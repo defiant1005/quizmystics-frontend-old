@@ -1,22 +1,22 @@
-import { IPlayers, magicSpellType } from "@/intefaces/IGame";
+import { IPlayers } from "@/intefaces/IGame";
 
-export const testUserData: Array<IPlayers> = [
+export const testData: Array<IPlayers> = [
   {
-    name: "Ринат",
-    room: "NLGA",
-    avatar: "/src/assets/avatars/5.svg",
+    name: "Test",
+    room: "TYN2",
+    avatar: "/src/assets/avatars/6.svg",
+    userId: "sffaV2wF1m_mGy30AAAD",
+    count: 200,
+    oldCount: 100,
+    curse: [],
     isReady: true,
-    userId: "vnY1fxlT3WPi7HNRAAAL",
-    count: 0,
-    oldCount: 0,
-    isRoomAdmin: true,
-    winningQuote: "123",
+    winningQuote: "123123",
     stats: {
-      health: 2,
-      power: 2,
-      magic: 5,
-      intelligence: 4,
-      dexterity: 2,
+      health: 1,
+      power: 1,
+      magic: 4,
+      intelligence: 5,
+      dexterity: 4,
     },
     spellList: [
       {
@@ -32,48 +32,32 @@ export const testUserData: Array<IPlayers> = [
       {
         name: "silenceWisdom",
         label: "Интерруптус",
-        quantity: 2,
+        quantity: 1,
       },
       {
         name: "secretRiddle",
         label: "Секретная загадка",
         quantity: 2,
       },
-      {
-        name: "antagonisticRiddle",
-        label: "Антаговеяние",
-        quantity: 1,
-      },
-    ],
-    curse: [
-      {
-        who: "IPhWqwbBgeyamfC8AAAN",
-        spell: "secretException",
-        evaded: true,
-      },
-      {
-        who: "IPhWqwbBgeyamfC8AAAN2",
-        spell: "secretException",
-        evaded: true,
-      },
     ],
   },
   {
-    name: "Тест",
-    room: "NLGA",
-    isRoomAdmin: false,
-    avatar: "/src/assets/avatars/6.svg",
-    userId: "IPhWqwbBgeyamfC8AAAN",
-    count: 0,
-    oldCount: 0,
+    name: "Rinat",
+    room: "TYN2",
+    avatar: "/src/assets/avatars/15.svg",
     isReady: true,
+    userId: "yafQqKtFKwHJSPYTAAAB",
+    count: 400,
+    oldCount: 500,
+    isRoomAdmin: true,
+    curse: [],
     winningQuote: "123",
     stats: {
-      health: 4,
+      health: 1,
       power: 2,
-      magic: 2,
+      magic: 3,
       intelligence: 5,
-      dexterity: 2,
+      dexterity: 4,
     },
     spellList: [
       {
@@ -86,31 +70,30 @@ export const testUserData: Array<IPlayers> = [
         label: "Секретел",
         quantity: 1,
       },
-    ],
-    curse: [
       {
-        who: "vnY1fxlT3WPi7HNRAAAL",
-        spell: "antagonisticRiddle",
-        evaded: true,
+        name: "silenceWisdom",
+        label: "Интерруптус",
+        quantity: 2,
       },
     ],
   },
   {
-    name: "Тест2",
-    room: "NLGA",
-    avatar: "/src/assets/avatars/8.svg",
-    userId: "IPhWqwbBgeyamfC8AAAN2",
-    count: 0,
-    oldCount: 0,
-    isRoomAdmin: false,
+    name: "Evelina",
+    room: "TYN2",
+    avatar: "/src/assets/avatars/15.svg",
     isReady: true,
+    userId: "yafQqKtFKwHJSPYTAAABzxczxczczxczcx",
+    count: 500,
+    oldCount: 400,
+    isRoomAdmin: true,
+    curse: [],
     winningQuote: "123",
     stats: {
-      health: 4,
+      health: 1,
       power: 2,
-      magic: 2,
+      magic: 3,
       intelligence: 5,
-      dexterity: 2,
+      dexterity: 4,
     },
     spellList: [
       {
@@ -123,34 +106,83 @@ export const testUserData: Array<IPlayers> = [
         label: "Секретел",
         quantity: 1,
       },
-    ],
-    curse: [
       {
-        who: "vnY1fxlT3WPi7HNRAAAL",
-        spell: "antagonisticRiddle",
-        evaded: false,
+        name: "silenceWisdom",
+        label: "Интерруптус",
+        quantity: 2,
+      },
+    ],
+  },
+  {
+    name: "Azat",
+    room: "TYN2",
+    avatar: "/src/assets/avatars/15.svg",
+    isReady: true,
+    userId: "yafQqKtFKwHJSPYTAAABasdasdasd",
+    count: 50,
+    oldCount: 150,
+    isRoomAdmin: true,
+    curse: [],
+    winningQuote: "123",
+    stats: {
+      health: 1,
+      power: 2,
+      magic: 3,
+      intelligence: 5,
+      dexterity: 4,
+    },
+    spellList: [
+      {
+        name: "coldCharm",
+        label: "Криострасть",
+        quantity: 2,
+      },
+      {
+        name: "secretException",
+        label: "Секретел",
+        quantity: 1,
+      },
+      {
+        name: "silenceWisdom",
+        label: "Интерруптус",
+        quantity: 2,
+      },
+    ],
+  },
+  {
+    name: "Ruzel",
+    room: "TYN2",
+    avatar: "/src/assets/avatars/15.svg",
+    isReady: true,
+    userId: "yafQqKtFKwHJSPYTAAAB123123123",
+    count: -100,
+    oldCount: 0,
+    isRoomAdmin: true,
+    curse: [],
+    winningQuote: "123",
+    stats: {
+      health: 1,
+      power: 2,
+      magic: 3,
+      intelligence: 5,
+      dexterity: 4,
+    },
+    spellList: [
+      {
+        name: "coldCharm",
+        label: "Криострасть",
+        quantity: 2,
+      },
+      {
+        name: "secretException",
+        label: "Секретел",
+        quantity: 1,
+      },
+      {
+        name: "silenceWisdom",
+        label: "Интерруптус",
+        quantity: 2,
       },
     ],
   },
 ];
-
-export const testQuestion = {
-  id: 13,
-  title: "Чему равно значение выражения 3! (факториал)?",
-  answer1: "3",
-  answer2: "6",
-  answer3: "9",
-  answer4: "12",
-  categoryId: 1,
-};
-
-export const testCurse2: Array<magicSpellType> = ["coldCharm"];
-export const testCurse1: Array<magicSpellType> = [
-  "secretException",
-  "secretRiddle",
-  "silenceWisdom",
-  "antagonisticRiddle",
-];
-export const testCurse3: Array<magicSpellType> = ["silenceWisdom"];
-export const testCurse4: Array<magicSpellType> = ["secretRiddle"];
-export const testCurse5: Array<magicSpellType> = ["antagonisticRiddle"];

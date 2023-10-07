@@ -48,7 +48,7 @@ export interface IPlayers {
   count: number;
   oldCount: number;
   winningQuote: string;
-  isRoomAdmin: boolean;
+  isRoomAdmin?: boolean;
   avatar: string;
   isReady: boolean;
   spellList?: Array<ISpell>;

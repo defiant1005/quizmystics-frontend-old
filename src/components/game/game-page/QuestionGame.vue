@@ -221,7 +221,11 @@ export default defineComponent({
 </script>
 
 <template>
-  <div v-if="!isLoadingPage" class="question-game">
+  <div
+    v-if="!isLoadingPage"
+    class="question-game"
+    :class="{ 'question-game__loading': isSilenceWisdom }"
+  >
     <div class="question-game__header header">
       <h3
         class="header__title"
@@ -248,6 +252,7 @@ export default defineComponent({
         class="answer__item"
         color="green"
         :label="!isAntagonisticRiddle ? question.answer1 : randomValues[0]"
+        :disabled="hiddenAnswer === 0"
         :class="[
           { answer__item_active: activeAnswer === question.answer1 },
           { answer__hidden: hiddenAnswer === 0 },
@@ -277,6 +282,7 @@ export default defineComponent({
         :label="!isAntagonisticRiddle ? question.answer2 : randomValues[1]"
         color="green"
         class="answer__item"
+        :disabled="hiddenAnswer === 1"
         :class="[
           { answer__item_active: activeAnswer === question.answer2 },
           { answer__hidden: hiddenAnswer === 1 },
@@ -306,6 +312,7 @@ export default defineComponent({
         :label="!isAntagonisticRiddle ? question.answer3 : randomValues[2]"
         color="green"
         class="answer__item"
+        :disabled="hiddenAnswer === 2"
         :class="[
           { answer__item_active: activeAnswer === question.answer3 },
           { answer__hidden: hiddenAnswer === 2 },
@@ -335,6 +342,7 @@ export default defineComponent({
         :label="!isAntagonisticRiddle ? question.answer4 : randomValues[3]"
         color="green"
         class="answer__item"
+        :disabled="hiddenAnswer === 3"
         :class="[
           { answer__item_active: activeAnswer === question.answer4 },
           { answer__hidden: hiddenAnswer === 3 },
@@ -373,6 +381,10 @@ export default defineComponent({
   grid-template-rows: fit-content(20px) 1fr;
   gap: 60px;
   justify-content: center;
+
+  &__loading {
+    height: 100%;
+  }
 
   .header {
     &__title {

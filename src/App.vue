@@ -3,7 +3,6 @@ import { defineComponent } from "vue";
 import MainNotice from "@/package/components/MainNotice.vue";
 import { mapState } from "pinia";
 import { useMainStore } from "@/stores/main";
-import { testQuestion, testCurse2 } from "@/package/constants/test-user-data";
 
 export default defineComponent({
   name: "App",
@@ -13,9 +12,6 @@ export default defineComponent({
     const mainStore = useMainStore();
 
     return {
-      testQuestion,
-      testCurse2,
-
       mainStore,
     };
   },

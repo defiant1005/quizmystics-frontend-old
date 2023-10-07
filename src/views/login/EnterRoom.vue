@@ -80,7 +80,7 @@ export default defineComponent({
     <MainButton
       type="submit"
       label="Войти"
-      :disabled="room.length !== 4 || isSubmitDisabled"
+      :disabled="room.trim().length !== 4 || isSubmitDisabled"
     />
   </form>
 </template>

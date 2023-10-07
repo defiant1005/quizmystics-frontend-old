@@ -102,11 +102,9 @@ export default defineComponent({
 .user-card {
   width: 100%;
   height: 64px;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   cursor: pointer;
   border-radius: 16px;
   border: 2px solid $black;
@@ -144,6 +142,8 @@ export default defineComponent({
       align-items: center;
       gap: 8px;
       margin: 0;
+      @include text-1;
+      color: $black;
     }
 
     &__vip {
