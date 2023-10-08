@@ -69,3 +69,18 @@ export type magicSpellType =
   | "silenceWisdom"
   | "secretRiddle"
   | "antagonisticRiddle";
+
+export type choiceTestCount = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+
+export type tests =
+  | "scam"
+  | "money"
+  | "arena"
+  | "fight"
+  | "bowls"
+  | "math"
+  | "average"
+  | "dragon"
+  | "cube"
+  | "scales"
+  | "victim";

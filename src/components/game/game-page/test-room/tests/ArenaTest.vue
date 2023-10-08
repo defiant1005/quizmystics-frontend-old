@@ -2,15 +2,17 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "TestRoom",
+  name: "ArenaTest",
+
+  //От 2 игроков. Взять очки, атаковать или защититься
 });
 </script>
 
 <template>
-  <div class="test-room"></div>
+  <div class="arena-test"></div>
 </template>
 
 <style lang="scss" scoped>
-.test-room {
+.arena-test {
 }
 </style>
