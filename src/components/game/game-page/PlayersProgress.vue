@@ -7,7 +7,7 @@ import { IPlayers } from "@/intefaces/IGame";
 
 export default defineComponent({
   name: "PlayersProgress",
-  emits: ["nextQuestion"],
+  emits: ["nextStep"],
 
   props: {
     isFinishGame: {
@@ -139,7 +139,7 @@ export default defineComponent({
       }, this.deltaCount + 200);
 
       setTimeout(() => {
-        this.$emit("nextQuestion");
+        this.$emit("nextStep");
       }, 4000);
     }, this.deltaDelay + this.deltaAnimation);
   },

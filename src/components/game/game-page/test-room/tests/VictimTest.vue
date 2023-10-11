@@ -9,7 +9,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="victim-test"></div>
+  <div class="victim-test">victim-test</div>
 </template>
 
 <style lang="scss" scoped>

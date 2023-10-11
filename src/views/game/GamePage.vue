@@ -10,10 +10,11 @@ import { state, socket } from "@/socket";
 
 import MagicUsage from "@/components/game/game-page/magic-usage/MagicUsage.vue";
 import { ICurse, IPlayers } from "@/intefaces/IGame";
+import TestRoom from "@/components/game/game-page/test-room/TestRoom.vue";
 
 export default defineComponent({
   name: "GamePage",
-  components: { MagicUsage, PlayersProgress, QuestionGame },
+  components: { TestRoom, MagicUsage, PlayersProgress, QuestionGame },
 
   data() {
     return {
@@ -106,9 +107,9 @@ export default defineComponent({
       }
     },
 
-    nextQuestionHandler() {
+    nextStepHandler() {
       state.isShowProgress = !state.isShowProgress;
-      this.step = 2;
+      this.step = 5;
     },
 
     animationEndHandler() {
@@ -156,8 +157,12 @@ export default defineComponent({
     <div v-else-if="step === 4" class="game-page__progress progress">
       <PlayersProgress
         :is-finish-game="isFinishGame"
-        @nextQuestion="nextQuestionHandler"
+        @nextStep="nextStepHandler"
       />
+    </div>
+
+    <div v-else-if="step === 5" class="game-page__progress progress">
+      <TestRoom />
     </div>
   </div>
 </template>

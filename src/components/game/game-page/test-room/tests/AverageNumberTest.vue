@@ -9,7 +9,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="average-number-test"></div>
+  <div class="average-number-test">average-number-test</div>
 </template>
 
 <style lang="scss" scoped>

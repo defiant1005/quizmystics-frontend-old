@@ -3,7 +3,6 @@ import { defineComponent, PropType } from "vue";
 import AppDrawer from "@/package/components/AppDrawer.vue";
 import { ISpell, magicSpellType, stateValue } from "@/intefaces/IGame";
 import MainButton from "@/package/components/MainButton.vue";
-import { buttonColor } from "@/intefaces/IMain";
 import { spellColor } from "@/package/helpers/spells";
 
 export default defineComponent({

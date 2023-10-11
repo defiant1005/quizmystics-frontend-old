@@ -11,6 +11,7 @@ export const state = reactive({
   isShowProgress: false,
   nextQuestion: null,
   finishGame: false,
+  currentTest: null,
 });
 
 export const socket = io(BASE_URL, {
@@ -51,6 +52,10 @@ socket.on("startGame", async ({ room, questionId }) => {
       });
     }
   }
+});
+
+socket.on("setTestRoom", async ({ data }) => {
+  state.currentTest = data.test;
 });
 
 socket.on("finishGame", async ({ data }) => {
