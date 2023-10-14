@@ -34,6 +34,8 @@ export default defineComponent({
     ArenaTest,
   },
 
+  emits: ["finishTest"],
+
   data() {
     return {
       currentTest: "dragon",
@@ -58,6 +60,12 @@ export default defineComponent({
       return this.usersList.filter(
         (user: IPlayers) => user.count < user.oldCount
       );
+    },
+  },
+
+  methods: {
+    finishTestHandler() {
+      this.$emit("finishTest");
     },
   },
 
@@ -108,7 +116,11 @@ export default defineComponent({
     </template>
 
     <template v-else-if="currentTest === 'dragon'">
-      <DragonTreasureTest :users-list="usersList" :victim-users="victimUsers" />
+      <DragonTreasureTest
+        :users-list="usersList"
+        :victim-users="victimUsers"
+        @finishTest="finishTestHandler"
+      />
     </template>
 
     <template v-else-if="currentTest === 'cube'">

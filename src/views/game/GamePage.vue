@@ -108,12 +108,21 @@ export default defineComponent({
     },
 
     nextStepHandler() {
-      state.isShowProgress = !state.isShowProgress;
-      this.step = 5;
+      if (this.step === 4) {
+        state.isShowProgress = !state.isShowProgress;
+        this.step = 5;
+      } else {
+        this.step = 2;
+      }
     },
 
     animationEndHandler() {
       this.step = 3;
+    },
+
+    finishTestHandler() {
+      this.step = 6;
+      socket.emit("setUpdateUserList");
     },
   },
 
@@ -154,7 +163,10 @@ export default defineComponent({
       />
     </div>
 
-    <div v-else-if="step === 4" class="game-page__progress progress">
+    <div
+      v-else-if="step === 4 || step === 6"
+      class="game-page__progress progress"
+    >
       <PlayersProgress
         :is-finish-game="isFinishGame"
         @nextStep="nextStepHandler"
@@ -162,7 +174,7 @@ export default defineComponent({
     </div>
 
     <div v-else-if="step === 5" class="game-page__progress progress">
-      <TestRoom />
+      <TestRoom @finishTest="finishTestHandler" />
     </div>
   </div>
 </template>

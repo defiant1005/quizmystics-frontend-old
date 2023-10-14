@@ -11,6 +11,7 @@ type chestType = "closed" | "win" | "lose";
 export default defineComponent({
   name: "DragonTreasureTest",
   components: { MainButtonIcon },
+  emits: ["finishTest"],
 
   props: {
     usersList: {
@@ -28,7 +29,6 @@ export default defineComponent({
     return {
       chest1: "closed" as chestType,
       chest2: "closed" as chestType,
-      choiceTreasure: null as null | number,
       isBtnDisabled: false,
     };
   },
@@ -50,31 +50,42 @@ export default defineComponent({
 
   methods: {
     checkChest(checkNumber: number) {
-      this.isBtnDisabled = true;
-      this.choiceTreasure = checkNumber;
-      const normalize = {
-        treasureCount: checkNumber,
-        room: this.room,
-      };
-      socket.emit("dragonTest", normalize);
+      if (!this.disabled) {
+        this.isBtnDisabled = true;
+        const normalize = {
+          treasureCount: checkNumber,
+          room: this.room,
+          userId: this.myId,
+        };
+        socket.emit("dragonTest", normalize);
+      }
     },
   },
 
   created() {
-    socket.on("finishDragonTest", (isWin: { win: boolean }) => {
-      if (this.choiceTreasure === 1) {
-        if (isWin.win) {
-          this.chest1 = "win";
+    socket.on(
+      "checkDragonTest",
+      (isWin: { win: boolean; treasureCount: number }) => {
+        if (isWin.treasureCount === 1) {
+          if (isWin.win) {
+            this.chest1 = "win";
+          } else {
+            this.chest1 = "lose";
+          }
+        } else if (isWin.treasureCount === 2) {
+          if (isWin.win) {
+            this.chest2 = "win";
+          } else {
+            this.chest2 = "lose";
+          }
         } else {
-          this.chest1 = "lose";
-        }
-      } else {
-        if (isWin.win) {
-          this.chest2 = "win";
-        } else {
-          this.chest2 = "lose";
+          console.error("неожиданное поведение");
         }
       }
+    );
+
+    socket.on("finishDragonTest", () => {
+      this.$emit("finishTest");
     });
   },
 });

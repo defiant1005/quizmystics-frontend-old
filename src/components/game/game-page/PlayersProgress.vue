@@ -2,8 +2,10 @@
 import { defineComponent } from "vue";
 import { useGameStore } from "@/stores/game.store";
 //@ts-ignore
-import { state } from "@/socket";
+import { state, socket } from "@/socket";
 import { IPlayers } from "@/intefaces/IGame";
+import { mapState } from "pinia";
+import { useUserStore } from "@/stores/user";
 
 export default defineComponent({
   name: "PlayersProgress",
@@ -35,6 +37,10 @@ export default defineComponent({
   },
 
   computed: {
+    ...mapState(useUserStore, {
+      room: "room",
+    }),
+
     usersList() {
       return state.usersList;
     },
@@ -45,6 +51,14 @@ export default defineComponent({
 
     getDeltaAnimation() {
       return this.deltaAnimation + "ms";
+    },
+
+    winnerUsers() {
+      return this.usersList.map((user: IPlayers) => {
+        if (user.count > user.oldCount) {
+          return user.userId;
+        }
+      });
     },
   },
 
@@ -115,20 +129,6 @@ export default defineComponent({
             this.deltaCount
           );
           this.gameStore.setCount(user.count);
-        } else {
-          //иногда обновление usersList происходит не сразу, иметь в виду этот баг
-          setTimeout(() => {
-            if (user.oldCount !== user.count) {
-              this.counter(
-                index.toString(),
-                user.oldCount,
-                user.count,
-                this.deltaCount
-              );
-            } else {
-              console.error("почему-то не обновляется usersList");
-            }
-          }, this.deltaCount);
         }
       });
 
@@ -139,6 +139,11 @@ export default defineComponent({
       }, this.deltaCount + 200);
 
       setTimeout(() => {
+        const normalize = {
+          room: this.room,
+          usersId: this.winnerUsers,
+        };
+        socket.emit("updateOldCount", normalize);
         this.$emit("nextStep");
       }, 4000);
     }, this.deltaDelay + this.deltaAnimation);
@@ -148,8 +153,6 @@ export default defineComponent({
 
 <template>
   <div class="players-progress">
-    <button @click="shuffle" type="button">shuffle</button>
-
     <TransitionGroup tag="ul" name="fade" class="container">
       <div
         v-for="(user, index) in myUserList"
@@ -164,10 +167,10 @@ export default defineComponent({
 
         <p
           class="users__delta"
-          v-if="isShowDelta"
+          v-if="isShowDelta && user.count - user.oldCount !== 0"
           :class="[
             {
-              users__delta_green: user.count - user.oldCount >= 0,
+              users__delta_green: user.count - user.oldCount > 0,
             },
             {
               users__delta_red: user.count - user.oldCount < 0,
