@@ -48,8 +48,17 @@ export default defineComponent({
       myId: "id",
     }),
 
+    isPlayerAdmin() {
+      return (
+        this.usersList.find((user: IPlayers) => user.userId === this.myId)
+          ?.isRoomAdmin ?? false
+      );
+    },
+
     usersList() {
-      return state.usersList;
+      return state.usersList.filter((player: IPlayers) => {
+        return player.stats?.health !== 0;
+      });
     },
 
     currentTest2() {
@@ -70,10 +79,7 @@ export default defineComponent({
   },
 
   mounted() {
-    if (
-      this.usersList.find((user: IPlayers) => user.userId === this.myId)
-        .isRoomAdmin
-    ) {
+    if (this.isPlayerAdmin) {
       const normalize = {
         count: this.victimUsers.length,
         allUsersCount: this.usersList.length,

@@ -6,6 +6,7 @@ import { state, socket } from "@/socket";
 import { IPlayers } from "@/intefaces/IGame";
 import { mapState } from "pinia";
 import { useUserStore } from "@/stores/user";
+import delay from "@/package/helpers/delay";
 
 export default defineComponent({
   name: "PlayersProgress",
@@ -77,13 +78,17 @@ export default defineComponent({
   },
 
   methods: {
+    delay,
+
     counter(id: string, start: number, end: number, duration: number) {
       const obj: any = document.getElementById(id);
       let current = start;
       const range = end - start;
       if (range !== 0) {
         const increment = end > start ? 1 : -1;
+
         const step = Math.abs(Math.floor(duration / range));
+
         const timer = setInterval(() => {
           current += increment;
           obj.textContent = current;
@@ -108,45 +113,59 @@ export default defineComponent({
         return `${user.count - user.oldCount}`;
       }
     },
+
+    sortUserListOldCount() {
+      this.myUserList = this.usersList.sort(function (
+        a: IPlayers,
+        b: IPlayers
+      ) {
+        return b.oldCount - a.oldCount;
+      });
+    },
+
+    sortUserListNewCount() {
+      this.myUserList = this.usersList.sort(function (
+        a: IPlayers,
+        b: IPlayers
+      ) {
+        return b.count - a.count;
+      });
+    },
   },
 
-  mounted() {
-    this.myUserList = this.usersList.sort(function (a, b) {
-      return b.oldCount - a.oldCount;
+  async mounted() {
+    this.sortUserListOldCount();
+
+    await delay(2000);
+
+    this.isShowDelta = false;
+
+    this.numbers_animation = true;
+
+    this.myUserList.forEach((user: IPlayers, index: number) => {
+      if (user.oldCount !== user.count) {
+        this.counter(
+          index.toString(),
+          user.oldCount,
+          user.count,
+          this.deltaCount
+        );
+        this.gameStore.setCount(user.count);
+      }
     });
 
-    setTimeout(() => {
-      this.isShowDelta = false;
+    await delay(this.deltaCount + 1000);
 
-      this.numbers_animation = true;
+    this.sortUserListNewCount();
 
-      this.myUserList.forEach((user: any, index: any) => {
-        if (user.oldCount !== user.count) {
-          this.counter(
-            index.toString(),
-            user.oldCount,
-            user.count,
-            this.deltaCount
-          );
-          this.gameStore.setCount(user.count);
-        }
-      });
+    await delay(2000);
 
-      setTimeout(() => {
-        this.myUserList.sort(function (a, b) {
-          return b.count - a.count;
-        });
-      }, this.deltaCount + 200);
-
-      setTimeout(() => {
-        const normalize = {
-          room: this.room,
-          usersId: this.winnerUsers,
-        };
-        socket.emit("updateOldCount", normalize);
-        this.$emit("nextStep");
-      }, 4000);
-    }, this.deltaDelay + this.deltaAnimation);
+    const normalize = {
+      room: this.room,
+      usersId: this.winnerUsers,
+    };
+    socket.emit("updateOldCount", normalize);
+    this.$emit("nextStep");
   },
 });
 </script>
@@ -157,11 +176,15 @@ export default defineComponent({
       <div
         v-for="(user, index) in myUserList"
         :key="user.userId"
-        :class="{ users_vip: index === 0 }"
+        :class="[
+          { users_vip: index === 0 },
+          { users_death: user.stats!.health === 0 },
+        ]"
         class="players-progress__users users"
       >
         <div class="users__left left">
-          <img :src="user.avatar" alt="ava" />
+          <img :src="user.avatar" alt="ava" v-if="user.stats!.health !== 0" />
+          <img src="@/assets/icons/death.svg" alt="ava" v-else />
           <p>{{ user.name }}</p>
         </div>
 
@@ -180,7 +203,7 @@ export default defineComponent({
           {{ setDelta(user) }}
         </p>
 
-        <p :id="index.toString()">{{ user.oldCount ?? 99 }}</p>
+        <p :id="index.toString()">{{ user.oldCount ?? 0 }}</p>
       </div>
     </TransitionGroup>
   </div>
@@ -217,6 +240,10 @@ export default defineComponent({
 
     &_vip {
       background: $blue-800;
+    }
+
+    &_death {
+      background: $black-800 !important;
     }
 
     .left {

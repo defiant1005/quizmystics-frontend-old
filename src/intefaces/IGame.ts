@@ -27,7 +27,7 @@ export interface IPlayersStats {
   dexterity: stateValue;
 }
 
-export type stateValue = 1 | 2 | 3 | 4 | 5;
+export type stateValue = 0 | 1 | 2 | 3 | 4 | 5;
 
 export interface ISpell {
   name: magicSpellType;

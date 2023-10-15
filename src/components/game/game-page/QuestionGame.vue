@@ -61,6 +61,8 @@ export default defineComponent({
       coldCharmAnswer2: 0,
       coldCharmAnswer3: 0,
       coldCharmAnswer4: 0,
+
+      isAnswerDisabled: false,
     };
   },
 
@@ -185,6 +187,11 @@ export default defineComponent({
         this.correctAnswer = correctAnswer;
       });
     },
+
+    choiceAnswer(answer: string) {
+      this.isAnswerDisabled = true;
+      this.$emit("choiceAnswer", answer);
+    },
   },
 
   mounted() {
@@ -252,7 +259,7 @@ export default defineComponent({
         class="answer__item"
         color="green"
         :label="!isAntagonisticRiddle ? question.answer1 : randomValues[0]"
-        :disabled="hiddenAnswer === 0"
+        :disabled="hiddenAnswer === 0 || isAnswerDisabled"
         :class="[
           { answer__item_active: activeAnswer === question.answer1 },
           { answer__hidden: hiddenAnswer === 0 },
@@ -267,7 +274,7 @@ export default defineComponent({
               activeAnswer === question.answer1 && isCorrectAnswer === 'bad',
           },
         ]"
-        @click="$emit('choiceAnswer', question.answer1)"
+        @click="choiceAnswer(question.answer1)"
       />
 
       <MainButton
@@ -282,7 +289,7 @@ export default defineComponent({
         :label="!isAntagonisticRiddle ? question.answer2 : randomValues[1]"
         color="green"
         class="answer__item"
-        :disabled="hiddenAnswer === 1"
+        :disabled="hiddenAnswer === 1 || isAnswerDisabled"
         :class="[
           { answer__item_active: activeAnswer === question.answer2 },
           { answer__hidden: hiddenAnswer === 1 },
@@ -297,7 +304,7 @@ export default defineComponent({
               activeAnswer === question.answer2 && isCorrectAnswer === 'bad',
           },
         ]"
-        @click="$emit('choiceAnswer', question.answer2)"
+        @click="choiceAnswer(question.answer2)"
       />
 
       <MainButton
@@ -312,7 +319,7 @@ export default defineComponent({
         :label="!isAntagonisticRiddle ? question.answer3 : randomValues[2]"
         color="green"
         class="answer__item"
-        :disabled="hiddenAnswer === 2"
+        :disabled="hiddenAnswer === 2 || isAnswerDisabled"
         :class="[
           { answer__item_active: activeAnswer === question.answer3 },
           { answer__hidden: hiddenAnswer === 2 },
@@ -327,7 +334,7 @@ export default defineComponent({
               activeAnswer === question.answer3 && isCorrectAnswer === 'bad',
           },
         ]"
-        @click="$emit('choiceAnswer', question.answer3)"
+        @click="choiceAnswer(question.answer3)"
       />
 
       <MainButton
@@ -342,7 +349,7 @@ export default defineComponent({
         :label="!isAntagonisticRiddle ? question.answer4 : randomValues[3]"
         color="green"
         class="answer__item"
-        :disabled="hiddenAnswer === 3"
+        :disabled="hiddenAnswer === 3 || isAnswerDisabled"
         :class="[
           { answer__item_active: activeAnswer === question.answer4 },
           { answer__hidden: hiddenAnswer === 3 },
@@ -357,7 +364,7 @@ export default defineComponent({
               activeAnswer === question.answer4 && isCorrectAnswer === 'bad',
           },
         ]"
-        @click="$emit('choiceAnswer', question.answer4)"
+        @click="choiceAnswer(question.answer4)"
       />
 
       <MainButton

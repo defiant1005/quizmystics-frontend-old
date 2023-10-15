@@ -95,7 +95,7 @@ export default defineComponent({
   <div class="dragon-treasure-test">
     <h2>Подземелье дракона</h2>
     <p v-if="!isUserReadOnly">Выбери сундук</p>
-    <p v-else>Ждем пока {{ victimUsers[0].name }} выберет сундук</p>
+    <p v-else>Ждем пока {{ victimUsers[0]?.name ?? "" }} выберет сундук</p>
     <div class="dragon-treasure-test__chest-container chest-container">
       <MainButtonIcon
         class="chest-container__btn btn"

@@ -8,7 +8,6 @@ export const state = reactive({
   connected: false,
   usersList: [],
   startGame: false,
-  isShowProgress: false,
   nextQuestion: null,
   finishGame: false,
   currentTest: null,
@@ -34,7 +33,6 @@ socket.on("updateUserList", ({ data }) => {
 
 socket.on("finishQuestion", async ({ data }) => {
   const gameStore = useGameStore();
-  state.isShowProgress = true;
   state.usersList = data.users;
   await gameStore.getOneQuestion(data.nextQuestion);
 });

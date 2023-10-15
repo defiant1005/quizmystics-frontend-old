@@ -34,10 +34,6 @@ export default defineComponent({
       room: "room",
     }),
 
-    isShowProgress() {
-      return state.isShowProgress;
-    },
-
     isFinishGame() {
       return state.finishGame;
     },
@@ -109,7 +105,6 @@ export default defineComponent({
 
     nextStepHandler() {
       if (this.step === 4) {
-        state.isShowProgress = !state.isShowProgress;
         this.step = 5;
       } else {
         this.step = 2;
@@ -122,7 +117,6 @@ export default defineComponent({
 
     finishTestHandler() {
       this.step = 6;
-      socket.emit("setUpdateUserList");
     },
   },
 
