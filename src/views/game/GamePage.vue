@@ -11,16 +11,24 @@ import { state, socket } from "@/socket";
 import MagicUsage from "@/components/game/game-page/magic-usage/MagicUsage.vue";
 import { ICurse, IPlayers } from "@/intefaces/IGame";
 import TestRoom from "@/components/game/game-page/test-room/TestRoom.vue";
+import SetCategory from "@/components/game/game-page/SetCategory.vue";
 
 export default defineComponent({
   name: "GamePage",
-  components: { TestRoom, MagicUsage, PlayersProgress, QuestionGame },
+
+  components: {
+    SetCategory,
+    TestRoom,
+    MagicUsage,
+    PlayersProgress,
+    QuestionGame,
+  },
 
   data() {
     return {
       timer: 5,
       choiceAnswer: "",
-      step: 1,
+      step: 0,
     };
   },
 
@@ -43,7 +51,7 @@ export default defineComponent({
     },
 
     isShowTimer() {
-      return this.timer > -1 && this.step === 1;
+      return this.timer > -1 && this.step === 0;
     },
 
     userList() {
@@ -120,11 +128,9 @@ export default defineComponent({
     },
   },
 
-  mounted() {
-    this.step = 1;
-
+  async mounted() {
     setTimeout(() => {
-      this.step = 2;
+      this.step = 1;
     }, this.timer * 1000);
 
     setTimeout(() => {
@@ -139,6 +145,8 @@ export default defineComponent({
     <div v-if="isShowTimer" class="game-page__timer timer">
       {{ timer }}
     </div>
+
+    <SetCategory v-else-if="step === 1" :user-list="userList" />
 
     <MagicUsage
       v-else-if="step === 2"
