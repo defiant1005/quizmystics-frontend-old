@@ -9,7 +9,7 @@ import PlayersProgress from "@/components/game/game-page/PlayersProgress.vue";
 import { state, socket } from "@/socket";
 
 import MagicUsage from "@/components/game/game-page/magic-usage/MagicUsage.vue";
-import { ICurse, IPlayers } from "@/intefaces/IGame";
+import { ICurse, IPlayers, IQuestion } from "@/intefaces/IGame";
 import TestRoom from "@/components/game/game-page/test-room/TestRoom.vue";
 import SetCategory from "@/components/game/game-page/SetCategory.vue";
 
@@ -25,7 +25,10 @@ export default defineComponent({
   },
 
   data() {
+    const gameStore = useGameStore();
+
     return {
+      gameStore,
       timer: 5,
       choiceAnswer: "",
       step: 0,
@@ -136,6 +139,13 @@ export default defineComponent({
     setTimeout(() => {
       this.startTimer();
     }, 500);
+  },
+
+  created() {
+    socket.on("currentQuestion", (question: IQuestion) => {
+      this.gameStore.setQuestion(question);
+      this.step = 2;
+    });
   },
 });
 </script>

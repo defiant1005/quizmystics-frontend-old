@@ -11,6 +11,7 @@ import MainButton from "@/package/components/MainButton.vue";
 export default defineComponent({
   name: "SetCategory",
   components: { MainButton },
+  emits: ["nextStep"],
 
   props: {
     userList: {
@@ -50,12 +51,15 @@ export default defineComponent({
 
   methods: {
     choiceCategory(categoryId: number) {
-      const normalize = {
-        room: this.room,
-        categoryId: categoryId,
-      };
+      this.isAnswerDisabled = true;
+      if (this.isMeAdmin) {
+        const normalize = {
+          room: this.room,
+          categoryId: categoryId,
+        };
 
-      socket.emit("setCategory", normalize);
+        socket.emit("setCategory", normalize);
+      }
     },
   },
 
@@ -64,9 +68,7 @@ export default defineComponent({
       const normalize = {
         room: this.room,
       };
-      socket.emit("whoChoosesCategory", normalize, (data: any) => {
-        console.log(data);
-      });
+      socket.emit("whoChoosesCategory", normalize);
     }
   },
 

@@ -40,5 +40,9 @@ export const useGameStore = defineStore("game-store", {
     setCount(countValue: number) {
       this.userCount += countValue;
     },
+
+    setQuestion(question: IQuestion) {
+      this.question = question;
+    },
   },
 });
