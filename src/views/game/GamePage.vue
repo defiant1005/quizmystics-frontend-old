@@ -114,7 +114,7 @@ export default defineComponent({
       if (this.step === 4) {
         this.step = 5;
       } else {
-        this.step = 2;
+        this.step = 1;
       }
     },
 

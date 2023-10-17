@@ -49,6 +49,10 @@ export default defineComponent({
     isMeAdmin() {
       return this.meData?.isRoomAdmin ?? false;
     },
+
+    isMeSelectedCategory() {
+      return this.whoChoiceAnswerId === this.meData?.userId;
+    },
   },
 
   methods: {
@@ -56,7 +60,7 @@ export default defineComponent({
 
     async choiceCategory(categoryId: number) {
       this.isAnswerDisabled = true;
-      if (this.isMeAdmin) {
+      if (this.isMeSelectedCategory) {
         const normalize = {
           room: this.room,
           categoryId: categoryId,

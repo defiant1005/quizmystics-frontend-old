@@ -115,6 +115,7 @@ export default defineComponent({
           this.startProgress();
         }, 1000);
       } else {
+        this.isAnswerDisabled = true;
         this.finishQuestion();
         await delay(2500);
         this.$emit("setAnswer");
