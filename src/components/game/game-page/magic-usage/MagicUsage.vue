@@ -2,9 +2,9 @@
 import { defineComponent, PropType } from "vue";
 import { IPlayers, magicSpellType } from "@/intefaces/IGame";
 import {
-  chanceDexterity,
-  chanceDexterityStringPercent,
-} from "@/package/helpers/chance-dexterity";
+  chanceLuck,
+  chanceLuckStringPercent,
+} from "@/package/helpers/chance-luck";
 import MagicUsageDrawer from "@/components/game/game-page/magic-usage/MagicUsageDrawer.vue";
 //@ts-ignore
 import { socket } from "@/socket";
@@ -33,8 +33,8 @@ export default defineComponent({
 
     return {
       mainStore,
-      chanceDexterity,
-      chanceDexterityStringPercent,
+      chanceLuck,
+      chanceLuckStringPercent,
       choiceUserId: "",
       spellsButtonsDisabled: false,
       isDrawerDisabled: false,
@@ -63,9 +63,9 @@ export default defineComponent({
       );
     },
 
-    dexterityPercent() {
-      return this.chanceDexterityStringPercent(
-        this.chanceDexterity(this.currentUser!.stats!.dexterity)
+    luckPercent() {
+      return this.chanceLuckStringPercent(
+        this.chanceLuck(this.currentUser!.stats!.luck)
       );
     },
   },
@@ -127,7 +127,7 @@ export default defineComponent({
   <div class="magic-usage">
     <template v-if="!isShowSpellAnimation && currentUser.stats!.health > 0">
       <h2>Ваш уровень магии: {{ currentUser!.stats!.magic }}</h2>
-      <h2>Ваш уровень зашиты от магии: {{ dexterityPercent }}</h2>
+      <h2>Ваш уровень зашиты от магии: {{ luckPercent }}</h2>
       <p>У вас есть время заколдовать противника:</p>
       <div
         class="progress"

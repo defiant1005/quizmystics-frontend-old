@@ -16,7 +16,7 @@ export const testData: Array<IPlayers> = [
       power: 1,
       magic: 4,
       intelligence: 5,
-      dexterity: 4,
+      luck: 4,
     },
     spellList: [
       {
@@ -57,7 +57,7 @@ export const testData: Array<IPlayers> = [
       power: 2,
       magic: 3,
       intelligence: 5,
-      dexterity: 4,
+      luck: 4,
     },
     spellList: [
       {
@@ -93,7 +93,7 @@ export const testData: Array<IPlayers> = [
       power: 2,
       magic: 3,
       intelligence: 5,
-      dexterity: 4,
+      luck: 4,
     },
     spellList: [
       {
@@ -129,7 +129,7 @@ export const testData: Array<IPlayers> = [
       power: 2,
       magic: 3,
       intelligence: 5,
-      dexterity: 4,
+      luck: 4,
     },
     spellList: [
       {
@@ -165,7 +165,7 @@ export const testData: Array<IPlayers> = [
       power: 2,
       magic: 3,
       intelligence: 5,
-      dexterity: 4,
+      luck: 4,
     },
     spellList: [
       {

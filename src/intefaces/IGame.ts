@@ -18,7 +18,7 @@ export interface IPlayersStats {
   power: stateValue;
   magic: stateValue;
   intelligence: stateValue;
-  dexterity: stateValue;
+  luck: stateValue;
 }
 
 export type stateValue = 0 | 1 | 2 | 3 | 4 | 5;

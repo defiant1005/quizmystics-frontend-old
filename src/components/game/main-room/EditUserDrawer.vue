@@ -8,7 +8,7 @@ import { IPlayers } from "@/intefaces/IGame";
 import MainCounter from "@/package/components/MainCounter.vue";
 import MainPopper from "@/package/components/MainPopper.vue";
 import {
-  dexterity_description,
+  luck_description,
   health_description,
   intelligence_description,
   magic_description,
@@ -49,7 +49,7 @@ export default defineComponent({
       power_description,
       magic_description,
       intelligence_description,
-      dexterity_description,
+      luck_description,
 
       userName: "",
       nameErrorMessage: "",
@@ -62,7 +62,7 @@ export default defineComponent({
       power: 1,
       magic: 1,
       intelligence: 1,
-      dexterity: 1,
+      luck: 1,
 
       //изменяется из родителя
       avatar: null as null | string,
@@ -79,7 +79,7 @@ export default defineComponent({
         this.power -
         this.magic -
         this.intelligence -
-        this.dexterity
+        this.luck
       );
     },
 
@@ -123,7 +123,7 @@ export default defineComponent({
             power: this.power,
             magic: this.magic,
             intelligence: this.intelligence,
-            dexterity: this.dexterity,
+            luck: this.luck,
           },
         };
 
@@ -244,9 +244,9 @@ export default defineComponent({
 
       <div class="edit-user-form__stats stats">
         <p>
-          Ловкость
+          Удача
 
-          <MainPopper :content="dexterity_description">
+          <MainPopper :content="luck_description">
             <MainButtonIcon class="stats__btn-info">
               <span class="icon-info"></span>
             </MainButtonIcon>
@@ -254,7 +254,7 @@ export default defineComponent({
         </p>
 
         <MainCounter
-          v-model:count="dexterity"
+          v-model:count="luck"
           :max-value="5"
           :min-value="1"
           :max-disabled="isMaxDisabled"

@@ -6,5 +6,4 @@ export const magic_description =
   "От уровня магии зависит сила и продолжительность ваших заклинаний. (max 5)";
 export const intelligence_description =
   "От уровня интеллекта зависит количество ваших заклинаний. (max 5)";
-export const dexterity_description =
-  "Ловкость дает возможность уклоняться от вражеских атак. (max 5)";
+export const luck_description = "Иногда помогает в игре. (max 5)";

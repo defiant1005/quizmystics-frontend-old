@@ -63,8 +63,9 @@
   display: inline-block;
 }
 
-.icon-dexterity {
-  mask: url("@/assets/icons/dexterity.svg") 0 / cover no-repeat;
+.icon-luck {
+  mask: url("@/assets/icons/luck.svg") 0 / cover no-repeat;
+  background: $black;
   display: inline-block;
 }
 

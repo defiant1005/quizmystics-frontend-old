@@ -89,8 +89,8 @@ export default defineComponent({
       </div>
 
       <div class="stats__stat stat">
-        <span class="icon-dexterity" />
-        <p>{{ user.stats!.dexterity }}</p>
+        <span class="icon-luck" />
+        <p>{{ user.stats!.luck }}</p>
       </div>
     </div>
 

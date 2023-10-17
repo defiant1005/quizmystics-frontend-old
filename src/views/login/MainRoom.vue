@@ -36,6 +36,8 @@ export default defineComponent({
       currentUser: null as null | IPlayers,
 
       isCopyRoom: false,
+
+      isSubmitDisabled: false,
     };
   },
 
@@ -69,7 +71,10 @@ export default defineComponent({
     },
 
     isStartDisabled() {
-      return !!this.usersList.find((item: IPlayers) => !item.isReady);
+      return (
+        !!this.usersList.find((item: IPlayers) => !item.isReady) ||
+        this.isSubmitDisabled
+      );
     },
   },
 
@@ -78,6 +83,8 @@ export default defineComponent({
       if (this.isStartDisabled) {
         return;
       }
+
+      this.isSubmitDisabled = true;
 
       const gameData = {
         room: this.userRoom,

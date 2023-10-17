@@ -1,8 +1,8 @@
 import { stateValue } from "@/intefaces/IGame";
 import assertUnreachable from "@/package/helpers/assert-unreachable";
 
-export function chanceDexterity(dexterity: stateValue) {
-  switch (dexterity) {
+export function chanceLuck(luck: stateValue) {
+  switch (luck) {
     case 0:
       return 0.07;
 
@@ -22,10 +22,10 @@ export function chanceDexterity(dexterity: stateValue) {
       return 0.35;
 
     default:
-      return assertUnreachable(dexterity);
+      return assertUnreachable(luck);
   }
 }
 
-export function chanceDexterityStringPercent(dexterityPercent: number) {
-  return (dexterityPercent * 100).toFixed(0) + "%";
+export function chanceLuckStringPercent(LuckPercent: number) {
+  return (LuckPercent * 100).toFixed(0) + "%";
 }
