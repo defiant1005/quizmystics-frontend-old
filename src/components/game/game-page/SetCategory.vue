@@ -59,7 +59,7 @@ export default defineComponent({
     delay,
 
     async choiceCategory(categoryId: number) {
-      this.isAnswerDisabled = true;
+      this.isAnswerDisabled = false;
       if (this.isMeSelectedCategory) {
         const normalize = {
           room: this.room,
