@@ -3,6 +3,9 @@ import assertUnreachable from "@/package/helpers/assert-unreachable";
 
 export function chanceDexterity(dexterity: stateValue) {
   switch (dexterity) {
+    case 0:
+      return 0.07;
+
     case 1:
       return 0.07;
 

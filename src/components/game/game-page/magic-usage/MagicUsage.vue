@@ -125,7 +125,7 @@ export default defineComponent({
 
 <template>
   <div class="magic-usage">
-    <template v-if="!isShowSpellAnimation">
+    <template v-if="!isShowSpellAnimation && currentUser.stats!.health > 0">
       <h2>Ваш уровень магии: {{ currentUser!.stats!.magic }}</h2>
       <h2>Ваш уровень зашиты от магии: {{ dexterityPercent }}</h2>
       <p>У вас есть время заколдовать противника:</p>
@@ -154,6 +154,10 @@ export default defineComponent({
       </div>
     </template>
 
+    <h2 v-else-if="!isShowSpellAnimation && currentUser.stats!.health === 0">
+      У мертвых нет заклинаний
+    </h2>
+
     <MagicAnimation
       v-else
       :user-list="userList"
@@ -173,13 +177,14 @@ export default defineComponent({
 </template>
 
 <style lang="scss" scoped>
+h2 {
+  @include h-4;
+  color: $black;
+}
+
 .magic-usage {
   width: 100%;
   padding: 30px;
-
-  > h2 {
-    @include h-4;
-  }
 
   .progress {
     margin-bottom: 20px;

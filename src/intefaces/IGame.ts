@@ -13,12 +13,6 @@ export interface ICheckAnswer {
   answer: string;
 }
 
-export type CheckAnswerResponseType = "good" | "bad";
-
-export interface ICheckAnswerResponse {
-  message: CheckAnswerResponseType;
-}
-
 export interface IPlayersStats {
   health: stateValue;
   power: stateValue;

@@ -2,11 +2,7 @@
 import { defineComponent, PropType } from "vue";
 //@ts-ignore
 import { socket } from "@/socket";
-import {
-  CheckAnswerResponseType,
-  IQuestion,
-  magicSpellType,
-} from "@/intefaces/IGame";
+import { IQuestion, magicSpellType } from "@/intefaces/IGame";
 import { useGameStore } from "@/stores/game.store";
 import MainButton from "@/package/components/MainButton.vue";
 import {
@@ -15,6 +11,7 @@ import {
 } from "@/package/helpers/random-numbers";
 import { mapState } from "pinia";
 import { useUserStore } from "@/stores/user";
+import delay from "@/package/helpers/delay";
 
 export default defineComponent({
   name: "QuestionGame",
@@ -47,7 +44,6 @@ export default defineComponent({
       gameStore,
       progress: 0,
       answerTime: 10,
-      isCorrectAnswer: null as null | CheckAnswerResponseType,
       randomNumbers: [] as Array<number>,
       randomValues: [] as Array<string>,
       hiddenAnswer: null as null | number,
@@ -110,30 +106,33 @@ export default defineComponent({
   },
 
   methods: {
-    startProgress() {
+    delay,
+
+    async startProgress() {
       this.progress += 1;
       if (this.progress <= this.answerTime) {
         setTimeout(() => {
           this.startProgress();
         }, 1000);
       } else {
-        this.gameStore
-          .checkCorrectAnswer({
-            questionId: this.question.id,
-            answer: this.activeAnswer,
-          })
-          .then((res: any) => {
-            this.isCorrectAnswer = res.data.message;
-          })
-          .finally(() => {
-            setTimeout(() => {
-              this.finishQuestion();
+        this.finishQuestion();
+        await delay(2500);
+        this.$emit("setAnswer");
 
-              setTimeout(() => {
-                this.$emit("setAnswer");
-              }, 2000);
-            }, 1000);
-          });
+        // this.gameStore
+        //   .checkCorrectAnswer({
+        //     questionId: this.question.id,
+        //     answer: this.activeAnswer,
+        //   })
+        //   .finally(() => {
+        //     setTimeout(() => {
+        //       this.finishQuestion();
+        //
+        //       setTimeout(() => {
+        //         this.$emit("setAnswer");
+        //       }, 2000);
+        //     }, 1000);
+        //   });
       }
     },
 
@@ -264,14 +263,13 @@ export default defineComponent({
           { answer__item_active: activeAnswer === question.answer1 },
           { answer__hidden: hiddenAnswer === 0 },
           {
-            answer__item_good:
-              (activeAnswer === question.answer1 &&
-                isCorrectAnswer === 'good') ||
-              correctAnswer === question.answer1,
+            answer__item_good: correctAnswer === question.answer1,
           },
           {
             answer__item_bad:
-              activeAnswer === question.answer1 && isCorrectAnswer === 'bad',
+              activeAnswer === question.answer1 &&
+              correctAnswer !== question.answer1 &&
+              correctAnswer !== '',
           },
         ]"
         @click="choiceAnswer(question.answer1)"
@@ -294,14 +292,13 @@ export default defineComponent({
           { answer__item_active: activeAnswer === question.answer2 },
           { answer__hidden: hiddenAnswer === 1 },
           {
-            answer__item_good:
-              (activeAnswer === question.answer2 &&
-                isCorrectAnswer === 'good') ||
-              correctAnswer === question.answer2,
+            answer__item_good: correctAnswer === question.answer2,
           },
           {
             answer__item_bad:
-              activeAnswer === question.answer2 && isCorrectAnswer === 'bad',
+              activeAnswer === question.answer2 &&
+              correctAnswer !== question.answer2 &&
+              correctAnswer !== '',
           },
         ]"
         @click="choiceAnswer(question.answer2)"
@@ -324,14 +321,13 @@ export default defineComponent({
           { answer__item_active: activeAnswer === question.answer3 },
           { answer__hidden: hiddenAnswer === 2 },
           {
-            answer__item_good:
-              (activeAnswer === question.answer3 &&
-                isCorrectAnswer === 'good') ||
-              correctAnswer === question.answer3,
+            answer__item_good: correctAnswer === question.answer3,
           },
           {
             answer__item_bad:
-              activeAnswer === question.answer3 && isCorrectAnswer === 'bad',
+              activeAnswer === question.answer3 &&
+              correctAnswer !== question.answer3 &&
+              correctAnswer !== '',
           },
         ]"
         @click="choiceAnswer(question.answer3)"
@@ -354,14 +350,13 @@ export default defineComponent({
           { answer__item_active: activeAnswer === question.answer4 },
           { answer__hidden: hiddenAnswer === 3 },
           {
-            answer__item_good:
-              (activeAnswer === question.answer4 &&
-                isCorrectAnswer === 'good') ||
-              correctAnswer === question.answer4,
+            answer__item_good: correctAnswer === question.answer4,
           },
           {
             answer__item_bad:
-              activeAnswer === question.answer4 && isCorrectAnswer === 'bad',
+              activeAnswer === question.answer4 &&
+              correctAnswer !== question.answer4 &&
+              correctAnswer !== '',
           },
         ]"
         @click="choiceAnswer(question.answer4)"

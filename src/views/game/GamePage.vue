@@ -100,13 +100,9 @@ export default defineComponent({
           room: this.room,
         };
 
-        socket.emit("changeUserCount", answerData, (error: string) => {
-          this.choiceAnswer = "";
+        socket.emit("changeUserCount", answerData);
 
-          if (error) {
-            console.error(error);
-          }
-        });
+        this.choiceAnswer = "";
 
         this.step = 4;
       } else {

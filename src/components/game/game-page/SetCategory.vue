@@ -7,6 +7,7 @@ import { useUserStore } from "@/stores/user";
 import { socket } from "@/socket";
 import { ICategories } from "@/intefaces/IAdminInrefaces";
 import MainButton from "@/package/components/MainButton.vue";
+import delay from "@/package/helpers/delay";
 
 export default defineComponent({
   name: "SetCategory",
@@ -25,6 +26,7 @@ export default defineComponent({
       categories: [] as Array<ICategories>,
       isAnswerDisabled: false,
       whoChoiceAnswerId: null as null | string,
+      selectedCategoryId: null as null | number,
     };
   },
 
@@ -50,7 +52,9 @@ export default defineComponent({
   },
 
   methods: {
-    choiceCategory(categoryId: number) {
+    delay,
+
+    async choiceCategory(categoryId: number) {
       this.isAnswerDisabled = true;
       if (this.isMeAdmin) {
         const normalize = {
@@ -81,6 +85,10 @@ export default defineComponent({
         this.isAnswerDisabled = data.userId === this.myId;
       }
     );
+
+    socket.on("setCategory", (categoryId: number) => {
+      this.selectedCategoryId = categoryId;
+    });
   },
 });
 </script>
@@ -95,7 +103,8 @@ export default defineComponent({
       <MainButton
         v-for="category in categories"
         :key="category.id"
-        class="answer__item"
+        class="categories__item"
+        :class="{ categories__item_active: selectedCategoryId === category.id }"
         color="green"
         :label="category.title"
         :disabled="!isAnswerDisabled"
@@ -120,6 +129,12 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     gap: 20px;
+
+    &__item {
+      &_active {
+        background: $blue-800 !important;
+      }
+    }
   }
 }
 </style>
