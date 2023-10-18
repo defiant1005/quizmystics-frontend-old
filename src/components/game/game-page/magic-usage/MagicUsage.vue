@@ -127,7 +127,7 @@ export default defineComponent({
   <div class="magic-usage">
     <template v-if="!isShowSpellAnimation && currentUser.stats!.health > 0">
       <h2>Ваш уровень магии: {{ currentUser!.stats!.magic }}</h2>
-      <h2>Ваш уровень зашиты от магии: {{ luckPercent }}</h2>
+      <h2>Ваш уровень удачи: {{ luckPercent }}</h2>
       <p>У вас есть время заколдовать противника:</p>
       <div
         class="progress"

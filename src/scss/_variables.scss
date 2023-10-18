@@ -67,6 +67,29 @@ $red-100: #ffe8e8;
   line-height: 120%;
 }
 
+@mixin yellow-scroll {
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $yellow;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $white;
+  }
+
+  scrollbar-color: $yellow lightyellow;
+  scrollbar-width: 6px;
+  scrollbar-height: 6px;
+
+  @supports (-webkit-appearance: none) {
+    overflow-y: auto;
+  }
+}
+
 //@mixin title-2 {
 //  font-family: "Montserrat", sans-serif;
 //  font-style: normal;

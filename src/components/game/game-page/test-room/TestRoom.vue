@@ -2,7 +2,7 @@
 import { defineComponent } from "vue";
 //@ts-ignore
 import { state, socket } from "@/socket";
-import { IPlayers } from "@/intefaces/IGame";
+import { IPlayers, testsTypes } from "@/intefaces/IGame";
 import { mapState } from "pinia";
 import { useUserStore } from "@/stores/user";
 import ArenaTest from "@/components/game/game-page/test-room/tests/ArenaTest.vue";
@@ -38,7 +38,7 @@ export default defineComponent({
 
   data() {
     return {
-      currentTest: "dragon",
+      currentTest: "scam" as testsTypes,
     };
   },
 
@@ -94,7 +94,11 @@ export default defineComponent({
 <template>
   <div class="test-room">
     <template v-if="currentTest === 'scam'">
-      <ScamTest :users-list="usersList" :victim-users="victimUsers" />
+      <ScamTest
+        :users-list="usersList"
+        :victim-users="victimUsers"
+        @finishTest="finishTestHandler"
+      />
     </template>
 
     <template v-else-if="currentTest === 'money'">
@@ -146,5 +150,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 .test-room {
   width: 100%;
+  height: 100%;
 }
 </style>

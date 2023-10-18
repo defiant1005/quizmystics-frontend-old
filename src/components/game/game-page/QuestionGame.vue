@@ -119,21 +119,6 @@ export default defineComponent({
         this.finishQuestion();
         await delay(2500);
         this.$emit("setAnswer");
-
-        // this.gameStore
-        //   .checkCorrectAnswer({
-        //     questionId: this.question.id,
-        //     answer: this.activeAnswer,
-        //   })
-        //   .finally(() => {
-        //     setTimeout(() => {
-        //       this.finishQuestion();
-        //
-        //       setTimeout(() => {
-        //         this.$emit("setAnswer");
-        //       }, 2000);
-        //     }, 1000);
-        //   });
       }
     },
 

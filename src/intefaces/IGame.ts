@@ -66,7 +66,7 @@ export type magicSpellType =
 
 export type choiceTestCount = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 
-export type tests =
+export type testsTypes =
   | "scam"
   | "money"
   | "arena"
