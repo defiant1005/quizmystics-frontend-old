@@ -1,6 +1,5 @@
 <script lang="ts">
-import { defineComponent } from "vue";
-import { PropType } from "vue/dist/vue";
+import { defineComponent, PropType } from "vue";
 import { IPlayers } from "@/intefaces/IGame";
 import { mapState } from "pinia";
 import { useUserStore } from "@/stores/user";

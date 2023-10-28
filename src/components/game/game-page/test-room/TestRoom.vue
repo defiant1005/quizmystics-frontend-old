@@ -38,7 +38,7 @@ export default defineComponent({
 
   data() {
     return {
-      currentTest: "scam" as testsTypes,
+      currentTest: "average" as testsTypes,
     };
   },
 

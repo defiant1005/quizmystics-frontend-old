@@ -2,7 +2,9 @@ module.exports = {
   root: true,
   env: {
     node: true,
+    es2022: true,
   },
+  plugins: ["unused-imports"],
   extends: [
     "eslint:recommended",
     "@vue/eslint-config-typescript/recommended",

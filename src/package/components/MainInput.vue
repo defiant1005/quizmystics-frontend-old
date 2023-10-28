@@ -1,9 +1,11 @@
 <script lang="ts">
 import { defineComponent } from "vue";
+import { vMaska } from "maska";
 
 export default defineComponent({
   name: "MainInput",
   emits: ["update:modelValue", "input"],
+  directives: { maska: vMaska },
 
   props: {
     modelValue: {
@@ -36,6 +38,12 @@ export default defineComponent({
     maxlength: {
       type: Number,
       default: 255,
+    },
+
+    mask: {
+      type: [String, Array, Object],
+      default: undefined,
+      required: false,
     },
 
     errorMessage: {
@@ -71,6 +79,8 @@ export default defineComponent({
       class="main-input__input input"
       :class="{ 'input_left-padding': leftIcon }"
       :type="type"
+      v-maska
+      :data-maska="mask"
       :placeholder="placeholder"
       :disabled="disabled"
       :maxlength="maxlength"
